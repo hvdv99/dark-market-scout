@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../5. Labs Data Forensics/.idea/5. Labs Data Forensics.iml" filepath="$PROJECT_DIR$/../../../5. Labs Data Forensics/.idea/5. Labs Data Forensics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/dark-market-scout.iml" filepath="$PROJECT_DIR$/.idea/dark-market-scout.iml" />
+    </modules>
+  </component>
+</project>
