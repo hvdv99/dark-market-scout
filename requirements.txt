@@ -1,3 +1,7 @@
 beautifulsoup4
 fake-useragent
 requests
+requests[socks]
+requests[security]
+cryptography
+stem
