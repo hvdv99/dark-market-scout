@@ -155,8 +155,6 @@ class Crawler:
         :return: None
         """
         # getting a seed and adding it to the queue
-        a_seed = random.choice(list(self.seed))
-        self.seed -= a_seed
         self.queue.append(self.seed)
 
         # start crawling until exit condition was reached
