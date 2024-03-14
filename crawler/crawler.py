@@ -158,7 +158,7 @@ class Crawler:
         self.queue.append(self.seed)
 
         # start crawling until exit condition was reached
-        while self.queue and self.exit_condition:
+        while self.queue and not self.exit_condition:
             url = self.queue.popleft()
 
             if url not in self.visited:
