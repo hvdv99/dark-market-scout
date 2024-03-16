@@ -240,3 +240,4 @@ cython_debug/
 # Our own stuff goes here
 .DS_Store
 config/personal_constants.py
+/resources

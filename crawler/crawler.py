@@ -24,7 +24,7 @@ class Crawler:
         self.visited = set()
         self.queue = deque()
         self.requests_send_counter = int()
-        self.resource_path = '/resources'
+        self.resource_path = '../resources'
 
     def set_cookies(self, cookies: list):
         if not isinstance(cookies, list):
@@ -89,8 +89,12 @@ class Crawler:
         :return: response
         """
         self._replace_user_agent()
-        header = {'User-Agent': self.user_agent, 'Cookie': random.choice(self.cookies)}
+        if not self.cookies:
+            header = {'User-Agent': self.user_agent}
+        else:
+            header = {'User-Agent': self.user_agent, 'Cookie': random.choice(self.cookies)}
         web_page = requests.get(url, headers=header, proxies=self.proxies)
+        self.requests_send_counter += 1
         return web_page
 
     def _detect_captcha(self, web_page) -> bool:
@@ -158,7 +162,7 @@ class Crawler:
         self.queue.append(self.seed)
 
         # start crawling until exit condition was reached
-        while self.queue and not self.exit_condition:
+        while self.queue and self.exit_condition:
             url = self.queue.popleft()
 
             if url not in self.visited:
