@@ -6,25 +6,30 @@ from bs4 import BeautifulSoup
 import os
 import time
 import random
+import logging
+import sys
 from urllib.parse import urlparse, urljoin
 import uuid
 
 
 class Crawler:
+
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+
     def __init__(self):
         self.cookies = list()
         self.seed = str()
         self.proxies = {'http': 'socks5h://localhost:9050',
                         'https': 'socks5h://localhost:9050'}
-        self.exit_condition = bool()
-        self.request_interval = 1
-        self.request_timing_behaviour = 'constant'
+        self.max_pages_to_crawl = None
+        self.request_interval = 1  # the time between each request
+        self.request_timing_behaviour = 'constant'  # defaults to constant, see: set_request_timing_behaviour()
         self.ua_behaviour = 1
         self.user_agent = None
         self.visited = set()
         self.queue = deque()
         self.requests_send_counter = int()
-        self.resource_path = '../resources'
+        self.resource_path = str()
 
     def set_cookies(self, cookies: list):
         if not isinstance(cookies, list):
@@ -37,11 +42,11 @@ class Crawler:
             return TypeError('Seed should string')
         self.seed = seed
 
-    def set_exit_condition(self, condition: bool):
-        if not isinstance(condition, bool):
+    def set_max_pages_to_crawl(self, max_pages: int):
+        if not isinstance(max_pages, int):
             return TypeError('Condition is not of type bool')
         else:
-            self.exit_condition = condition
+            self.max_pages_to_crawl = max_pages
 
     def set_request_interval(self, new_interval: int):
         if not isinstance(new_interval, int):
@@ -50,7 +55,7 @@ class Crawler:
             return ValueError('Interval should be positive or zero')
         self.request_interval = new_interval
 
-    def set_request_timing_behaviour(self, new_timing_behaviour):
+    def set_request_timing_behaviour(self, new_timing_behaviour: str):
         timing_types = {'constant', 'random'}
         if not isinstance(new_timing_behaviour, str):
             return TypeError('Timing should be of type string')
@@ -58,7 +63,7 @@ class Crawler:
             return ValueError('Timing should either be constant or random')
         self.request_timing_behaviour = new_timing_behaviour
 
-    def set_user_agent_behaviour(self, new_ua_behaviour):
+    def set_user_agent_behaviour(self, new_ua_behaviour: int):
         """
         This function will determine after how many requests the user agent
         will be replaced for a new one.
@@ -68,6 +73,28 @@ class Crawler:
         if not isinstance(new_ua_behaviour, int):
             return TypeError('The user agent behaviour should be of type integer')
         self.ua_behaviour = new_ua_behaviour
+        logging.info('New user agent behaviour configured')
+
+    def set_resource_dir(self, path: str):
+        main_resource_dir = os.path.join('..', 'resources')
+        specific_resource_dir = os.path.join(main_resource_dir, path)
+        if not os.path.exists(specific_resource_dir):
+            os.makedirs(specific_resource_dir)
+            logging.info('New resource directory created')
+        self.resource_path = specific_resource_dir
+
+    def _check_max_pages(self) -> bool:
+        """
+        Function that check how many pages have been retrieved and compares that to
+        the maximum allowed number of pages to crawl. Function is later used in self.crawl
+        to stop the while loop.
+
+        if max_pages_to_crawl is None, then no limit is assumed and the crawler will just keep going.
+        :return:
+        """
+        if self.max_pages_to_crawl is None:
+            return True
+        return self.max_pages_to_crawl > self.requests_send_counter
 
     def _replace_user_agent(self):
         """
@@ -142,7 +169,7 @@ class Crawler:
         path = os.path.join(self.resource_path, filename)
         with open(path, 'w') as file:
             file.write(web_page.text)
-            print(f"URL {url} saved under the name {filename}")
+            logging.info(f"URL {url} saved under the name {filename}")
         return True
 
     def sync_resources(self):
@@ -158,11 +185,18 @@ class Crawler:
         This function is the runner function of the crawler
         :return: None
         """
+        # error handling
+        if not self.seed:
+            raise ValueError('The seed attribute must be set before crawling')
+
+        if not self.resource_path:
+            raise ValueError('The resource path must be inserted before crawling')
+
         # getting a seed and adding it to the queue
         self.queue.append(self.seed)
 
         # start crawling until exit condition was reached
-        while self.queue and self.exit_condition:
+        while self.queue and self._check_max_pages():
             url = self.queue.popleft()
 
             if url not in self.visited:
@@ -172,7 +206,7 @@ class Crawler:
                 if self.request_timing_behaviour == 'constant':
                     time.sleep(self.request_interval)  # time between each request
                 elif self.request_timing_behaviour == 'random':
-                    time.sleep(random.randint(1, self.request_interval))
+                    time.sleep(random.randint(0, self.request_interval))
 
                 # Update the visited pages
                 self.visited.add(url)
