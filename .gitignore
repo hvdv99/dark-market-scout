@@ -160,6 +160,7 @@ cython_debug/
 .idea/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .idea/
 
 ## User-specific stuff
@@ -238,6 +239,8 @@ cython_debug/
 #.idea/caches/build_file_checksums.ser
 
 # Our own stuff goes here
+=======
+>>>>>>> origin/setup-crawler
 =======
 >>>>>>> origin/setup-crawler
 .DS_Store
