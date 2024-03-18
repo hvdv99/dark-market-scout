@@ -33,34 +33,34 @@ class Crawler:
 
     def set_cookies(self, cookies: list):
         if not isinstance(cookies, list):
-            return TypeError('Cookies should be inserted as list')
+            raise TypeError('Cookies should be inserted as list')
         else:
             self.cookies = cookies
 
     def set_seed(self, seed: str):
         if not isinstance(seed, str):
-            return TypeError('Seed should string')
+            raise TypeError('Seed should string')
         self.seed = seed
 
     def set_max_pages_to_crawl(self, max_pages: int):
         if not isinstance(max_pages, int):
-            return TypeError('Condition is not of type bool')
+            raise TypeError('Condition is not of type bool')
         else:
             self.max_pages_to_crawl = max_pages
 
     def set_request_interval(self, new_interval: int):
         if not isinstance(new_interval, int):
-            return TypeError('Interval should be of type integer')
+            raise TypeError('Interval should be of type integer')
         if new_interval < 0:
-            return ValueError('Interval should be positive or zero')
+            raise ValueError('Interval should be positive or zero')
         self.request_interval = new_interval
 
     def set_request_timing_behaviour(self, new_timing_behaviour: str):
         timing_types = {'constant', 'random'}
         if not isinstance(new_timing_behaviour, str):
-            return TypeError('Timing should be of type string')
+            raise TypeError('Timing should be of type string')
         if new_timing_behaviour not in timing_types:
-            return ValueError('Timing should either be constant or random')
+            raise ValueError('Timing should either be constant or random')
         self.request_timing_behaviour = new_timing_behaviour
 
     def set_user_agent_behaviour(self, new_ua_behaviour: int):
@@ -71,7 +71,7 @@ class Crawler:
         :return: None
         """
         if not isinstance(new_ua_behaviour, int):
-            return TypeError('The user agent behaviour should be of type integer')
+            raise TypeError('The user agent behaviour should be of type integer')
         self.ua_behaviour = new_ua_behaviour
         logging.info('New user agent behaviour configured')
 
@@ -110,7 +110,7 @@ class Crawler:
     def _send_request(self, url):
         """
         Function to set up a tor connection and send a request under tor network.
-        Cookie is chosen randomly from the list of cookies
+        Cookie is chosen randomly from the list of COOKIES
         User agent is dependent on how many request have been sent by the crawler, see: self._replace_user_agent
         :param url: the url to download
         :return: response
@@ -119,7 +119,7 @@ class Crawler:
         if not self.cookies:
             header = {'User-Agent': self.user_agent}
         else:
-            header = {'User-Agent': self.user_agent, 'Cookie': random.choice(self.cookies)}
+            header = {'Cookie': random.choice(self.cookies), 'User-Agent': self.user_agent}
         web_page = requests.get(url, headers=header, proxies=self.proxies)
         self.requests_send_counter += 1
         return web_page
@@ -180,19 +180,19 @@ class Crawler:
         """
         pass
 
-    def crawl(self):  # appending the seed to the queue
+    def crawl(self):  # appending the SEED to the queue
         """
         This function is the runner function of the crawler
         :return: None
         """
         # error handling
         if not self.seed:
-            raise ValueError('The seed attribute must be set before crawling')
+            raise ValueError('The SEED attribute must be set before crawling')
 
         if not self.resource_path:
             raise ValueError('The resource path must be inserted before crawling')
 
-        # getting a seed and adding it to the queue
+        # getting a SEED and adding it to the queue
         self.queue.append(self.seed)
 
         # start crawling until exit condition was reached
