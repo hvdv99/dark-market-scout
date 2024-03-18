@@ -30,6 +30,11 @@ class Crawler:
         self.queue = deque()
         self.requests_send_counter = int()
         self.resource_path = str()
+        self.seed = set()
+        self.exit_condition = bool()
+        self.request_interval = 1
+        self.request_timing = 'constant'
+
 
     def set_cookies(self, cookies: list):
         if not isinstance(cookies, list):
@@ -180,7 +185,7 @@ class Crawler:
         """
         pass
 
-    def crawl(self):  # appending the SEED to the queue
+    def crawl(self):
         """
         This function is the runner function of the crawler
         :return: None
