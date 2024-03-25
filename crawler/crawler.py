@@ -35,7 +35,6 @@ class Crawler:
         self.request_interval = 1
         self.request_timing = 'constant'
 
-
     def set_cookies(self, cookies: list):
         if not isinstance(cookies, list):
             raise TypeError('Cookies should be inserted as list')
@@ -112,7 +111,7 @@ class Crawler:
             return True
         return False
 
-    def _send_request(self, url):
+    def _send_request(self, url) -> requests.Response:
         """
         Function to set up a tor connection and send a request under tor network.
         Cookie is chosen randomly from the list of COOKIES
@@ -136,8 +135,11 @@ class Crawler:
         """
         pass
 
-    def _extract_internal_links(self, web_page):
-
+    def _extract_internal_links(self, web_page: requests.Response) -> list:
+        """
+        Method that gets all the links on a html page, checks if they belong
+        the domain we are scraping, then returns them as a list.
+        """
         request_url = web_page.request.url
         domain = urlparse(request_url).netloc
 
