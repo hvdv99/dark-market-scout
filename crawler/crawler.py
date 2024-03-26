@@ -1,6 +1,6 @@
 from fake_useragent import UserAgent
-from collections import deque
 import requests
+from requests.exceptions import Timeout
 from bs4 import BeautifulSoup
 
 import os
@@ -8,6 +8,8 @@ import time
 import random
 import logging
 import sys
+import pickle
+from collections import deque
 from urllib.parse import urlparse, urljoin
 import json
 import hashlib
@@ -90,6 +92,33 @@ class Crawler:
             logging.info('New resource directory created')
         self.resource_path = specific_resource_dir
 
+    def _write_queue_to_file(self) -> bool:
+        """
+        Helper function which writes the current queue to a file when there were still items in the queue although
+        the runner was not finished running.
+        :return: True if queue written to file, else file
+        """
+        if self.queue:  # only write when there is data in deque
+            marketplace_dir = os.path.basename(self.resource_path)
+            deque_filename = '{}-queue.pkl'.format(marketplace_dir)
+            with open(os.path.join(self.resource_path, deque_filename), 'wb') as f:  # overrides file if exists
+                pickle.dump(self.queue, f)
+            return True
+        return False
+
+    def _load_queue_from_file(self) -> bool:
+        """
+        Helper function that loads the queue from a file en sets it as a class variable when it exists.
+        :return: True if queue was loaded from file else False
+        """
+        filename = '{}-queue.pkl'.format(os.path.basename(self.resource_path))
+        location = os.path.join(self.resource_path, filename)
+        if os.path.exists(location):
+            with open(location, 'rb') as f:
+                self.queue = pickle.load(f)
+            return True
+        return False
+
     def _check_max_pages(self) -> bool:
         """
         Function that check how many pages have been retrieved and compares that to
@@ -97,7 +126,7 @@ class Crawler:
         to stop the while loop.
 
         if max_pages_to_crawl is None, then no limit is assumed and the crawler will just keep going.
-        :return:
+        :return: True if there is no maximum or when the limit has not been exceeded.
         """
         if self.max_pages_to_crawl is None:
             return True
@@ -211,16 +240,16 @@ class Crawler:
 
     def crawl(self):
         """
-        This function is the runner function of the crawler
+        This method is used to neatly set up invoke the main functionality of the class: 🕸🕷️️ CRAWLING 🕷️🕸️
         :return: None
         """
 
-        def _write_json_file(write_target, file_data):
+        def _write_json_file(file_location, file_data):
             """
             overwriting existing file with the new data
             """
-            with open(write_target, 'w') as jf_loc:
-                json.dump(file_data, jf_loc)
+            with open(file_location, 'w') as f:
+                json.dump(file_data, f)
 
         # error handling
         if not self.seed:
@@ -241,8 +270,9 @@ class Crawler:
             # if the file does not exist jet, we start with an empty dictionairy
             json_file = dict()
 
-        # getting a SEED and adding it to the queue
-        self.queue.append(self.seed)
+        if not self._load_queue_from_file():
+            # getting a SEED and adding it to the queue when queue was not loaded from file
+            self.queue.append(self.seed)
 
         try:
             # start crawling until exit condition was reached
@@ -278,7 +308,7 @@ class Crawler:
                     if self.hash_url(url) not in json_file.keys():
                         json_file.update(url_object)  # updating the current json file in memory
                         if sys.getsizeof(json_file) > (10 * 1024 * 1024):
-                            _write_json_file(write_target=json_file_loc, file_data=json_file)  # writing if > 10 MB
+                            _write_json_file(file_location=json_file_loc, file_data=json_file)  # writing if > 10 MB
 
                     # Save the page into the resource folder
                     self._save_resource(url, web_page)
@@ -292,7 +322,12 @@ class Crawler:
                 else:
                     logging.info('URL: {} has already been scraped!'.format(url))
 
-            _write_json_file(write_target=json_file_loc, file_data=json_file)  # writing after loop
+        except (KeyboardInterrupt, Timeout):  # writing when interrupted or request taking too long
+            _write_json_file(file_location=json_file_loc, file_data=json_file)
+            if self._write_queue_to_file():
+                logging.info('Interrupted and queue written to file')
 
-        except KeyboardInterrupt:
-            _write_json_file(write_target=json_file_loc, file_data=json_file)  # writing when interrupted
+        else:
+            _write_json_file(file_location=json_file_loc, file_data=json_file)  # writing when everything went fine
+            if self._write_queue_to_file():
+                logging.info('Process finished and queue written to file')
