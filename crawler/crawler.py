@@ -170,16 +170,6 @@ class Crawler:
         return list(urls)
 
     @staticmethod
-    def url_to_sanitized_filename(url: str) -> str:
-        path = urlparse(url).path
-        clean_path = path.replace('/', '++')
-        forbidden_chars = '/<>:"\\|?*\0'
-
-        for char in forbidden_chars:
-            result = clean_path.replace(char, '--')
-        return result
-
-    @staticmethod
     def hash_url(url: str) -> str:
         """
         Method that will be used to hash the urls, so that they can later be used to store the urls.
