@@ -105,7 +105,7 @@ class Crawler:
 
     def _replace_user_agent(self):
         """
-        Method that sets
+        Method that replaces the current user agent for a random new one
         :return: True if a new user agent was set, False if the same was kept.
         """
         ua = UserAgent()
@@ -214,6 +214,14 @@ class Crawler:
         This function is the runner function of the crawler
         :return: None
         """
+
+        def _write_json_file(write_target, file_data):
+            """
+            overwriting existing file with the new data
+            """
+            with open(write_target, 'w') as jf_loc:
+                json.dump(file_data, jf_loc)
+
         # error handling
         if not self.seed:
             raise ValueError('The SEED attribute must be set before crawling')
@@ -221,65 +229,70 @@ class Crawler:
         if not self.resource_path:
             raise ValueError('The resource path must be inserted before crawling')
 
+        # setting up file path for the file where the network data is stored
+        json_file_name = os.path.basename(self.resource_path) + '.json'
+        json_file_loc = os.path.join(self.resource_path, json_file_name)
+
+        # opening existing file or creating new one if not exists
+        if os.path.exists(json_file_loc):
+            with open(json_file_loc, 'r') as jf:
+                json_file = json.load(jf)
+        else:
+            # if the file does not exist jet, we start with an empty dictionairy
+            json_file = dict()
+
         # getting a SEED and adding it to the queue
         self.queue.append(self.seed)
 
-        # start crawling until exit condition was reached
-        while self.queue and self._check_max_pages():
-            url = self.queue.popleft()
+        try:
+            # start crawling until exit condition was reached
+            while self.queue and self._check_max_pages():
+                url = self.queue.popleft()
+                hashed_url = self.hash_url(url)  # required later for logging
 
-            if url not in self.visited:
-                # Send tor request to download the page
-                web_page = self._send_request(url)
+                # url can not be in current crawling session and not in previous crawls
+                if (url not in self.visited) and (hashed_url not in json_file.keys()):
+                    # Send tor request to download the page
+                    web_page = self._send_request(url)
 
-                if self.request_timing_behaviour == 'constant':
-                    time.sleep(self.request_interval)  # time between each request
-                elif self.request_timing_behaviour == 'random':
-                    time.sleep(random.randint(0, self.request_interval))
+                    # insert some waiting time in between each request
+                    if self.request_timing_behaviour == 'constant':
+                        time.sleep(self.request_interval)  # time between each request
+                    elif self.request_timing_behaviour == 'random':
+                        time.sleep(random.randint(0, self.request_interval))
 
-                # Update the visited pages
-                self.visited.add(url)
+                    # Update the visited pages
+                    self.visited.add(url)
 
-                # Extract all the internal links
-                new_urls = self._extract_internal_links(web_page)
+                    # Extract all the internal links
+                    new_urls = self._extract_internal_links(web_page)
 
-                # hash the data
-                hashed_url = self.hash_url(url)
-                url_object = {hashed_url: {"original": url}}  # storing the original url as its value
-                url_children = {self.hash_url(n_url): n_url for n_url in new_urls}  # the same for internal links
-                url_object[hashed_url].update({"children": url_children})  # adding its children to the object
-                # now the original and the children can easily be referenced with:
-                # url_object[hashed_url].get("original") OR url_object[hashed_url].get("children")
+                    # hash the urls for logging
+                    url_object = {hashed_url: {"original": url}}  # storing the original url as its value
+                    url_children = {self.hash_url(n_url): n_url for n_url in new_urls}  # the same for internal links
+                    url_object[hashed_url].update({"children": url_children})  # adding its children to the object
+                    # now the original and the children can easily be referenced with:
+                    # url_object[hashed_url].get("original") OR url_object[hashed_url].get("children")
 
-                # setting up file path for the file where the network data is stored
-                json_file_name = os.path.basename(self.resource_path) + '.json'
-                json_file_loc = os.path.join(self.resource_path, json_file_name)
-
-                # opening existing file or creating new one if not exists
-                if os.path.exists(json_file_loc):
-                    with open(json_file_loc, 'r') as jf:
-                        json_file = json.load(jf)
-                else:
-                    # if the file does not exist jet, we start with an empty dictionairy
-                    json_file = dict()
-
-                # checking if the url is not already in the data
-                if self.hash_url(url) not in json_file.keys():
-                    json_file.update(url_object)
-
-                    # overwriting existing file with the new data
-                    with open(json_file_loc, 'w') as jf:
-                        json.dump(json_file, jf)
+                    # checking if the url is not already in the data
+                    if self.hash_url(url) not in json_file.keys():
+                        json_file.update(url_object)  # updating the current json file in memory
+                        if sys.getsizeof(json_file) > (10 * 1024 * 1024):
+                            _write_json_file(write_target=json_file_loc, file_data=json_file)  # writing if > 10 MB
 
                     # Save the page into the resource folder
                     self._save_resource(url, web_page)
 
+                    # adding only the urls that are not in queue already and not in visited
+                    # Note: we are collecting data about all urls in the step above, which will allow us to
+                    #       visualize the whole structure of the marketplace
+                    for new_url in new_urls:
+                        if new_url not in self.queue and new_url not in self.visited:
+                            self.queue.append(new_url)
                 else:
                     logging.info('URL: {} has already been scraped!'.format(url))
 
-                # adding only the urls that are not in queue already and not in visited
-                # Note: we are collecting data about all urls in the step above, which will allow us to
-                #       visualize the whole structure of the marketplace
-                for new_url in new_urls:
-                    if new_url not in self.queue and new_url not in self.visited:
-                        self.queue.append(new_url)
+            _write_json_file(write_target=json_file_loc, file_data=json_file)  # writing after loop
+
+        except KeyboardInterrupt:
+            _write_json_file(write_target=json_file_loc, file_data=json_file)  # writing when interrupted
