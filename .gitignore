@@ -243,3 +243,4 @@ cython_debug/
 config/personal_constants.py
 /resources
 /.idea
+/config/*.json

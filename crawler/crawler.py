@@ -2,9 +2,12 @@ from fake_useragent import UserAgent
 import requests
 from requests.exceptions import Timeout
 from bs4 import BeautifulSoup
+from google.cloud import storage
+from google.oauth2 import service_account
 
 import os
 import time
+from datetime import datetime, timezone
 import random
 import logging
 import sys
@@ -13,6 +16,8 @@ from collections import deque
 from urllib.parse import urlparse, urljoin
 import json
 import hashlib
+
+import config.constants as c
 
 
 class Crawler:
@@ -219,7 +224,7 @@ class Crawler:
         function retrieved from lab session to save the crawled page to the resources repo
         :param url:
         :param web_page:
-        :return:
+        :return: True if resource saved, else error
         """
         hashed_url = self.hash_url(url)
         filename = hashed_url + ".html"
@@ -228,13 +233,49 @@ class Crawler:
         with open(path, 'w') as file:
             file.write(web_page.text)
             logging.info(f"URL {url} saved under the name {filename}")
-        return True
+            return True
 
-    def sync_resources(self):
+    @staticmethod
+    def _get_bucket() -> storage.Bucket:
         """
-        method that synchronizes the resources that are kept in the local resources
-        directory with the cloud bucket.
-        :return:
+        helper that configures a bucket
+        :return: configured bucket
+        """
+        credentials = service_account.Credentials.from_service_account_file(
+            c.GOOGLE_APPLICATION_CREDENTIALS
+        )
+        storage_client = storage.Client(credentials=credentials)
+        return storage_client.bucket(bucket_name=c.BUCKET_NAME)  # returns bucket object
+
+    def upload_resources(self):
+        """
+        method that uploads resources that are kept in the local resources
+        directory to the cloud bucket. Also uploads files that have been changed more recently locally. Only uploads
+        and does not download from bucket.
+        :return: None
+        """
+        bucket = self._get_bucket()
+        # looping over local resource directory
+        resources_directory = os.path.dirname(self.resource_path)
+        for root, dirs, files in os.walk(resources_directory):
+            for filename in files:
+                if filename in {'.DS_Store'}:
+                    continue
+                local_file = os.path.join(root, filename)
+
+                relative_path = os.path.relpath(local_file, resources_directory)
+                blob = bucket.get_blob(relative_path)
+
+                # Compare last modification times or other logic for syncing
+                if not blob.exists() or os.path.getmtime(local_file) > datetime.timestamp(
+                        blob.updated.replace(tzinfo=timezone.utc)):
+                    # Upload the file if it doesn't exist or if the local version is newer
+                    blob.upload_from_filename(local_file)
+                    print(f"Uploaded {local_file} to {relative_path} in bucket {c.BUCKET_NAME}")
+
+    def download_resources(self):
+        """
+        Method that downloads resources from the cloud bucket that are not in the local directory.
         """
         pass
 
