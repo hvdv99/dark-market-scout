@@ -9,7 +9,8 @@ import random
 import logging
 import sys
 from urllib.parse import urlparse, urljoin
-import uuid
+import json
+import hashlib
 
 
 class Crawler:
@@ -29,7 +30,7 @@ class Crawler:
         self.visited = set()
         self.queue = deque()
         self.requests_send_counter = int()
-        self.resource_path = str()
+        self.resource_path = str()  # give it the name of the marketplace we are scraping
         self.seed = set()
         self.exit_condition = bool()
         self.request_interval = 1
@@ -81,6 +82,8 @@ class Crawler:
 
     def set_resource_dir(self, path: str):
         main_resource_dir = os.path.join('..', 'resources')
+        if not os.path.exists(main_resource_dir):
+            os.mkdir(main_resource_dir)
         specific_resource_dir = os.path.join(main_resource_dir, path)
         if not os.path.exists(specific_resource_dir):
             os.makedirs(specific_resource_dir)
@@ -135,7 +138,8 @@ class Crawler:
         """
         pass
 
-    def _extract_internal_links(self, web_page: requests.Response) -> list:
+    @staticmethod
+    def _extract_internal_links(web_page: requests.Response) -> list:
         """
         Method that gets all the links on a html page, checks if they belong
         the domain we are scraping, then returns them as a list.
@@ -165,14 +169,42 @@ class Crawler:
 
         return list(urls)
 
-    def _save_resource(self, url, web_page):
+    @staticmethod
+    def url_to_sanitized_filename(url: str) -> str:
+        path = urlparse(url).path
+        clean_path = path.replace('/', '++')
+        forbidden_chars = '/<>:"\\|?*\0'
+
+        for char in forbidden_chars:
+            result = clean_path.replace(char, '--')
+        return result
+
+    @staticmethod
+    def hash_url(url: str) -> str:
+        """
+        Method that will be used to hash the urls, so that they can later be used to store the urls.
+        :param url:
+        :return:
+        """
+        # Create an MD5 hash object
+        hash_obj = hashlib.md5()
+
+        # Update the hash object with the input string, encoded to bytes
+        hash_obj.update(url.encode())
+
+        # Return the hexadecimal digest of the hash
+        return hash_obj.hexdigest()
+
+    def _save_resource(self, url: str, web_page: requests.Response) -> bool:
         """
         function retrieved from lab session to save the crawled page to the resources repo
         :param url:
         :param web_page:
         :return:
         """
-        filename = str(uuid.uuid4().hex) + ".html"
+        hashed_url = self.hash_url(url)
+        filename = hashed_url + ".html"
+
         path = os.path.join(self.resource_path, filename)
         with open(path, 'w') as file:
             file.write(web_page.text)
@@ -218,11 +250,46 @@ class Crawler:
                 # Update the visited pages
                 self.visited.add(url)
 
-                # Save the page into the download folder
-                self._save_resource(url, web_page)
-
                 # Extract all the internal links
                 new_urls = self._extract_internal_links(web_page)
+
+                # hash the data
+                hashed_url = self.hash_url(url)
+                url_object = {hashed_url: {"original": url}}  # storing the original url as its value
+                url_children = {self.hash_url(n_url): n_url for n_url in new_urls}  # the same for internal links
+                url_object[hashed_url].update({"children": url_children})  # adding its children to the object
+                # now the original and the children can easily be referenced with:
+                # url_object[hashed_url].get("original") OR url_object[hashed_url].get("children")
+
+                # setting up file path for the file where the network data is stored
+                json_file_name = os.path.basename(self.resource_path) + '.json'
+                json_file_loc = os.path.join(self.resource_path, json_file_name)
+
+                # opening existing file or creating new one if not exists
+                if os.path.exists(json_file_loc):
+                    with open(json_file_loc, 'r') as jf:
+                        json_file = json.load(jf)
+                else:
+                    # if the file does not exist jet, we start with an empty dictionairy
+                    json_file = dict()
+
+                # checking if the url is not already in the data
+                if self.hash_url(url) not in json_file.keys():
+                    json_file.update(url_object)
+
+                    # overwriting existing file with the new data
+                    with open(json_file_loc, 'w') as jf:
+                        json.dump(json_file, jf)
+
+                    # Save the page into the resource folder
+                    self._save_resource(url, web_page)
+
+                else:
+                    logging.info('URL: {} has already been scraped!'.format(url))
+
+                # adding only the urls that are not in queue already and not in visited
+                # Note: we are collecting data about all urls in the step above, which will allow us to
+                #       visualize the whole structure of the marketplace
                 for new_url in new_urls:
                     if new_url not in self.queue and new_url not in self.visited:
                         self.queue.append(new_url)
