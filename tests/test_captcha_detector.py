@@ -14,11 +14,11 @@ def list_html_files(directory):
 def test_detects_captcha(load_html, file_path):
     html_captcha = load_html(file_path)
     detector = CaptchaDetector()
-    assert detector.detect_captcha(html_captcha) == True
+    assert detector.detect_captcha(html_captcha) is True
 
 
 @pytest.mark.parametrize("file_path", list_html_files('data/non_captcha/'))
 def test_detects_non_captcha(load_html, file_path):
     html_non_captcha = load_html(file_path)
     detector = CaptchaDetector()
-    assert detector.detect_captcha(html_non_captcha) == False
+    assert detector.detect_captcha(html_non_captcha) is False
