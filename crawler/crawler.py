@@ -204,11 +204,12 @@ class Crawler:
         return list(urls)
 
     @staticmethod
-    def hash_url(url: str) -> str:
+    def _hash_url(url: str) -> str:
         """
         Method that will be used to hash the urls, so that they can later be used to store the urls.
-        :param url:
-        :return:
+        Algorithm used is MD5
+        :param url: The url to be hashed
+        :return: The hashed url
         """
         # Create an MD5 hash object
         hash_obj = hashlib.md5()
@@ -226,7 +227,7 @@ class Crawler:
         :param web_page:
         :return: True if resource saved, else error
         """
-        hashed_url = self.hash_url(url)
+        hashed_url = self._hash_url(url)
         filename = hashed_url + ".html"
 
         path = os.path.join(self.resource_path, filename)
@@ -288,6 +289,9 @@ class Crawler:
         def _write_json_file(file_location, file_data):
             """
             overwriting existing file with the new data
+            :param file_location:
+            :param file_data:
+            :return:
             """
             with open(file_location, 'w') as f:
                 json.dump(file_data, f)
@@ -319,7 +323,7 @@ class Crawler:
             # start crawling until exit condition was reached
             while self.queue and self._check_max_pages():
                 url = self.queue.popleft()
-                hashed_url = self.hash_url(url)  # required later for logging
+                hashed_url = self._hash_url(url)  # required later for logging
 
                 # url can not be in current crawling session and not in previous crawls
                 if (url not in self.visited) and (hashed_url not in json_file.keys()):
@@ -340,13 +344,13 @@ class Crawler:
 
                     # hash the urls for logging
                     url_object = {hashed_url: {"original": url}}  # storing the original url as its value
-                    url_children = {self.hash_url(n_url): n_url for n_url in new_urls}  # the same for internal links
+                    url_children = {self._hash_url(n_url): n_url for n_url in new_urls}  # the same for internal links
                     url_object[hashed_url].update({"children": url_children})  # adding its children to the object
                     # now the original and the children can easily be referenced with:
                     # url_object[hashed_url].get("original") OR url_object[hashed_url].get("children")
 
                     # checking if the url is not already in the data
-                    if self.hash_url(url) not in json_file.keys():
+                    if self._hash_url(url) not in json_file.keys():
                         json_file.update(url_object)  # updating the current json file in memory
                         if sys.getsizeof(json_file) > (10 * 1024 * 1024):
                             _write_json_file(file_location=json_file_loc, file_data=json_file)  # writing if > 10 MB
