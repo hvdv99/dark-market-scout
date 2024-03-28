@@ -1,10 +1,15 @@
 from crawler.crawler import Crawler
 from config import constants as c
 
-# configuring the crawler
+# Instantiate object
 crawl_scout = Crawler()
+
+# Synchronizing resources
+crawl_scout.sync_resources()
+
+# configuring the crawler
 crawl_scout.set_seed(c.SEED)
-# crawl_scout.set_cookies(c.COOKIES)
+crawl_scout.set_cookies(c.COOKIES)
 crawl_scout.set_max_pages_to_crawl(10)
 crawl_scout.set_request_interval(0)
 crawl_scout.set_user_agent_behaviour(15)  # after how many requests the user agent will be replaced for new one
@@ -13,6 +18,3 @@ crawl_scout.set_resource_dir('digital-thrift-shop')  # set to name of the market
 
 # start crawling
 # crawl_scout.crawl()
-
-# sync resources
-crawl_scout.upload_resources()

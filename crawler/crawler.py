@@ -37,7 +37,7 @@ class Crawler:
         self.visited = set()
         self.queue = deque()
         self.requests_send_counter = int()
-        self.resource_path = str()  # give it the name of the marketplace we are scraping
+        self.resource_path = str()  # the path from the repo root to the specific resource marketplace directory
         self.seed = set()
         self.exit_condition = bool()
         self.request_interval = 1
@@ -248,7 +248,7 @@ class Crawler:
         storage_client = storage.Client(credentials=credentials)
         return storage_client.bucket(bucket_name=c.BUCKET_NAME)  # returns bucket object
 
-    def upload_resources(self):
+    def _upload_resources(self):
         """
         method that uploads resources that are kept in the local resources
         directory to the cloud bucket. Also uploads files that have been changed more recently locally. Only uploads
@@ -266,19 +266,76 @@ class Crawler:
 
                 relative_path = os.path.relpath(local_file, resources_directory)
                 blob = bucket.get_blob(relative_path)
-
-                # Compare last modification times or other logic for syncing
-                if not blob.exists() or os.path.getmtime(local_file) > datetime.timestamp(
-                        blob.updated.replace(tzinfo=timezone.utc)):
-                    # Upload the file if it doesn't exist or if the local version is newer
+                if not blob:  # blob does not exist in bucket
+                    blob = bucket.blob(relative_path)
                     blob.upload_from_filename(local_file)
-                    print(f"Uploaded {local_file} to {relative_path} in bucket {c.BUCKET_NAME}")
+                    print(f"Uploaded {local_file} to {relative_path}")
+                elif os.path.getmtime(local_file) > datetime.timestamp(blob.updated.replace(tzinfo=timezone.utc)):
+                    blob.upload_from_filename(local_file)
+                    print(f"Replaced local file: {local_file} with {relative_path}")
+                else:
+                    logging.info(f'Local file: {local_file} up-to-date in bucket')
 
-    def download_resources(self):
+    def _download_resources(self):
         """
         Method that downloads resources from the cloud bucket that are not in the local directory.
         """
-        pass
+        bucket = self._get_bucket()
+        local_resources_path = os.path.dirname(self.resource_path)  # resolves to /resources
+        blobs = bucket.list_blobs()
+
+        for blob in blobs:
+            local_file_path = os.path.join(local_resources_path, blob.name)
+
+            # Check if the file exists locally and if the cloud version is newer
+            # Some Python-pro knowledge: In the case that the file not exists, the second condition will not be
+            # evaluated this is beneficial, because if this was not the case, os.path.getmtime would throw an error!
+            if not os.path.exists(local_file_path) or (datetime.timestamp(blob.updated.replace(tzinfo=timezone.utc)) >
+                                                       os.path.getmtime(local_file_path)):
+                # Ensure the local directory structure exists
+                os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
+
+                # Download the file
+                blob.download_to_filename(local_file_path)
+                logging.info(f"Downloaded {blob.name} to {local_file_path}")
+            else:
+                logging.debug(f"{blob.name} is up to date with bucket")
+
+    def delete_resource(self, resource_name: str):
+        """
+        method deletes resource locally and in bucket
+        :param resource_name: the name resource to be deleted
+        :return: None
+        """
+        # Delete from bucket
+        bucket = self._get_bucket()
+        blobs = bucket.list_blobs()
+        for blob in blobs:
+            blob_name = blob.name
+            if blob_name.endswith(resource_name):
+                blob.delete()
+                logging.info(f"Blob: {blob_name} deleted")
+
+        # Delete locally
+        for root, _, files in os.walk(os.path.dirname(self.resource_path)):
+            for file in files:
+                if file == resource_name:
+                    os.remove(os.path.join(root, file))
+                    logging.info(f"File {file} removed locally")
+                    return
+
+    def sync_resources(self) -> None:
+        # error handling
+        if not self.resource_path:
+            raise ValueError("Resource directory must be set before synchronizing resources")
+
+        # First download
+        self._download_resources()
+
+        # Then upload
+        self._upload_resources()
+
+        logging.info('Synchronized resources')
 
     def crawl(self):
         """
@@ -371,8 +428,10 @@ class Crawler:
             _write_json_file(file_location=json_file_loc, file_data=json_file)
             if self._write_queue_to_file():
                 logging.info('Interrupted and queue written to file')
+            self.sync_resources()
 
         else:
             _write_json_file(file_location=json_file_loc, file_data=json_file)  # writing when everything went fine
             if self._write_queue_to_file():
                 logging.info('Process finished and queue written to file')
+            self.sync_resources()
