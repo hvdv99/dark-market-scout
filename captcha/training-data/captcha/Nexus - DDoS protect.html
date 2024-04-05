@@ -1,0 +1,3442 @@
+<head>
+    <title>DDoS Protection - Nexus Market</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="favicon" rel="shortcut icon" href="data:image/x-icon;base64,AAABAAMAEBAAAAEAIABoBAAANgAAACAgAAABACAAKBEAAJ4EAAAwMAAAAQAgAGgmAADGFQAAKAAAABAAAAAgAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//Tk75/0RDx/9DQ8X/SEfZ/1BQ//9QUP//UFD//1BQ//9QUP//TU30/0RDxv9DQ8X/R0bU/1BQ//9QUP//UFD//0lJ5v8fHR//Hx0b/y4sZf9QUP7/UFD//1BQ//9QUP//T0/8/y8ua/8fHRv/Hx0b/yspU/9QUP//UFD//1BQ//9JSeb/Hx0f/x8dG/8sK17/TEzr/1BQ/v9QUP//UFD+/zk3lv8fHRz/Hx0b/x8dG/8rKVP/UFD//1BQ//9QUP//SUnm/x8dH/8fHRv/LCte/0pK3/9NTe//UFD//0JBwP8gHiL/Hx0b/x8dG/8fHRv/KylT/1BQ//9QUP//UFD//0lJ5v8fHR//Hx0b/ywrXv9KSt//Skrf/0dG1v8jITH/Hx0b/x8dG/8fHRv/Hx0b/yspU/9QUP//UFD//1BQ//9JSeb/Hx0f/x8dG/8uLWX/Skrh/0hH1f8nJkT/Hx0b/x8dG/8uLWj/IB4f/x8dG/8rKVP/UFD//1BQ//9QUP//SUnm/x8dH/8fHRv/Ly1p/01N8/8uLWT/Hx0b/x8dG/8qKFD/SEjd/yAeIP8fHRv/KylT/1BQ//9QUP//UFD//0lJ5v8fHR//Hx0b/y8taf84N5T/Hx0c/x8dG/8kIjb/RUXL/0hH2P8gHiD/Hx0b/yspU/9QUP//UFD//1BQ//9JSeb/Hx0f/x8dG/8kIzj/IB4h/x8dG/8hHyX/QUG7/0pK3/9GRtD/IB4f/x8dG/8rKVP/UFD//1BQ//9QUP//SUnm/x8dH/8fHRv/Hx0b/x8dG/8fHR3/PDum/09P/f9LS+X/RkbQ/yAeH/8fHRv/KylT/1BQ//9QUP//UFD//0lJ5v8fHR//Hx0b/x8dG/8fHRv/MzF7/09P/f9QUP//T0/7/0dG1P8gHh//Hx0b/yspU/9QUP//UFD//1BQ//9KSeb/IB4g/x8dG/8fHRv/KilU/05O9v9QUP//UFD//1BQ//9LS+j/IB4g/x8dG/8rKVP/UFD//1BQ//9QUP//T0/7/0JBwf81M4T/KylY/0pK5f9QUP//UFD//1BQ//9QUP//TU31/zUzhP80M4H/Ozqg/1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ/v9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAACAAAABAAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//0pJ5v84N5H/NzaM/zc2jP83Noz/ODeP/0dG2f9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD+/0ZF1P84N4//NzaM/zc2jP83Noz/NzaM/0RDxv9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//Q0PN/yAeJP8fHRv/Hx0b/x8dG/8gHiD/Pj2x/1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9JSOL/KCZI/x8dG/8fHRv/Hx0b/x8dG/8fHRv/NzaM/1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9DQ83/IB4k/x8dG/8fHRv/Hx0b/x8dH/87OqP/T0/6/1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//TU3y/y0saP8fHRz/Hx0b/x8dG/8fHRv/Hx0b/x8dG/83Noz/UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//0NDzf8gHiT/Hx0b/x8dG/8fHRv/Hx0f/zk5nf9LS+f/T0/8/1BQ//9QUP//UFD//1BQ//9QUP//UFD//09P+v82NIv/IB4g/x8dG/8fHRv/Hx0b/x8dG/8fHRv/Hx0b/zc2jP9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//Q0PN/yAeJP8fHRv/Hx0b/x8dG/8fHR//OTmd/0pK3/9MTOv/UFD9/1BQ//9QUP//UFD//1BQ//9PT/3/Pjyv/yEfJf8fHRv/Hx0b/x8dG/8fHRv/Hx0b/x8dG/8fHRv/NzaM/1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9DQ83/IB4k/x8dG/8fHRv/Hx0b/x8dH/85OZ3/Skrf/0pK3/9MTO7/UFD+/1BQ//9QUP//UFD//0VE0f8kIzj/Hx0b/x8dG/8fHRv/Hx0b/x8dG/8fHRv/Hx0b/x8dG/83Noz/UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//0NDzf8gHiT/Hx0b/x8dG/8fHRv/Hx0f/zk5nf9KSt//Skrf/0pK4P9NTfL/UFD//1BQ//9KSeT/KSdM/x8dG/8fHRv/Hx0b/x8dG/8fHRv/Hx0b/x8dG/8fHRv/Hx0b/zc2jP9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//Q0PN/yAeJP8fHRv/Hx0b/x8dG/8fHR//OTmd/0pK3/9KSt//Skrf/0pK4f9OTvb/TU3z/y8tbP8fHRz/Hx0b/x8dG/8fHRv/Hx0b/x8dG/8fHRv/Hx0b/x8dG/8fHRv/NzaM/1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9DQ83/IB4k/x8dG/8fHRv/Hx0b/x8dH/86OZ3/Skrf/0pK3/9KSt//Skrf/0pK4P82NY7/IB4g/x8d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//9QUP//R0fb/yEfJv8fHRv/Hx0b/x8dG/8fHRv/NzaM/1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9MTO//Ojmg/y8ua/8kIzn/IB4j/x8dHP8gHiL/Ozqh/09P/P9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9IR97/IyEx/yEfJv8hHyb/IR8m/yEfJv84N5L/UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP7/T0/6/0xL7f9DQsj/NjWN/zg2lf9OTvj/UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//05O+f9IR97/R0fc/0dH3P9HR9z/R0fc/0xM7v9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP7/T0/8/1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAADAAAABgAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ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//9QUP//UFD//1BQ//9QUP7/UFD9/09P+v9MTPD/SUjh/0NCx/88Oqf/Q0LK/05O+v9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//T0/7/0xM8f9MTO//TEzv/0xM7/9MTO//TEzv/0xM7/9MTPH/T0/7/1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ/v9PT/r/T0/8/1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//1BQ//9QUP//UFD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==">
+    </head><body class="bg-gradient-to-tl from-gray-900 via-gray-900 to-red-900"><style>
+html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+strong{font-weight:bold}
+body{line-height:1}ol,ul{list-style:none}
+blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}
+table{border-collapse:collapse;border-spacing:0}*:focus{outline:0}input,select,textarea{border:0;box-shadow:0}
+html{height:100%}body{height:100%;line-height:1;background:#1A1E23;
+font-family:roboto, helvetica, sans-serif, arial, verdana, tahoma;font-size:16px;color:#fff}
+.container {width:100%;margin:0 auto;min-height:100%;position:relative;max-height:100vh;overflow:hidden; }
+.container>.inner{position:absolute;top:50%;left:0;right:0;margin:0 auto;text-align:center;-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%); transform:translateY(-50%);}
+.container>.inner>.logo{display:inline-block;vertical-align:middle;text-decoration:none;margin-bottom:10px}
+.container>.inner>.logo>.square{display:inline-block;vertical-align:middle;width:40px;height:40px;background-color:#9b59b6;background-size:24px 24px;background-position:center center;background-repeat:no-repeat;margin-right:10px}
+.container>.inner>.logo>.text{display:inline-block;vertical-align:middle;font-size:30px;color:#fff;font-weight:700}.container>.inner>.date{display:block;text-align:center;font-size:42px}
+.container>.inner>.date>.day{color:#9b59b6;font-weight:bold}.signed{display:block;width:400px;height:150px;margin-top:20px;margin:20px auto 0 auto;}
+.signed>textarea {margin:0 auto;width:400px;height:150px;min-width:400px;max-width:400px;display:block;padding:15px;background:#fff;border:1px solid #9b59b6;min-height:150px;max-height:150px;}p{margin:0 auto 20px auto;max-width:300px;}form.ddos_form .captcha-input{margin:0 auto 20px auto;display: block;width:300px;font-size:0;}form.ddos_form .captcha-input input{display:inline-block;vertical-align:top;height:50px;width:calc(100% - 150px);outline:0;border:none;font-size:16px;color:#000;padding:0 15px;line-height:50px;}form.ddos_form .captcha-input img{display:inline-block;vertical-align:top;}form.ddos_form button{display:block;width:100%;margin:0 auto;background:#ff5050;cursor:pointer;color:#fff;font-size:16px;text-transform:uppercase;text-align:center;height:40px;line-height:40px;outline:0;border:none;}
+
+.captchav2 {text-align: center;width: 100%;}
+
+.image {
+width: 20px;
+height: 20px;
+transform-origin: center;
+transform: scale(6);
+transition: all 0.2s ease-in;
+border-radius: 50%;
+border: 0.5px solid #ff5050;
+margin:auto;
+margin-bottom:60px;
+margin-top:80px
+}
+
+input {
+    text-align: center;
+    text-transform: uppercase;
+    background: #1a1e23;
+    border: 1.5px solid #525b63;
+    color: #e1e1e1;
+    font-size: 30px;
+    margin: 1px;
+    width: 50px;
+    height: 50px;
+}
+input:focus{
+    border: 1.5px solid #ff5050;
+}
+
+.expire {
+    display: inline-block;
+    vertical-align: top;
+    width: 100px;
+    height: 50px;
+    position: relative;
+    animation: timer-warning 1s 1;
+    animation-fill-mode: forwards;
+    animation-delay: 50s;
+    margin-bottom: 6px;
+    border-radius: 3px;
+}
+
+.expire>.timer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    overflow: hidden;
+}
+
+.expire>.timer>.time-part-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    height: 50px;
+    line-height: 50px;
+    color: #d8d8d8;
+}
+
+.expire>.timer>.time-part-wrapper:first-child:after {
+    content: ':';
+    display: inline-block;
+    vertical-align: top;
+    width: 15px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.expire>.timer>.time-part-wrapper>.time-part {
+    display: inline-block;
+    vertical-align: top;
+    width: 15px;
+    position: relative;
+    animation: timer-expire;
+    animation-fill-mode: forwards;
+    animation-delay: 60s;
+}
+
+.expire>.timer>.time-part-wrapper>.time-part>.digit-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    text-align: center;
+}
+
+.expire>.timer>.time-part-wrapper>.time-part>.digit-wrapper>.digit {
+    display: block;
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-size: 22px;
+}
+
+.expire>.timer>.time-part-wrapper>.time-part.seconds.tens>.digit-wrapper {
+    top: -50px;
+    animation: timer-seconds-tens 50s 1;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+}
+
+.expire>.timer>.time-part-wrapper>.time-part.seconds.ones>.digit-wrapper {
+    animation: timer-seconds-ones 10s 6;
+}
+
+.expire>.timer>.time-part-wrapper>.time-part.hundredths.tens>.digit-wrapper {
+    animation: timer-seconds-ones 1s 60;
+}
+
+.expire>.timer>.time-part-wrapper>.time-part.hundredths.ones>.digit-wrapper {
+    animation: timer-seconds-ones 500ms 120;
+}
+
+@-webkit-keyframes timer-seconds-tens {
+    0% {
+        top: -50px;
+    }
+
+    19% {
+        top: -50px;
+    }
+
+    20% {
+        top: -100px;
+    }
+
+    39% {
+        top: -100px;
+    }
+
+    40% {
+        top: -150px;
+    }
+
+    59% {
+        top: -150px;
+    }
+
+    60% {
+        top: -200px;
+    }
+
+    79% {
+        top: -200px;
+    }
+
+    80% {
+        top: -250px;
+    }
+
+    99% {
+        top: -250px;
+    }
+
+    100% {
+        top: -300px;
+    }
+}
+
+@-webkit-keyframes timer-seconds-ones {
+    0% {
+        top: 0;
+    }
+
+    9% {
+        top: 0;
+    }
+
+    10% {
+        top: -50px;
+    }
+
+    19% {
+        top: -50px;
+    }
+
+    20% {
+        top: -100px;
+    }
+
+    29% {
+        top: -100px;
+    }
+
+    30% {
+        top: -150px;
+    }
+
+    39% {
+        top: -150px;
+    }
+
+    40% {
+        top: -200px;
+    }
+
+    49% {
+        top: -200px;
+    }
+
+    50% {
+        top: -250px;
+    }
+
+    59% {
+        top: -250px;
+    }
+
+    60% {
+        top: -300px;
+    }
+
+    69% {
+        top: -300px;
+    }
+
+    70% {
+        top: -350px;
+    }
+
+    79% {
+        top: -350px;
+    }
+
+    80% {
+        top: -400px;
+    }
+
+    89% {
+        top: -400px;
+    }
+
+    90% {
+        top: -450px;
+    }
+
+    99% {
+        top: -450px;
+    }
+
+    100% {
+        top: -500px;
+    }
+}
+
+@-webkit-keyframes timer-warning {
+    from {
+        color: #d8d8d8;
+    }
+
+    to {
+        color: #E7943C;
+    }
+}
+
+@-webkit-keyframes timer-expire {
+    from {
+        color: #000;
+    }
+
+    to {
+        color: #e7643c;
+    }
+}
+
+@-webkit-keyframes button-expired {
+    from {
+        visibility: hidden;
+    }
+
+    to {
+        visibility: visible;
+    }
+}
+
+@-webkit-keyframes button-before {
+    from {
+        visibility: visible;
+    }
+
+    to {
+        visibility: hidden;
+    }
+}
+
+.center {
+text-align: center;
+}
+
+form.ddos_form button.before {
+    animation: button-before;
+    animation-fill-mode: forwards;
+    animation-delay: 60s;
+}
+
+form.ddos_form button.expired {
+    visibility: hidden;
+    background: #E74C3C;
+    animation: button-expired;
+    animation-fill-mode: forwards;
+    animation-delay: 60s;
+    margin-top: -40px;
+}
+
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+.-bottom-1 {
+  bottom: -0.25rem;
+}
+.-left-4 {
+  left: -1rem;
+}
+.-right-0 {
+  right: -0px;
+}
+.-right-0\.5 {
+  right: -0.125rem;
+}
+.-right-1 {
+  right: -0.25rem;
+}
+.-top-0 {
+  top: -0px;
+}
+.-top-0\.5 {
+  top: -0.125rem;
+}
+.bottom-0 {
+  bottom: 0px;
+}
+.bottom-2\/4 {
+  bottom: 50%;
+}
+.bottom-auto {
+  bottom: auto;
+}
+.left-0 {
+  left: 0px;
+}
+.left-2\/4 {
+  left: 50%;
+}
+.left-6 {
+  left: 1.5rem;
+}
+.left-auto {
+  left: auto;
+}
+.right-0 {
+  right: 0px;
+}
+.right-2\/4 {
+  right: 50%;
+}
+.right-auto {
+  right: auto;
+}
+.top-0 {
+  top: 0px;
+}
+.top-2 {
+  top: 0.5rem;
+}
+.top-2\/4 {
+  top: 50%;
+}
+.top-\[110px\] {
+  top: 110px;
+}
+.z-0 {
+  z-index: 0;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-50 {
+  z-index: 50;
+}
+.order-first {
+  order: -9999;
+}
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+.col-span-full {
+  grid-column: 1 / -1;
+}
+.m-0 {
+  margin: 0px;
+}
+.m-2 {
+  margin: 0.5rem;
+}
+.m-auto {
+  margin: auto;
+}
+.-mx-2 {
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+.-mx-3 {
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+}
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+.mx-1\.5 {
+  margin-left: 0.375rem;
+  margin-right: 0.375rem;
+}
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.mx-6 {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.my-1\.5 {
+  margin-top: 0.375rem;
+  margin-bottom: 0.375rem;
+}
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.my-20 {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.my-6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.-mb-\[3px\] {
+  margin-bottom: -3px;
+}
+.-ml-px {
+  margin-left: -1px;
+}
+.-mr-2 {
+  margin-right: -0.5rem;
+}
+.-mt-px {
+  margin-top: -1px;
+}
+.mb-0 {
+  margin-bottom: 0px;
+}
+.mb-0\.5 {
+  margin-bottom: 0.125rem;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+.mb-16 {
+  margin-bottom: 4rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+.mb-7 {
+  margin-bottom: 1.75rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
+.ml-12 {
+  margin-left: 3rem;
+}
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.ml-2\.5 {
+  margin-left: 0.625rem;
+}
+.ml-3 {
+  margin-left: 0.75rem;
+}
+.ml-4 {
+  margin-left: 1rem;
+}
+.ml-5 {
+  margin-left: 1.25rem;
+}
+.ml-6 {
+  margin-left: 1.5rem;
+}
+.ml-8 {
+  margin-left: 2rem;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.mr-1 {
+  margin-right: 0.25rem;
+}
+.mr-1\.5 {
+  margin-right: 0.375rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+}
+.mr-3 {
+  margin-right: 0.75rem;
+}
+.mr-4 {
+  margin-right: 1rem;
+}
+.mr-5 {
+  margin-right: 1.25rem;
+}
+.mr-6 {
+  margin-right: 1.5rem;
+}
+.mt-0 {
+  margin-top: 0px;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-1\.5 {
+  margin-top: 0.375rem;
+}
+.mt-10 {
+  margin-top: 2.5rem;
+}
+.mt-16 {
+  margin-top: 4rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-3 {
+  margin-top: 0.75rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mt-5 {
+  margin-top: 1.25rem;
+}
+.mt-6 {
+  margin-top: 1.5rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
+.mt-auto {
+  margin-top: auto;
+}
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.flex {
+  display: flex;
+}
+.inline-flex {
+  display: inline-flex;
+}
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+.h-0 {
+  height: 0px;
+}
+.h-0\.5 {
+  height: 0.125rem;
+}
+.h-1 {
+  height: 0.25rem;
+}
+.h-1\.5 {
+  height: 0.375rem;
+}
+.h-10 {
+  height: 2.5rem;
+}
+.h-12 {
+  height: 3rem;
+}
+.h-16 {
+  height: 4rem;
+}
+.h-2 {
+  height: 0.5rem;
+}
+.h-20 {
+  height: 5rem;
+}
+.h-24 {
+  height: 6rem;
+}
+.h-3 {
+  height: 0.75rem;
+}
+.h-3\.5 {
+  height: 0.875rem;
+}
+.h-4 {
+  height: 1rem;
+}
+.h-40 {
+  height: 10rem;
+}
+.h-5 {
+  height: 1.25rem;
+}
+.h-6 {
+  height: 1.5rem;
+}
+.h-8 {
+  height: 2rem;
+}
+.h-9 {
+  height: 2.25rem;
+}
+.h-\[52px\] {
+  height: 52px;
+}
+.h-full {
+  height: 100%;
+}
+.h-screen {
+  height: 100vh;
+}
+.max-h-0 {
+  max-height: 0px;
+}
+.max-h-96 {
+  max-height: 24rem;
+}
+.max-h-full {
+  max-height: 100%;
+}
+.min-h-\[calc\(100vh-138px\)\] {
+  min-height: calc(100vh - 138px);
+}
+.min-h-full {
+  min-height: 100%;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+.w-0 {
+  width: 0px;
+}
+.w-1 {
+  width: 0.25rem;
+}
+.w-1\.5 {
+  width: 0.375rem;
+}
+.w-1\/2 {
+  width: 50%;
+}
+.w-1\/3 {
+  width: 33.333333%;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-11 {
+  width: 2.75rem;
+}
+.w-16 {
+  width: 4rem;
+}
+.w-2 {
+  width: 0.5rem;
+}
+.w-2\/3 {
+  width: 66.666667%;
+}
+.w-20 {
+  width: 5rem;
+}
+.w-24 {
+  width: 6rem;
+}
+.w-3 {
+  width: 0.75rem;
+}
+.w-3\.5 {
+  width: 0.875rem;
+}
+.w-3\/12 {
+  width: 25%;
+}
+.w-36 {
+  width: 9rem;
+}
+.w-4 {
+  width: 1rem;
+}
+.w-4\/12 {
+  width: 33.333333%;
+}
+.w-40 {
+  width: 10rem;
+}
+.w-48 {
+  width: 12rem;
+}
+.w-5 {
+  width: 1.25rem;
+}
+.w-6 {
+  width: 1.5rem;
+}
+.w-6\/12 {
+  width: 50%;
+}
+.w-60 {
+  width: 15rem;
+}
+.w-72 {
+  width: 18rem;
+}
+.w-8 {
+  width: 2rem;
+}
+.w-8\/12 {
+  width: 66.666667%;
+}
+.w-9 {
+  width: 2.25rem;
+}
+.w-9\/12 {
+  width: 75%;
+}
+.w-96 {
+  width: 24rem;
+}
+.w-auto {
+  width: auto;
+}
+.w-full {
+  width: 100%;
+}
+.w-px {
+  width: 1px;
+}
+.min-w-full {
+  min-width: 100%;
+}
+.max-w-3xl {
+  max-width: 48rem;
+}
+.max-w-4xl {
+  max-width: 56rem;
+}
+.max-w-5xl {
+  max-width: 64rem;
+}
+.max-w-6xl {
+  max-width: 72rem;
+}
+.max-w-lg {
+  max-width: 32rem;
+}
+.max-w-md {
+  max-width: 28rem;
+}
+.max-w-xl {
+  max-width: 36rem;
+}
+.flex-1 {
+  flex: 1 1 0%;
+}
+.flex-auto {
+  flex: 1 1 auto;
+}
+.flex-none {
+  flex: none;
+}
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+.shrink-0 {
+  flex-shrink: 0;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.appearance-none {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.grid-flow-col {
+  grid-auto-flow: column;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.place-items-center {
+  place-items: center;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-end {
+  align-items: flex-end;
+}
+.items-center {
+  align-items: center;
+}
+.items-stretch {
+  align-items: stretch;
+}
+.justify-start {
+  justify-content: flex-start;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-evenly {
+  justify-content: space-evenly;
+}
+.justify-items-center {
+  justify-items: center;
+}
+.gap-0 {
+  gap: 0px;
+}
+.gap-0\.5 {
+  gap: 0.125rem;
+}
+.gap-1 {
+  gap: 0.25rem;
+}
+.gap-10 {
+  gap: 2.5rem;
+}
+.gap-16 {
+  gap: 4rem;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-5 {
+  gap: 1.25rem;
+}
+.gap-6 {
+  gap: 1.5rem;
+}
+.gap-x-6 {
+  -moz-column-gap: 1.5rem;
+       column-gap: 1.5rem;
+}
+.gap-y-8 {
+  row-gap: 2rem;
+}
+.-space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(-1rem * var(--tw-space-x-reverse));
+  margin-left: calc(-1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+}
+.space-y-1\.5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.375rem * var(--tw-space-y-reverse));
+}
+.space-y-12 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(3rem * var(--tw-space-y-reverse));
+}
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+.space-y-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+.self-center {
+  align-self: center;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.overflow-x-auto {
+  overflow-x: auto;
+}
+.overflow-y-auto {
+  overflow-y: auto;
+}
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+.whitespace-pre-line {
+  white-space: pre-line;
+}
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+.break-all {
+  word-break: break-all;
+}
+.rounded {
+  border-radius: 0.25rem;
+}
+.rounded-2xl {
+  border-radius: 1rem;
+}
+.rounded-3xl {
+  border-radius: 1.5rem;
+}
+.rounded-full {
+  border-radius: 9999px;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+.rounded-md {
+  border-radius: 0.375rem;
+}
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+.rounded-b {
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+.rounded-b-lg {
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+.rounded-l-md {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+.rounded-r {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+.rounded-r-md {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+.rounded-t {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+.rounded-t-lg {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.border-transparent {
+  border-color: transparent;
+}
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(246 248 254 / var(--tw-border-opacity));
+}
+.border-white\/5 {
+  border-color: rgb(246 248 254 / 0.05);
+}
+.border-t-transparent {
+  border-top-color: transparent;
+}
+.bg-base-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(236 91 91 / var(--tw-bg-opacity));
+}
+.bg-base-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 80 80 / var(--tw-bg-opacity));
+}
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+.bg-black\/50 {
+  background-color: rgb(0 0 0 / 0.5);
+}
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(108 122 133 / var(--tw-bg-opacity));
+}
+.bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+.bg-gray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+.bg-gray-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 21 26 / var(--tw-bg-opacity));
+}
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 238 247 / var(--tw-bg-opacity));
+}
+.bg-slate-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+}
+.bg-slate-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(27 29 31 / var(--tw-bg-opacity));
+}
+.bg-slate-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 41 46 / var(--tw-bg-opacity));
+}
+.bg-transparent {
+  background-color: transparent;
+}
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 248 254 / var(--tw-bg-opacity));
+}
+.bg-white\/10 {
+  background-color: rgb(246 248 254 / 0.1);
+}
+.bg-opacity-90 {
+  --tw-bg-opacity: 0.9;
+}
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+.bg-gradient-to-tl {
+  background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+}
+.bg-none {
+  background-image: none;
+}
+.from-gray-900 {
+  --tw-gradient-from: #18151a var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(24 21 26 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.from-red-500 {
+  --tw-gradient-from: #ef4444 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(239 68 68 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.via-gray-900 {
+  --tw-gradient-to: rgb(24 21 26 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #18151a var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+.to-red-500 {
+  --tw-gradient-to: #ef4444 var(--tw-gradient-to-position);
+}
+.to-red-900 {
+  --tw-gradient-to: #7f1d1d var(--tw-gradient-to-position);
+}
+.bg-cover {
+  background-size: cover;
+}
+.bg-center {
+  background-position: center;
+}
+.p-0 {
+  padding: 0px;
+}
+.p-1 {
+  padding: 0.25rem;
+}
+.p-1\.5 {
+  padding: 0.375rem;
+}
+.p-12 {
+  padding: 3rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-3 {
+  padding: 0.75rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-6 {
+  padding: 1.5rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+.px-1\.5 {
+  padding-left: 0.375rem;
+  padding-right: 0.375rem;
+}
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.px-2\.5 {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-1\.5 {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-2\.5 {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+.py-24 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.py-3\.5 {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.pb-0 {
+  padding-bottom: 0px;
+}
+.pb-0\.5 {
+  padding-bottom: 0.125rem;
+}
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+.pb-14 {
+  padding-bottom: 3.5rem;
+}
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
+.pb-4 {
+  padding-bottom: 1rem;
+}
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+.pb-8 {
+  padding-bottom: 2rem;
+}
+.pl-0 {
+  padding-left: 0px;
+}
+.pl-1 {
+  padding-left: 0.25rem;
+}
+.pl-1\.5 {
+  padding-left: 0.375rem;
+}
+.pl-2 {
+  padding-left: 0.5rem;
+}
+.pl-2\.5 {
+  padding-left: 0.625rem;
+}
+.pl-3 {
+  padding-left: 0.75rem;
+}
+.pl-3\.5 {
+  padding-left: 0.875rem;
+}
+.pl-4 {
+  padding-left: 1rem;
+}
+.pl-\[0\.15rem\] {
+  padding-left: 0.15rem;
+}
+.pr-10 {
+  padding-right: 2.5rem;
+}
+.pr-6 {
+  padding-right: 1.5rem;
+}
+.pr-7 {
+  padding-right: 1.75rem;
+}
+.pt-0 {
+  padding-top: 0px;
+}
+.pt-0\.5 {
+  padding-top: 0.125rem;
+}
+.pt-1 {
+  padding-top: 0.25rem;
+}
+.pt-1\.5 {
+  padding-top: 0.375rem;
+}
+.pt-10 {
+  padding-top: 2.5rem;
+}
+.pt-16 {
+  padding-top: 4rem;
+}
+.pt-2 {
+  padding-top: 0.5rem;
+}
+.pt-4 {
+  padding-top: 1rem;
+}
+.pt-5 {
+  padding-top: 1.25rem;
+}
+.pt-8 {
+  padding-top: 2rem;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-start {
+  text-align: start;
+}
+.text-end {
+  text-align: end;
+}
+.align-baseline {
+  vertical-align: baseline;
+}
+.align-middle {
+  vertical-align: middle;
+}
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.font-sans {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+.text-9xl {
+  font-size: 8rem;
+  line-height: 1;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-extrabold {
+  font-weight: 800;
+}
+.font-light {
+  font-weight: 300;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-normal {
+  font-weight: 400;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-thin {
+  font-weight: 100;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.italic {
+  font-style: italic;
+}
+.slashed-zero {
+  --tw-slashed-zero: slashed-zero;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+.leading-3 {
+  line-height: .75rem;
+}
+.leading-4 {
+  line-height: 1rem;
+}
+.leading-5 {
+  line-height: 1.25rem;
+}
+.leading-6 {
+  line-height: 1.5rem;
+}
+.leading-7 {
+  line-height: 1.75rem;
+}
+.leading-8 {
+  line-height: 2rem;
+}
+.leading-none {
+  line-height: 1;
+}
+.leading-normal {
+  line-height: 1.5;
+}
+.leading-relaxed {
+  line-height: 1.625;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+.text-amber-500 {
+  --tw-text-opacity: 1;
+  color: rgb(245 158 11 / var(--tw-text-opacity));
+}
+.text-base-500 {
+  --tw-text-opacity: 1;
+  color: rgb(255 80 80 / var(--tw-text-opacity));
+}
+.text-blue-300 {
+  --tw-text-opacity: 1;
+  color: rgb(147 197 253 / var(--tw-text-opacity));
+}
+.text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity));
+}
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+.text-emerald-300 {
+  --tw-text-opacity: 1;
+  color: rgb(110 231 183 / var(--tw-text-opacity));
+}
+.text-emerald-400 {
+  --tw-text-opacity: 1;
+  color: rgb(52 211 153 / var(--tw-text-opacity));
+}
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(108 122 133 / var(--tw-text-opacity));
+}
+.text-gray-300 {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+.text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+.text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(24 21 26 / var(--tw-text-opacity));
+}
+.text-green-400 {
+  --tw-text-opacity: 1;
+  color: rgb(74 222 128 / var(--tw-text-opacity));
+}
+.text-green-500 {
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity));
+}
+.text-green-700 {
+  --tw-text-opacity: 1;
+  color: rgb(21 128 61 / var(--tw-text-opacity));
+}
+.text-green-900 {
+  --tw-text-opacity: 1;
+  color: rgb(20 83 45 / var(--tw-text-opacity));
+}
+.text-indigo-300 {
+  --tw-text-opacity: 1;
+  color: rgb(165 180 252 / var(--tw-text-opacity));
+}
+.text-indigo-400 {
+  --tw-text-opacity: 1;
+  color: rgb(129 140 248 / var(--tw-text-opacity));
+}
+.text-indigo-500 {
+  --tw-text-opacity: 1;
+  color: rgb(99 102 241 / var(--tw-text-opacity));
+}
+.text-indigo-700 {
+  --tw-text-opacity: 1;
+  color: rgb(67 56 202 / var(--tw-text-opacity));
+}
+.text-indigo-900 {
+  --tw-text-opacity: 1;
+  color: rgb(49 46 129 / var(--tw-text-opacity));
+}
+.text-inherit {
+  color: inherit;
+}
+.text-lime-300 {
+  --tw-text-opacity: 1;
+  color: rgb(190 242 100 / var(--tw-text-opacity));
+}
+.text-lime-400 {
+  --tw-text-opacity: 1;
+  color: rgb(163 230 53 / var(--tw-text-opacity));
+}
+.text-lime-500 {
+  --tw-text-opacity: 1;
+  color: rgb(132 204 22 / var(--tw-text-opacity));
+}
+.text-neutral-400 {
+  --tw-text-opacity: 1;
+  color: rgb(163 163 163 / var(--tw-text-opacity));
+}
+.text-primary {
+  --tw-text-opacity: 1;
+  color: rgb(149 165 177 / var(--tw-text-opacity));
+}
+.text-purple-600 {
+  --tw-text-opacity: 1;
+  color: rgb(147 51 234 / var(--tw-text-opacity));
+}
+.text-red-400 {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity));
+}
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+.text-red-700 {
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
+}
+.text-red-900 {
+  --tw-text-opacity: 1;
+  color: rgb(127 29 29 / var(--tw-text-opacity));
+}
+.text-secondary {
+  --tw-text-opacity: 1;
+  color: rgb(83 96 109 / var(--tw-text-opacity));
+}
+.text-sky-400 {
+  --tw-text-opacity: 1;
+  color: rgb(56 189 248 / var(--tw-text-opacity));
+}
+.text-sky-500 {
+  --tw-text-opacity: 1;
+  color: rgb(14 165 233 / var(--tw-text-opacity));
+}
+.text-sky-900 {
+  --tw-text-opacity: 1;
+  color: rgb(12 74 110 / var(--tw-text-opacity));
+}
+.text-slate-200 {
+  --tw-text-opacity: 1;
+  color: rgb(226 232 240 / var(--tw-text-opacity));
+}
+.text-slate-400 {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+.text-slate-700 {
+  --tw-text-opacity: 1;
+  color: rgb(51 47 59 / var(--tw-text-opacity));
+}
+.text-teal-300 {
+  --tw-text-opacity: 1;
+  color: rgb(94 234 212 / var(--tw-text-opacity));
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(246 248 254 / var(--tw-text-opacity));
+}
+.text-white\/20 {
+  color: rgb(246 248 254 / 0.2);
+}
+.text-white\/50 {
+  color: rgb(246 248 254 / 0.5);
+}
+.text-white\/90 {
+  color: rgb(246 248 254 / 0.9);
+}
+.text-yellow-400 {
+  --tw-text-opacity: 1;
+  color: rgb(250 204 21 / var(--tw-text-opacity));
+}
+.text-yellow-500 {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity));
+}
+.text-yellow-900 {
+  --tw-text-opacity: 1;
+  color: rgb(113 63 18 / var(--tw-text-opacity));
+}
+.text-opacity-70 {
+  --tw-text-opacity: 0.7;
+}
+.underline {
+  text-decoration-line: underline;
+}
+.no-underline {
+  text-decoration-line: none;
+}
+.decoration-base-500 {
+  text-decoration-color: #ff5050;
+}
+.decoration-green-600 {
+  text-decoration-color: #16a34a;
+}
+.decoration-lime-400 {
+  text-decoration-color: #a3e635;
+}
+.decoration-red-600 {
+  text-decoration-color: #dc2626;
+}
+.decoration-yellow-500 {
+  text-decoration-color: #eab308;
+}
+.decoration-dotted {
+  text-decoration-style: dotted;
+}
+.decoration-wavy {
+  text-decoration-style: wavy;
+}
+.underline-offset-2 {
+  text-underline-offset: 2px;
+}
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.placeholder-opacity-50::-moz-placeholder {
+  --tw-placeholder-opacity: 0.5;
+}
+.placeholder-opacity-50::placeholder {
+  --tw-placeholder-opacity: 0.5;
+}
+.opacity-10 {
+  opacity: 0.1;
+}
+.opacity-25 {
+  opacity: 0.25;
+}
+.opacity-5 {
+  opacity: 0.05;
+}
+.opacity-50 {
+  opacity: 0.5;
+}
+.opacity-75 {
+  opacity: 0.75;
+}
+.shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-\[0_2px_15px_-3px_rgba\(0\2c 0\2c 0\2c 0\.07\)\2c 0_10px_20px_-2px_rgba\(0\2c 0\2c 0\2c 0\.04\)\] {
+  --tw-shadow: 0 2px 15px -3px rgba(0,0,0,0.07),0 10px 20px -2px rgba(0,0,0,0.04);
+  --tw-shadow-colored: 0 2px 15px -3px var(--tw-shadow-color), 0 10px 20px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-lg {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-sm {
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-xl {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-base-500\/10 {
+  --tw-shadow-color: rgb(255 80 80 / 0.1);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+.shadow-indigo-500\/10 {
+  --tw-shadow-color: rgb(99 102 241 / 0.1);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+.ring-4 {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.ring-black\/10 {
+  --tw-ring-color: rgb(0 0 0 / 0.1);
+}
+.ring-gray-200 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(108 122 133 / var(--tw-ring-opacity));
+}
+.ring-gray-300 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
+}
+.ring-green-500 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(34 197 94 / var(--tw-ring-opacity));
+}
+.ring-opacity-20 {
+  --tw-ring-opacity: 0.2;
+}
+.ring-opacity-80 {
+  --tw-ring-opacity: 0.8;
+}
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.duration-150 {
+  transition-duration: 150ms;
+}
+.duration-200 {
+  transition-duration: 200ms;
+}
+.duration-300 {
+  transition-duration: 300ms;
+}
+.duration-500 {
+  transition-duration: 500ms;
+}
+.duration-700 {
+  transition-duration: 700ms;
+}
+.duration-\[500ms\] {
+  transition-duration: 500ms;
+}
+.duration-\[550ms\] {
+  transition-duration: 550ms;
+}
+.duration-\[650ms\] {
+  transition-duration: 650ms;
+}
+.duration-\[750ms\] {
+  transition-duration: 750ms;
+}
+.ease-in {
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+.file\:mr-5::file-selector-button {
+  margin-right: 1.25rem;
+}
+.file\:hidden::file-selector-button {
+  display: none;
+}
+.file\:rounded-md::file-selector-button {
+  border-radius: 0.375rem;
+}
+.file\:border-0::file-selector-button {
+  border-width: 0px;
+}
+.file\:bg-base-500::file-selector-button {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 80 80 / var(--tw-bg-opacity));
+}
+.file\:px-4::file-selector-button {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.file\:py-1::file-selector-button {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.file\:py-1\.5::file-selector-button {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+.file\:text-sm::file-selector-button {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.file\:font-medium::file-selector-button {
+  font-weight: 500;
+}
+.file\:text-white::file-selector-button {
+  --tw-text-opacity: 1;
+  color: rgb(246 248 254 / var(--tw-text-opacity));
+}
+.placeholder\:text-secondary::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(83 96 109 / var(--tw-text-opacity));
+}
+.placeholder\:text-secondary::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(83 96 109 / var(--tw-text-opacity));
+}
+.placeholder\:text-slate-400::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+.placeholder\:text-slate-400::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+.before\:pointer-events-none::before {
+  content: var(--tw-content);
+  pointer-events: none;
+}
+.before\:absolute::before {
+  content: var(--tw-content);
+  position: absolute;
+}
+.before\:h-3::before {
+  content: var(--tw-content);
+  height: 0.75rem;
+}
+.before\:w-3::before {
+  content: var(--tw-content);
+  width: 0.75rem;
+}
+.before\:rounded-full::before {
+  content: var(--tw-content);
+  border-radius: 9999px;
+}
+.before\:bg-transparent::before {
+  content: var(--tw-content);
+  background-color: transparent;
+}
+.before\:content-\[\'\'\]::before {
+  --tw-content: '';
+  content: var(--tw-content);
+}
+.after\:absolute::after {
+  content: var(--tw-content);
+  position: absolute;
+}
+.after\:z-\[2\]::after {
+  content: var(--tw-content);
+  z-index: 2;
+}
+.after\:mt-\[0\.1rem\]::after {
+  content: var(--tw-content);
+  margin-top: 0.1rem;
+}
+.after\:h-5::after {
+  content: var(--tw-content);
+  height: 1.25rem;
+}
+.after\:w-5::after {
+  content: var(--tw-content);
+  width: 1.25rem;
+}
+.after\:rounded-full::after {
+  content: var(--tw-content);
+  border-radius: 9999px;
+}
+.after\:border-none::after {
+  content: var(--tw-content);
+  border-style: none;
+}
+.after\:bg-neutral-100::after {
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
+}
+.after\:shadow-\[0_0px_3px_0_rgb\(0_0_0_\/_7\%\)\2c _0_2px_2px_0_rgb\(0_0_0_\/_4\%\)\]::after {
+  content: var(--tw-content);
+  --tw-shadow: 0 0px 3px 0 rgb(0 0 0 / 7%), 0 2px 2px 0 rgb(0 0 0 / 4%);
+  --tw-shadow-colored: 0 0px 3px 0 var(--tw-shadow-color), 0 2px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.after\:transition-\[background-color_0\.2s\2c transform_0\.2s\]::after {
+  content: var(--tw-content);
+  transition-property: background-color 0.2s,transform 0.2s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.after\:content-\[\'\'\]::after {
+  --tw-content: '';
+  content: var(--tw-content);
+}
+.checked\:bg-green-500:checked {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+}
+.checked\:bg-none:checked {
+  background-image: none;
+}
+.checked\:after\:absolute:checked::after {
+  content: var(--tw-content);
+  position: absolute;
+}
+.checked\:after\:z-\[2\]:checked::after {
+  content: var(--tw-content);
+  z-index: 2;
+}
+.checked\:after\:ml-\[1\.25rem\]:checked::after {
+  content: var(--tw-content);
+  margin-left: 1.25rem;
+}
+.checked\:after\:mt-\[0\.1rem\]:checked::after {
+  content: var(--tw-content);
+  margin-top: 0.1rem;
+}
+.checked\:after\:h-5:checked::after {
+  content: var(--tw-content);
+  height: 1.25rem;
+}
+.checked\:after\:w-5:checked::after {
+  content: var(--tw-content);
+  width: 1.25rem;
+}
+.checked\:after\:rounded-full:checked::after {
+  content: var(--tw-content);
+  border-radius: 9999px;
+}
+.checked\:after\:border-none:checked::after {
+  content: var(--tw-content);
+  border-style: none;
+}
+.checked\:after\:bg-white:checked::after {
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 248 254 / var(--tw-bg-opacity));
+}
+.hover\:scale-105:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.hover\:scale-110:hover {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
+}
+.hover\:border-base-500:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 80 80 / var(--tw-border-opacity));
+}
+.hover\:border-green-500:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 197 94 / var(--tw-border-opacity));
+}
+.hover\:border-indigo-400:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(129 140 248 / var(--tw-border-opacity));
+}
+.hover\:border-red-500:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+.hover\:bg-base-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 80 80 / var(--tw-bg-opacity));
+}
+.hover\:bg-base-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(211 61 61 / var(--tw-bg-opacity));
+}
+.hover\:bg-blue-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+}
+.hover\:bg-gray-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+.hover\:bg-gray-100\/60:hover {
+  background-color: rgb(243 244 246 / 0.6);
+}
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(108 122 133 / var(--tw-bg-opacity));
+}
+.hover\:bg-gray-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+.hover\:bg-gray-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
+}
+.hover\:bg-gray-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+.hover\:bg-green-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+}
+.hover\:bg-indigo-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(129 140 248 / var(--tw-bg-opacity));
+}
+.hover\:bg-indigo-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(99 102 241 / var(--tw-bg-opacity));
+}
+.hover\:bg-indigo-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(67 56 202 / var(--tw-bg-opacity));
+}
+.hover\:bg-red-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+.hover\:bg-red-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
+.hover\:bg-slate-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+}
+.hover\:bg-slate-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 47 59 / var(--tw-bg-opacity));
+}
+.hover\:bg-slate-800\/60:hover {
+  background-color: rgb(27 29 31 / 0.6);
+}
+.hover\:bg-slate-900\/60:hover {
+  background-color: rgb(37 41 46 / 0.6);
+}
+.hover\:bg-white\/60:hover {
+  background-color: rgb(246 248 254 / 0.6);
+}
+.hover\:text-base-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 80 80 / var(--tw-text-opacity));
+}
+.hover\:text-blue-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+.hover\:text-gray-400:hover {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+.hover\:text-gray-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+.hover\:text-gray-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+.hover\:text-gray-900:hover {
+  --tw-text-opacity: 1;
+  color: rgb(24 21 26 / var(--tw-text-opacity));
+}
+.hover\:text-green-400:hover {
+  --tw-text-opacity: 1;
+  color: rgb(74 222 128 / var(--tw-text-opacity));
+}
+.hover\:text-indigo-400:hover {
+  --tw-text-opacity: 1;
+  color: rgb(129 140 248 / var(--tw-text-opacity));
+}
+.hover\:text-indigo-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(99 102 241 / var(--tw-text-opacity));
+}
+.hover\:text-indigo-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(79 70 229 / var(--tw-text-opacity));
+}
+.hover\:text-lime-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(132 204 22 / var(--tw-text-opacity));
+}
+.hover\:text-red-400:hover {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity));
+}
+.hover\:text-red-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(246 248 254 / var(--tw-text-opacity));
+}
+.hover\:text-yellow-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity));
+}
+.hover\:text-opacity-100:hover {
+  --tw-text-opacity: 1;
+}
+.hover\:underline:hover {
+  text-decoration-line: underline;
+}
+.hover\:shadow-2xl:hover {
+  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.hover\:shadow-lg:hover {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.hover\:file\:bg-base-500::file-selector-button:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 80 80 / var(--tw-bg-opacity));
+}
+.focus\:z-10:focus {
+  z-index: 10;
+}
+.focus\:border-blue-300:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(147 197 253 / var(--tw-border-opacity));
+}
+.focus\:border-gray-300\/60:focus {
+  border-color: rgb(209 213 219 / 0.6);
+}
+.focus\:border-lime-500:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(132 204 22 / var(--tw-border-opacity));
+}
+.focus\:border-red-500:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+.focus\:border-secondary\/50:focus {
+  border-color: rgb(83 96 109 / 0.5);
+}
+.focus\:border-transparent:focus {
+  border-color: transparent;
+}
+.focus\:bg-gray-200:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(108 122 133 / var(--tw-bg-opacity));
+}
+.focus\:bg-gray-700:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+.focus\:bg-indigo-400:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(129 140 248 / var(--tw-bg-opacity));
+}
+.focus\:bg-indigo-700:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(67 56 202 / var(--tw-bg-opacity));
+}
+.focus\:bg-red-600:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
+.focus\:text-gray-900:focus {
+  --tw-text-opacity: 1;
+  color: rgb(24 21 26 / var(--tw-text-opacity));
+}
+.focus\:text-indigo-600:focus {
+  --tw-text-opacity: 1;
+  color: rgb(79 70 229 / var(--tw-text-opacity));
+}
+.focus\:text-white:focus {
+  --tw-text-opacity: 1;
+  color: rgb(246 248 254 / var(--tw-text-opacity));
+}
+.focus\:shadow-lg:focus {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.focus\:ring:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.focus\:ring-0:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.focus\:ring-green-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(134 239 172 / var(--tw-ring-opacity));
+}
+.focus\:ring-indigo-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(165 180 252 / var(--tw-ring-opacity));
+}
+.focus\:ring-red-200:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(254 202 202 / var(--tw-ring-opacity));
+}
+.focus\:ring-red-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(252 165 165 / var(--tw-ring-opacity));
+}
+.focus\:ring-sky-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(125 211 252 / var(--tw-ring-opacity));
+}
+.focus\:ring-yellow-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(253 224 71 / var(--tw-ring-opacity));
+}
+.focus\:ring-zinc-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(212 212 216 / var(--tw-ring-opacity));
+}
+.focus\:after\:rounded-full:focus::after {
+  content: var(--tw-content);
+  border-radius: 9999px;
+}
+.focus\:after\:content-\[\'\'\]:focus::after {
+  --tw-content: '';
+  content: var(--tw-content);
+}
+.checked\:focus\:border-green-500:focus:checked {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 197 94 / var(--tw-border-opacity));
+}
+.checked\:focus\:bg-green-500:focus:checked {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+}
+.active\:bg-gray-100:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+.active\:bg-indigo-500:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(99 102 241 / var(--tw-bg-opacity));
+}
+.active\:text-gray-500:active {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+.active\:text-gray-700:active {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+.active\:shadow-lg:active {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.group:hover .group-hover\:block {
+  display: block;
+}
+.group:hover .group-hover\:h-full {
+  height: 100%;
+}
+.group:hover .group-hover\:w-full {
+  width: 100%;
+}
+@keyframes pulse {
+
+  50% {
+    opacity: .5;
+  }
+}
+.group:hover .group-hover\:animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.group:hover .group-hover\:text-white {
+  --tw-text-opacity: 1;
+  color: rgb(246 248 254 / var(--tw-text-opacity));
+}
+.peer:checked+.group .group-\[\.peer\:checked\+\&\]\:visible {
+  visibility: visible;
+}
+.peer:checked ~ .peer-checked\:block {
+  display: block;
+}
+.peer:checked ~ .peer-checked\:border-base-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 80 80 / var(--tw-border-opacity));
+}
+.peer:checked ~ .peer-checked\:border-green-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 197 94 / var(--tw-border-opacity));
+}
+.peer:checked ~ .peer-checked\:font-semibold {
+  font-weight: 600;
+}
+.peer:checked ~ .peer-checked\:text-base-500 {
+  --tw-text-opacity: 1;
+  color: rgb(255 80 80 / var(--tw-text-opacity));
+}
+@media (prefers-color-scheme: dark) {
+
+  .dark\:border-gray-500 {
+    --tw-border-opacity: 1;
+    border-color: rgb(107 114 128 / var(--tw-border-opacity));
+  }
+
+  .dark\:border-gray-600 {
+    --tw-border-opacity: 1;
+    border-color: rgb(75 85 99 / var(--tw-border-opacity));
+  }
+
+  .dark\:border-gray-800 {
+    --tw-border-opacity: 1;
+    border-color: rgb(31 41 55 / var(--tw-border-opacity));
+  }
+
+  .dark\:border-slate-700 {
+    --tw-border-opacity: 1;
+    border-color: rgb(51 47 59 / var(--tw-border-opacity));
+  }
+
+  .dark\:bg-blue-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-gray-700 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-gray-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-gray-900 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(24 21 26 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-slate-700 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(51 47 59 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-slate-900\/95 {
+    background-color: rgb(37 41 46 / 0.95);
+  }
+
+  .dark\:text-blue-500 {
+    --tw-text-opacity: 1;
+    color: rgb(59 130 246 / var(--tw-text-opacity));
+  }
+
+  .dark\:text-gray-200 {
+    --tw-text-opacity: 1;
+    color: rgb(108 122 133 / var(--tw-text-opacity));
+  }
+
+  .dark\:text-gray-300 {
+    --tw-text-opacity: 1;
+    color: rgb(209 213 219 / var(--tw-text-opacity));
+  }
+
+  .dark\:text-gray-400 {
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity));
+  }
+
+  .dark\:text-slate-100 {
+    --tw-text-opacity: 1;
+    color: rgb(234 238 247 / var(--tw-text-opacity));
+  }
+
+  .dark\:text-white {
+    --tw-text-opacity: 1;
+    color: rgb(246 248 254 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:bg-blue-700:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+  }
+
+  .dark\:hover\:bg-slate-900\/20:hover {
+    background-color: rgb(37 41 46 / 0.2);
+  }
+
+  .dark\:hover\:text-white:hover {
+    --tw-text-opacity: 1;
+    color: rgb(246 248 254 / var(--tw-text-opacity));
+  }
+
+  .dark\:focus\:ring-blue-800:focus {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(30 64 175 / var(--tw-ring-opacity));
+  }
+}
+@media (min-width: 640px) {
+
+  .sm\:not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  .sm\:order-last {
+    order: 9999;
+  }
+
+  .sm\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
+  .sm\:col-span-12 {
+    grid-column: span 12 / span 12;
+  }
+
+  .sm\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
+  .sm\:mb-0 {
+    margin-bottom: 0px;
+  }
+
+  .sm\:ml-5 {
+    margin-left: 1.25rem;
+  }
+
+  .sm\:mt-0 {
+    margin-top: 0px;
+  }
+
+  .sm\:mt-2 {
+    margin-top: 0.5rem;
+  }
+
+  .sm\:flex {
+    display: flex;
+  }
+
+  .sm\:hidden {
+    display: none;
+  }
+
+  .sm\:w-1\/3 {
+    width: 33.333333%;
+  }
+
+  .sm\:w-2\/12 {
+    width: 16.666667%;
+  }
+
+  .sm\:w-2\/3 {
+    width: 66.666667%;
+  }
+
+  .sm\:w-5\/12 {
+    width: 41.666667%;
+  }
+
+  .sm\:max-w-4xl {
+    max-width: 56rem;
+  }
+
+  .sm\:flex-1 {
+    flex: 1 1 0%;
+  }
+
+  .sm\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
+  .sm\:items-end {
+    align-items: flex-end;
+  }
+
+  .sm\:items-center {
+    align-items: center;
+  }
+
+  .sm\:justify-start {
+    justify-content: flex-start;
+  }
+
+  .sm\:justify-between {
+    justify-content: space-between;
+  }
+
+  .sm\:space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .sm\:rounded {
+    border-radius: 0.25rem;
+  }
+
+  .sm\:p-4 {
+    padding: 1rem;
+  }
+
+  .sm\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .sm\:pr-8 {
+    padding-right: 2rem;
+  }
+
+  .sm\:pt-0 {
+    padding-top: 0px;
+  }
+}
+@media (min-width: 768px) {
+
+  .md\:inset-0 {
+    inset: 0px;
+  }
+
+  .md\:col-span-12 {
+    grid-column: span 12 / span 12;
+  }
+
+  .md\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  .md\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  .md\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .md\:mb-0 {
+    margin-bottom: 0px;
+  }
+
+  .md\:ml-6 {
+    margin-left: 1.5rem;
+  }
+
+  .md\:mt-0 {
+    margin-top: 0px;
+  }
+
+  .md\:block {
+    display: block;
+  }
+
+  .md\:inline-block {
+    display: inline-block;
+  }
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
+  .md\:w-1\/12 {
+    width: 8.333333%;
+  }
+
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+
+  .md\:w-1\/3 {
+    width: 33.333333%;
+  }
+
+  .md\:w-2\/3 {
+    width: 66.666667%;
+  }
+
+  .md\:w-2\/6 {
+    width: 33.333333%;
+  }
+
+  .md\:w-3\/12 {
+    width: 25%;
+  }
+
+  .md\:w-4\/6 {
+    width: 66.666667%;
+  }
+
+  .md\:w-48 {
+    width: 12rem;
+  }
+
+  .md\:w-6\/12 {
+    width: 50%;
+  }
+
+  .md\:w-8\/12 {
+    width: 66.666667%;
+  }
+
+  .md\:w-9\/12 {
+    width: 75%;
+  }
+
+  .md\:w-\[80\%\] {
+    width: 80%;
+  }
+
+  .md\:w-auto {
+    width: auto;
+  }
+
+  .md\:max-w-md {
+    max-width: 28rem;
+  }
+
+  .md\:flex-1 {
+    flex: 1 1 0%;
+  }
+
+  .md\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:justify-between {
+    justify-content: space-between;
+  }
+
+  .md\:gap-4 {
+    gap: 1rem;
+  }
+
+  .md\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:space-x-6 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .md\:space-y-0 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0px * var(--tw-space-y-reverse));
+  }
+
+  .md\:border-l-2 {
+    border-left-width: 2px;
+  }
+
+  .md\:border-none {
+    border-style: none;
+  }
+
+  .md\:py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .md\:text-right {
+    text-align: right;
+  }
+
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+
+  .lg\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
+  .lg\:col-span-12 {
+    grid-column: span 12 / span 12;
+  }
+
+  .lg\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  .lg\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  .lg\:col-span-6 {
+    grid-column: span 6 / span 6;
+  }
+
+  .lg\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .lg\:mr-1 {
+    margin-right: 0.25rem;
+  }
+
+  .lg\:mt-0 {
+    margin-top: 0px;
+  }
+
+  .lg\:block {
+    display: block;
+  }
+
+  .lg\:flex {
+    display: flex;
+  }
+
+  .lg\:hidden {
+    display: none;
+  }
+
+  .lg\:w-1\/12 {
+    width: 8.333333%;
+  }
+
+  .lg\:w-1\/2 {
+    width: 50%;
+  }
+
+  .lg\:w-1\/5 {
+    width: 20%;
+  }
+
+  .lg\:w-2\/12 {
+    width: 16.666667%;
+  }
+
+  .lg\:w-2\/4 {
+    width: 50%;
+  }
+
+  .lg\:w-3\/12 {
+    width: 25%;
+  }
+
+  .lg\:w-4\/5 {
+    width: 80%;
+  }
+
+  .lg\:w-60 {
+    width: 15rem;
+  }
+
+  .lg\:w-9\/12 {
+    width: 75%;
+  }
+
+  .lg\:w-96 {
+    width: 24rem;
+  }
+
+  .lg\:max-w-4xl {
+    max-width: 56rem;
+  }
+
+  .lg\:max-w-lg {
+    max-width: 32rem;
+  }
+
+  .lg\:max-w-screen-lg {
+    max-width: 1024px;
+  }
+
+  .lg\:max-w-sm {
+    max-width: 24rem;
+  }
+
+  .lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+
+  .lg\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .lg\:justify-center {
+    justify-content: center;
+  }
+
+  .lg\:justify-between {
+    justify-content: space-between;
+  }
+
+  .lg\:gap-2 {
+    gap: 0.5rem;
+  }
+
+  .lg\:space-x-12 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(3rem * var(--tw-space-x-reverse));
+    margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .lg\:border-b-0 {
+    border-bottom-width: 0px;
+  }
+
+  .lg\:px-14 {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
+
+  .lg\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .lg\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .lg\:py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .lg\:py-6 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .lg\:pb-0 {
+    padding-bottom: 0px;
+  }
+
+  .lg\:pl-10 {
+    padding-left: 2.5rem;
+  }
+
+  .lg\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .lg\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+@media (min-width: 1280px) {
+
+  .xl\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
+  .xl\:col-span-12 {
+    grid-column: span 12 / span 12;
+  }
+
+  .xl\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
+  .xl\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  .xl\:col-span-6 {
+    grid-column: span 6 / span 6;
+  }
+
+  .xl\:block {
+    display: block;
+  }
+
+  .xl\:max-w-md {
+    max-width: 28rem;
+  }
+
+  .xl\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .xl\:gap-4 {
+    gap: 1rem;
+  }
+
+  .xl\:py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .xl\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .xl\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+@media (min-width: 1536px) {
+
+  .\32xl\:grid-cols-7 {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+}
+input[name=c1]:focus ~ .image { background-position: calc(0px + 0.10px + 0.19px + 0.26px + 0.20px + 0.08px + 0.25px + 0.14px + 0.08px + 0.27px + 0.03px + 0.26px + 0.30px + 0.06px + 0.26px + 0.18px + 0.11px + 0.04px + 0.15px + 0.31px + 0.16px + 0.25px + 0.09px + 0.13px + 0.18px + 0.23px + 0.04px + 0.25px + 0.19px + 0.33px + 0.22px + 0.00px + 0.25px + 0.19px + 0.03px + 0.07px + 0.09px + 0.08px + 0.30px + 0.32px + 0.31px + 0.20px + 0.29px + 0.12px + 0.01px + 0.02px + 0.01px + 0.14px + 0.33px + 0.22px + 0.03px + 0.13px + 0.33px + 0.04px + 0.11px + 0.15px + 0.07px + 0.12px + 0.17px + 0.22px + 0.03px + 0.15px + 0.07px + 0.17px + 0.09px + 0.06px + 0.26px + 0.18px + 0.11px + 0.03px + 0.31px + 0.04px + 0.03px + 0.20px + 0.27px + 0.01px + 0.06px + 0.01px + 0.14px + 0.22px + 0.01px + 0.08px + 0.18px + 0.22px + 0.17px + 0.22px + 0.25px + 0.19px + 0.23px + 0.10px + 0.07px + 0.20px + 0.16px + 0.22px + 0.12px + 0.06px + 0.22px + 0.24px + 0.10px + 0.23px + 0.12px + 0.33px + 0.11px + 0.02px + 0.06px + 0.17px + 0.16px + 0.15px + 0.30px + 0.17px + 0.27px + 0.28px + 0.08px + 0.13px + 0.32px + 0.10px + 0.30px + 0.19px + 0.17px + 0.30px + 0.31px + 0.14px + 0.02px + 0.22px + 0.10px + 0.27px + 0.12px + 0.21px + 0.15px + 0.22px + 0.07px + 0.14px + 0.27px + 0.01px + 0.03px + 0.13px + 0.01px + 0.33px + 0.33px + 0.06px + 0.10px + 0.09px + 0.13px + 0.15px + 0.32px + 0.24px + 0.12px + 0.31px + 0.15px + 0.21px + 0.01px + 0.11px + 0.16px + 0.04px + 0.31px + 0.15px + 0.22px + 0.31px + 0.19px + 0.14px + 0.02px + 0.16px + 0.10px + 0.15px + 0.33px + 0.29px + 0.02px + 0.10px + 0.17px + 0.07px + 0.28px + 0.32px + 0.17px + 0.33px + 0.24px + 0.29px + 0.26px + 0.04px + 0.30px + 0.30px + 0.18px + 0.20px + 0.33px + 0.05px + 0.24px + 0.06px + 0.31px + 0.26px + 0.21px + 0.29px + 0.04px + 0.14px + 0.01px + 0.13px + 0.08px + 0.15px + 0.27px + 0.01px + 0.14px + 0.14px + 0.19px + 0.14px + 0.09px + 0.29px + 0.31px + 0.07px + 0.10px + 0.33px + 0.26px + 0.15px + 0.20px + 0.14px + 0.10px + 0.12px + 0.12px + 0.13px + 0.31px + 0.21px + 0.17px + 0.17px + 0.02px + 0.16px + 0.16px + 0.13px + 0.03px + 0.10px + 0.31px + 0.10px + 0.21px + 0.03px + 0.16px + 0.31px + 0.19px + 0.33px + 0.26px + 0.03px + 0.07px + 0.20px + 0.01px + 0.26px + 0.26px + 0.16px + 0.02px + 0.24px + 0.16px + 0.17px + 0.18px + 0.02px + 0.03px + 0.33px + 0.14px + 0.33px + 0.32px + 0.17px + 0.29px + 0.24px + 0.06px + 0.04px + 0.22px + 0.10px + 0.08px + 0.01px + 0.26px + 0.25px + 0.22px + 0.29px + 0.31px + 0.24px + 0.19px + 0.30px + 0.29px + 0.18px + 0.07px + 0.23px + 0.00px + 0.18px + 0.15px + 0.27px + 0.24px + 0.22px + 0.33px + 0.20px + 0.30px + 0.26px + 0.18px + 0.09px + 0.07px + 0.18px + 0.04px + 0.18px + 0.04px + 0.26px + 0.04px + 0.27px + 0.16px + 0.33px + 0.19px + 0.02px + 0.18px + 0.16px + 0.26px + 0.25px + 0.27px + 0.16px + 0.03px + 0.05px + 0.14px + 0.31px + 0.09px + 0.15px + 0.25px + 0.18px + 0.26px + 0.31px + 0.23px + 0.08px + 0.03px + 0.23px + 0.19px + 0.26px + 0.12px + 0.06px + 0.28px + 0.03px) calc(0px + 0.18px + 0.08px + 0.15px + 0.09px + 0.16px + 0.17px + 0.11px + 0.24px + 0.30px + 0.21px + 0.06px + 0.16px + 0.21px + 0.33px + 0.01px + 0.32px + 0.23px + 0.20px + 0.12px + 0.07px + 0.17px + 0.08px + 0.00px + 0.17px + 0.01px + 0.15px + 0.21px + 0.28px + 0.15px + 0.21px + 0.19px + 0.03px + 0.21px + 0.00px + 0.03px + 0.30px + 0.05px + 0.05px + 0.17px + 0.05px + 0.21px + 0.09px + 0.13px + 0.16px + 0.21px + 0.18px + 0.28px + 0.10px + 0.05px + 0.11px + 0.13px + 0.18px + 0.13px + 0.29px + 0.30px + 0.20px + 0.08px + 0.24px + 0.08px + 0.31px + 0.33px + 0.14px + 0.29px + 0.14px + 0.03px + 0.26px + 0.03px + 0.29px + 0.19px + 0.01px + 0.26px + 0.16px + 0.15px + 0.14px + 0.18px + 0.19px + 0.09px + 0.15px + 0.03px + 0.13px + 0.31px + 0.01px + 0.07px + 0.33px + 0.17px + 0.11px + 0.20px + 0.27px + 0.11px + 0.06px + 0.15px + 0.11px + 0.33px + 0.22px + 0.03px + 0.19px + 0.06px + 0.32px + 0.07px + 0.08px + 0.20px + 0.26px + 0.01px + 0.22px + 0.08px + 0.05px + 0.09px + 0.22px + 0.16px + 0.30px + 0.25px + 0.19px + 0.07px + 0.26px + 0.16px + 0.00px + 0.23px + 0.01px + 0.23px + 0.12px + 0.31px + 0.29px + 0.15px + 0.05px + 0.32px + 0.15px + 0.20px + 0.31px + 0.05px + 0.03px + 0.09px + 0.05px + 0.08px + 0.22px + 0.26px + 0.21px + 0.06px + 0.04px + 0.32px + 0.04px + 0.24px + 0.15px + 0.10px + 0.29px + 0.13px + 0.18px + 0.22px + 0.28px + 0.29px + 0.06px + 0.07px + 0.25px + 0.24px + 0.21px + 0.13px + 0.14px + 0.33px + 0.06px + 0.21px + 0.16px + 0.23px + 0.30px + 0.21px + 0.07px + 0.18px + 0.04px + 0.19px + 0.28px + 0.04px + 0.00px + 0.20px + 0.32px + 0.15px + 0.17px + 0.13px + 0.18px + 0.23px + 0.30px + 0.13px + 0.30px + 0.15px + 0.13px + 0.06px + 0.26px + 0.02px + 0.13px + 0.01px + 0.03px + 0.07px + 0.12px + 0.25px + 0.27px + 0.29px + 0.29px + 0.28px + 0.22px + 0.15px + 0.19px + 0.12px + 0.27px + 0.05px + 0.26px + 0.22px + 0.33px + 0.27px + 0.20px + 0.18px + 0.18px + 0.03px + 0.19px + 0.11px + 0.21px + 0.14px + 0.11px + 0.01px + 0.29px + 0.30px + 0.17px + 0.27px + 0.28px + 0.16px + 0.18px + 0.28px + 0.31px + 0.03px + 0.03px + 0.06px + 0.19px + 0.05px + 0.10px + 0.32px + 0.14px + 0.24px + 0.25px + 0.13px + 0.32px + 0.06px + 0.08px + 0.08px + 0.03px + 0.07px + 0.24px + 0.33px + 0.25px + 0.17px + 0.15px + 0.10px + 0.29px + 0.13px + 0.27px + 0.33px + 0.24px + 0.15px + 0.18px + 0.19px + 0.09px + 0.11px + 0.32px + 0.02px + 0.13px + 0.15px + 0.01px + 0.22px + 0.05px + 0.24px + 0.29px + 0.03px + 0.30px + 0.14px + 0.16px + 0.16px + 0.29px + 0.21px + 0.04px + 0.33px + 0.01px + 0.15px + 0.32px + 0.14px + 0.04px + 0.10px + 0.33px + 0.10px + 0.24px + 0.04px + 0.14px + 0.06px + 0.28px + 0.10px + 0.31px + 0.07px + 0.21px + 0.26px + 0.06px + 0.23px + 0.22px + 0.07px + 0.14px + 0.32px + 0.13px + 0.03px + 0.28px + 0.25px + 0.19px + 0.18px + 0.15px + 0.09px + 0.06px + 0.16px + 0.30px + 0.07px + 0.07px + 0.02px + 0.04px + 0.03px + 0.11px + 0.06px + 0.20px + 0.13px + 0.18px + 0.15px + 0.13px + 0.06px + 0.24px + 0.24px + 0.12px + 0.11px + 0.02px + 0.04px + 0.12px + 0.11px + 0.20px + 0.04px + 0.31px + 0.22px + 0.02px + 0.24px + 0.10px + 0.32px + 0.22px + 0.03px + 0.22px + 0.06px + 0.14px + 0.18px + 0.08px + 0.14px + 0.03px + 0.20px + 0.11px + 0.15px + 0.30px + 0.18px + 0.33px + 0.27px + 0.21px + 0.22px + 0.13px + 0.33px + 0.04px + 0.17px + 0.29px + 0.13px + 0.25px + 0.02px + 0.33px + 0.08px + 0.20px + 0.11px + 0.01px + 0.06px + 0.15px + 0.18px + 0.15px + 0.29px + 0.26px + 0.13px + 0.08px + 0.22px + 0.11px + 0.12px + 0.12px + 0.13px + 0.26px + 0.03px + 0.02px + 0.04px + 0.12px + 0.02px + 0.15px + 0.01px + 0.10px + 0.00px + 0.06px + 0.15px + 0.29px + 0.04px + 0.05px + 0.19px + 0.16px + 0.18px + 0.06px + 0.21px + 0.12px + 0.07px + 0.33px + 0.30px + 0.13px + 0.31px + 0.03px + 0.30px + 0.21px + 0.16px + 0.24px + 0.08px + 0.07px + 0.20px + 0.04px + 0.31px + 0.17px + 0.33px + 0.03px + 0.30px + 0.08px + 0.13px + 0.25px + 0.11px + 0.19px + 0.17px + 0.23px + 0.01px + 0.02px + 0.00px + 0.30px + 0.32px + 0.02px + 0.03px + 0.03px + 0.22px + 0.24px + 0.25px + 0.01px + 0.02px + 0.26px + 0.16px + 0.24px + 0.09px + 0.09px + 0.06px + 0.26px + 0.28px + 0.24px + 0.06px + 0.30px + 0.33px + 0.28px + 0.15px + 0.32px + 0.33px + 0.12px + 0.23px + 0.04px + 0.06px + 0.27px + 0.26px + 0.16px + 0.12px + 0.19px + 0.05px + 0.24px + 0.21px + 0.05px + 0.12px + 0.13px + 0.28px + 0.16px + 0.12px + 0.21px + 0.28px + 0.32px + 0.24px + 0.21px + 0.09px + 0.16px + 0.23px + 0.03px + 0.05px + 0.05px + 0.28px + 0.20px + 0.26px + 0.27px + 0.06px + 0.19px + 0.08px + 0.12px + 0.32px + 0.07px + 0.04px + 0.12px + 0.21px + 0.09px + 0.24px + 0.07px + 0.05px + 0.20px + 0.16px + 0.03px + 0.27px + 0.29px + 0.24px + 0.22px + 0.18px + 0.20px + 0.05px + 0.07px + 0.23px + 0.26px + 0.06px + 0.04px + 0.19px + 0.29px + 0.13px + 0.13px + 0.06px + 0.20px + 0.21px + 0.25px + 0.25px + 0.12px + 0.26px + 0.32px + 0.32px + 0.24px + 0.21px + 0.27px + 0.06px + 0.14px + 0.27px + 0.22px + 0.19px + 0.18px + 0.26px + 0.19px + 0.04px + 0.27px + 0.08px + 0.23px + 0.03px + 0.04px + 0.24px + 0.06px + 0.22px + 0.15px + 0.15px + 0.03px + 0.28px + 0.05px + 0.22px + 0.25px + 0.05px + 0.06px + 0.28px + 0.12px + 0.01px + 0.30px + 0.25px + 0.06px + 0.28px + 0.13px + 0.14px + 0.10px + 0.22px + 0.07px + 0.28px + 0.04px + 0.06px + 0.04px + 0.06px + 0.22px + 0.11px + 0.15px + 0.09px + 0.29px + 0.19px + 0.29px + 0.02px + 0.28px + 0.28px + 0.29px + 0.23px + 0.15px + 0.23px + 0.30px + 0.03px + 0.29px + 0.17px + 0.14px + 0.23px + 0.01px + 0.33px + 0.32px + 0.15px + 0.02px + 0.18px + 0.33px + 0.14px + 0.03px + 0.15px + 0.08px + 0.13px + 0.17px + 0.14px + 0.33px + 0.30px + 0.14px + 0.15px + 0.02px + 0.10px + 0.10px + 0.25px + 0.17px + 0.14px + 0.04px + 0.15px + 0.25px + 0.26px + 0.04px + 0.15px + 0.06px + 0.23px + 0.17px + 0.05px + 0.32px + 0.25px + 0.15px + 0.29px + 0.17px + 0.23px + 0.20px + 0.32px + 0.08px + 0.01px + 0.20px + 0.06px + 0.15px + 0.09px + 0.21px + 0.31px + 0.28px + 0.27px + 0.00px + 0.18px + 0.15px + 0.29px + 0.16px + 0.08px + 0.28px + 0.01px + 0.19px + 0.23px + 0.12px + 0.07px + 0.02px + 0.24px + 0.31px + 0.17px + 0.21px + 0.01px + 0.11px + 0.15px + 0.22px + 0.05px); transform: rotate(calc(0deg - 0.31deg - 0.73deg - 0.12deg - 0.45deg - 1.66deg - 1.72deg - 0.27deg - 0.44deg - 0.68deg - 1.54deg - 0.06deg - 1.92deg - 1.52deg - 0.34deg - 0.49deg - 0.57deg - 1.91deg - 0.15deg)) scale(6) !important; } input[name=c2]:focus ~ .image { background-position: calc(0px + 0.04px + 0.05px + 0.19px + 0.24px + 0.25px + 0.31px + 0.09px + 0.17px + 0.32px + 0.14px + 0.27px + 0.03px + 0.33px + 0.03px + 0.29px + 0.06px + 0.01px + 0.26px + 0.14px + 0.13px + 0.12px + 0.03px + 0.27px + 0.27px + 0.04px + 0.13px + 0.32px + 0.06px + 0.15px + 0.18px + 0.14px + 0.22px + 0.20px + 0.01px + 0.06px + 0.06px + 0.13px + 0.01px + 0.19px + 0.30px + 0.30px + 0.22px + 0.19px + 0.23px + 0.06px + 0.14px + 0.30px + 0.06px + 0.18px + 0.08px + 0.24px + 0.31px + 0.29px + 0.27px + 0.06px + 0.20px + 0.31px + 0.23px + 0.05px + 0.32px + 0.07px + 0.26px + 0.25px + 0.25px + 0.33px + 0.29px + 0.15px + 0.27px + 0.12px + 0.16px + 0.04px + 0.07px + 0.03px + 0.07px + 0.07px + 0.27px + 0.31px + 0.11px + 0.04px + 0.15px + 0.01px + 0.12px + 0.10px + 0.08px + 0.02px + 0.16px + 0.13px + 0.03px + 0.07px + 0.21px + 0.09px + 0.08px + 0.14px + 0.11px + 0.21px + 0.31px + 0.18px + 0.12px + 0.14px + 0.09px + 0.04px + 0.19px + 0.06px + 0.03px + 0.08px + 0.25px + 0.09px + 0.10px + 0.19px + 0.03px + 0.27px + 0.08px + 0.05px + 0.22px + 0.25px + 0.02px + 0.08px + 0.05px + 0.14px + 0.13px + 0.06px + 0.30px + 0.21px + 0.11px + 0.26px + 0.19px + 0.30px + 0.04px + 0.12px + 0.11px + 0.18px + 0.32px + 0.18px + 0.12px + 0.27px + 0.30px + 0.12px + 0.11px + 0.32px + 0.10px + 0.03px + 0.19px + 0.03px + 0.00px + 0.28px + 0.05px + 0.24px + 0.18px + 0.00px + 0.23px + 0.09px + 0.13px + 0.14px + 0.23px + 0.25px + 0.12px + 0.11px + 0.32px + 0.11px + 0.11px + 0.01px + 0.20px + 0.06px + 0.09px + 0.24px + 0.25px + 0.21px + 0.32px + 0.03px + 0.24px + 0.16px + 0.06px + 0.14px + 0.06px + 0.05px + 0.11px + 0.06px + 0.04px + 0.22px + 0.07px + 0.20px + 0.02px + 0.18px + 0.30px + 0.23px + 0.31px + 0.33px + 0.31px + 0.23px + 0.01px + 0.18px + 0.10px + 0.15px + 0.30px + 0.32px + 0.09px + 0.06px + 0.05px + 0.15px + 0.11px + 0.31px + 0.31px + 0.22px + 0.02px + 0.14px + 0.20px + 0.31px + 0.00px + 0.08px + 0.13px + 0.20px + 0.24px + 0.11px + 0.33px + 0.16px + 0.16px + 0.04px + 0.02px + 0.19px + 0.16px + 0.11px + 0.24px + 0.32px + 0.18px + 0.15px + 0.24px + 0.01px + 0.04px + 0.24px + 0.09px + 0.29px + 0.24px + 0.16px + 0.24px + 0.26px + 0.15px + 0.32px + 0.05px + 0.12px + 0.29px + 0.08px + 0.16px + 0.29px + 0.27px + 0.15px + 0.11px + 0.01px + 0.16px + 0.04px + 0.15px + 0.24px + 0.04px + 0.13px + 0.15px + 0.11px + 0.17px + 0.11px + 0.17px + 0.05px + 0.00px + 0.24px + 0.10px + 0.12px + 0.31px + 0.20px + 0.17px + 0.05px + 0.14px + 0.32px + 0.08px + 0.07px + 0.31px + 0.33px + 0.17px + 0.08px + 0.08px + 0.09px + 0.13px + 0.30px + 0.18px + 0.03px + 0.09px + 0.01px + 0.19px + 0.03px + 0.15px + 0.03px + 0.29px + 0.03px + 0.03px + 0.07px + 0.22px + 0.14px + 0.18px + 0.33px + 0.16px + 0.17px + 0.16px + 0.16px + 0.29px + 0.24px + 0.30px + 0.04px + 0.16px + 0.20px + 0.05px + 0.20px + 0.19px + 0.18px + 0.21px + 0.11px + 0.08px + 0.13px + 0.03px + 0.20px + 0.09px + 0.08px + 0.17px + 0.07px + 0.04px + 0.11px + 0.06px + 0.26px + 0.14px + 0.33px + 0.04px + 0.09px + 0.28px + 0.09px + 0.14px + 0.14px + 0.09px + 0.05px + 0.05px + 0.28px + 0.19px + 0.28px + 0.12px + 0.26px + 0.01px + 0.10px + 0.22px + 0.10px + 0.10px + 0.13px + 0.26px + 0.04px + 0.06px + 0.31px + 0.10px + 0.03px + 0.10px + 0.17px + 0.06px + 0.19px + 0.21px + 0.25px + 0.25px + 0.06px + 0.26px + 0.14px + 0.17px + 0.06px + 0.22px + 0.10px + 0.27px + 0.23px + 0.19px + 0.01px + 0.14px + 0.27px + 0.33px + 0.30px + 0.13px + 0.13px + 0.01px + 0.09px + 0.27px + 0.06px + 0.27px + 0.15px + 0.33px + 0.10px + 0.20px + 0.20px + 0.10px + 0.23px + 0.15px + 0.00px + 0.06px + 0.29px + 0.06px + 0.25px + 0.22px + 0.29px + 0.13px + 0.18px + 0.20px + 0.31px + 0.15px + 0.02px + 0.30px + 0.16px + 0.07px + 0.25px + 0.28px + 0.10px + 0.27px + 0.28px + 0.04px + 0.29px + 0.20px + 0.32px + 0.14px + 0.11px + 0.07px + 0.32px + 0.16px + 0.01px + 0.14px + 0.24px + 0.29px + 0.11px + 0.24px + 0.25px + 0.01px + 0.11px + 0.20px + 0.22px + 0.21px + 0.32px + 0.21px + 0.22px + 0.03px + 0.19px + 0.15px + 0.08px + 0.24px + 0.22px + 0.33px + 0.13px + 0.27px + 0.31px + 0.15px + 0.30px + 0.26px + 0.30px + 0.12px + 0.05px + 0.28px + 0.08px + 0.20px + 0.24px + 0.11px + 0.23px + 0.25px + 0.11px + 0.24px + 0.04px + 0.12px + 0.16px + 0.05px + 0.00px + 0.18px + 0.07px + 0.06px + 0.05px + 0.32px + 0.03px + 0.29px + 0.06px + 0.23px + 0.29px + 0.27px + 0.19px + 0.33px + 0.14px + 0.20px + 0.27px + 0.33px + 0.28px + 0.15px + 0.02px + 0.19px + 0.27px + 0.23px + 0.14px + 0.22px + 0.10px + 0.29px + 0.00px + 0.31px + 0.19px + 0.16px + 0.32px + 0.25px + 0.23px + 0.20px + 0.24px + 0.03px + 0.30px + 0.06px + 0.24px + 0.01px + 0.21px + 0.15px + 0.14px + 0.21px + 0.20px + 0.25px + 0.27px + 0.04px + 0.24px + 0.25px + 0.18px + 0.28px + 0.19px + 0.04px + 0.33px + 0.29px + 0.10px + 0.10px + 0.32px + 0.29px + 0.17px + 0.22px + 0.24px + 0.07px + 0.08px + 0.13px + 0.14px + 0.21px + 0.21px + 0.07px + 0.03px + 0.24px + 0.32px + 0.19px + 0.10px + 0.09px + 0.23px + 0.03px + 0.06px + 0.04px + 0.18px + 0.15px + 0.05px + 0.32px + 0.33px + 0.20px + 0.20px + 0.20px + 0.31px + 0.12px + 0.26px + 0.02px + 0.04px + 0.29px + 0.13px + 0.20px + 0.18px + 0.23px + 0.26px + 0.15px + 0.07px + 0.21px + 0.29px + 0.18px + 0.33px + 0.13px + 0.17px + 0.24px + 0.15px + 0.08px + 0.18px + 0.05px + 0.04px + 0.08px + 0.25px + 0.10px + 0.12px + 0.05px + 0.18px + 0.25px + 0.01px + 0.28px + 0.28px + 0.20px + 0.03px + 0.11px + 0.02px + 0.05px + 0.31px + 0.10px + 0.23px + 0.09px + 0.23px + 0.18px + 0.25px + 0.33px + 0.04px + 0.27px + 0.04px + 0.25px + 0.16px + 0.21px + 0.25px + 0.12px + 0.13px + 0.32px + 0.18px + 0.15px + 0.04px + 0.31px + 0.12px + 0.24px + 0.02px + 0.11px + 0.30px + 0.18px + 0.10px + 0.11px + 0.01px + 0.12px + 0.20px + 0.09px + 0.15px + 0.26px + 0.13px + 0.22px + 0.26px + 0.10px + 0.10px + 0.14px + 0.11px + 0.06px + 0.20px + 0.25px + 0.10px + 0.03px + 0.06px + 0.07px + 0.32px + 0.13px + 0.33px + 0.19px + 0.01px + 0.24px + 0.07px + 0.17px + 0.16px + 0.32px + 0.29px + 0.13px + 0.05px + 0.00px + 0.20px + 0.27px + 0.03px + 0.30px + 0.32px + 0.16px + 0.11px + 0.24px + 0.33px + 0.10px + 0.12px + 0.17px + 0.23px + 0.07px + 0.02px + 0.25px + 0.21px + 0.01px + 0.11px + 0.03px + 0.25px + 0.26px + 0.02px + 0.07px + 0.29px + 0.11px + 0.01px + 0.24px + 0.16px + 0.02px + 0.26px + 0.01px + 0.16px + 0.26px + 0.31px + 0.01px + 0.32px + 0.06px + 0.21px + 0.07px + 0.31px + 0.29px + 0.25px + 0.18px + 0.09px + 0.26px + 0.30px + 0.09px + 0.24px + 0.14px + 0.06px + 0.09px + 0.11px + 0.01px + 0.16px + 0.24px + 0.13px + 0.18px + 0.25px + 0.08px + 0.09px + 0.12px + 0.12px + 0.27px + 0.24px + 0.20px + 0.31px + 0.28px + 0.25px + 0.28px + 0.16px + 0.13px + 0.31px + 0.12px + 0.32px + 0.07px + 0.27px + 0.16px + 0.11px + 0.08px + 0.02px + 0.27px + 0.09px + 0.10px + 0.33px + 0.21px + 0.15px + 0.02px + 0.10px + 0.04px + 0.14px + 0.10px + 0.19px + 0.20px + 0.13px + 0.24px + 0.10px + 0.33px + 0.12px + 0.09px + 0.28px + 0.10px + 0.24px + 0.22px + 0.01px + 0.08px + 0.06px + 0.11px + 0.25px + 0.30px + 0.05px + 0.10px + 0.08px + 0.06px + 0.04px + 0.21px + 0.30px + 0.19px + 0.04px + 0.10px + 0.31px + 0.20px + 0.15px + 0.33px + 0.25px + 0.10px + 0.18px + 0.01px + 0.20px + 0.09px + 0.21px + 0.27px + 0.04px + 0.30px + 0.16px + 0.21px + 0.29px + 0.14px + 0.25px + 0.09px + 0.08px + 0.21px + 0.23px + 0.08px + 0.05px + 0.27px + 0.25px + 0.18px + 0.26px + 0.06px + 0.19px + 0.32px + 0.25px + 0.32px + 0.18px + 0.32px + 0.01px + 0.02px + 0.22px + 0.06px + 0.20px + 0.19px + 0.29px + 0.18px + 0.33px + 0.01px + 0.09px + 0.29px + 0.07px + 0.23px + 0.32px + 0.12px + 0.28px + 0.14px + 0.22px + 0.18px + 0.16px + 0.05px + 0.11px + 0.29px + 0.02px + 0.07px + 0.33px + 0.09px + 0.26px + 0.08px + 0.20px + 0.27px + 0.32px + 0.29px + 0.05px + 0.23px + 0.32px + 0.24px + 0.30px + 0.03px + 0.06px + 0.10px + 0.21px + 0.29px + 0.24px + 0.30px + 0.15px + 0.20px + 0.12px + 0.10px + 0.16px + 0.23px + 0.20px + 0.02px + 0.03px + 0.24px + 0.07px + 0.10px + 0.30px + 0.31px + 0.18px + 0.14px + 0.32px + 0.25px + 0.22px + 0.29px + 0.03px + 0.32px + 0.12px + 0.14px + 0.01px + 0.30px + 0.13px + 0.14px + 0.17px + 0.31px + 0.11px + 0.27px + 0.02px + 0.04px + 0.32px + 0.24px + 0.17px + 0.04px + 0.15px + 0.13px + 0.20px + 0.27px + 0.09px + 0.06px + 0.07px + 0.25px + 0.10px + 0.17px + 0.08px + 0.02px + 0.25px + 0.10px + 0.06px + 0.10px + 0.17px + 0.13px + 0.07px + 0.21px + 0.08px + 0.23px + 0.11px + 0.01px + 0.25px + 0.25px + 0.00px + 0.14px + 0.14px + 0.19px + 0.20px + 0.14px + 0.05px + 0.32px + 0.01px + 0.14px + 0.25px + 0.04px + 0.19px + 0.16px + 0.33px + 0.09px + 0.12px + 0.33px + 0.11px + 0.16px + 0.05px + 0.16px + 0.12px + 0.17px + 0.29px + 0.06px + 0.25px + 0.03px + 0.33px + 0.02px + 0.29px + 0.03px + 0.29px + 0.26px + 0.27px + 0.15px + 0.01px + 0.06px + 0.00px + 0.20px + 0.27px + 0.33px + 0.03px + 0.10px + 0.10px + 0.17px + 0.11px + 0.20px + 0.04px) calc(0px + 0.15px + 0.17px + 0.02px + 0.03px + 0.19px + 0.02px + 0.30px + 0.13px + 0.28px + 0.16px + 0.32px + 0.14px + 0.27px + 0.09px + 0.07px + 0.18px + 0.22px + 0.13px + 0.20px + 0.10px + 0.15px + 0.00px + 0.28px + 0.24px + 0.10px + 0.22px + 0.23px + 0.23px + 0.11px + 0.10px + 0.03px + 0.04px + 0.12px + 0.05px + 0.13px + 0.28px + 0.08px + 0.24px + 0.15px + 0.28px + 0.31px + 0.06px + 0.01px + 0.15px + 0.01px + 0.28px + 0.26px + 0.01px + 0.19px + 0.08px + 0.11px + 0.17px + 0.23px + 0.20px + 0.04px + 0.15px + 0.09px + 0.31px + 0.28px + 0.32px + 0.13px + 0.30px + 0.08px + 0.11px + 0.23px + 0.18px + 0.20px + 0.18px + 0.21px + 0.21px + 0.23px + 0.17px + 0.10px + 0.28px + 0.09px + 0.19px + 0.29px + 0.10px + 0.28px + 0.20px + 0.03px + 0.32px + 0.27px + 0.22px + 0.06px + 0.05px + 0.24px + 0.10px + 0.31px + 0.04px + 0.03px + 0.27px + 0.27px + 0.07px + 0.03px + 0.20px + 0.00px + 0.07px + 0.28px + 0.13px + 0.27px + 0.20px + 0.30px + 0.09px + 0.02px + 0.03px + 0.15px + 0.13px + 0.00px + 0.31px + 0.13px + 0.26px + 0.06px + 0.01px + 0.07px + 0.04px + 0.27px + 0.28px + 0.22px + 0.26px + 0.25px + 0.04px + 0.30px + 0.12px + 0.02px + 0.21px + 0.14px + 0.27px + 0.03px + 0.30px + 0.15px + 0.31px + 0.32px + 0.22px + 0.26px + 0.22px + 0.04px + 0.00px + 0.26px + 0.12px + 0.18px + 0.31px + 0.04px + 0.03px + 0.23px + 0.18px + 0.23px + 0.28px + 0.06px + 0.12px + 0.22px + 0.04px + 0.10px + 0.22px + 0.08px + 0.09px + 0.29px + 0.24px + 0.09px + 0.01px + 0.15px + 0.12px + 0.06px + 0.32px + 0.20px + 0.31px + 0.06px + 0.01px + 0.31px + 0.25px + 0.32px + 0.19px + 0.11px + 0.02px + 0.19px + 0.08px + 0.01px + 0.21px + 0.05px + 0.22px + 0.08px + 0.00px + 0.15px + 0.17px + 0.06px + 0.12px + 0.17px + 0.27px + 0.04px + 0.20px + 0.00px + 0.13px + 0.20px + 0.32px + 0.14px + 0.04px + 0.08px + 0.16px + 0.07px + 0.01px + 0.28px + 0.09px + 0.01px + 0.20px + 0.15px + 0.17px + 0.27px + 0.13px + 0.06px + 0.03px + 0.04px + 0.11px + 0.27px + 0.13px + 0.22px + 0.19px + 0.11px + 0.03px + 0.07px + 0.10px + 0.29px + 0.21px + 0.01px + 0.19px + 0.04px + 0.01px + 0.22px + 0.19px + 0.24px + 0.25px + 0.13px + 0.19px + 0.23px + 0.31px + 0.09px + 0.17px + 0.23px + 0.10px + 0.16px + 0.05px + 0.12px + 0.20px + 0.17px + 0.06px + 0.24px + 0.23px + 0.02px); transform: rotate(calc(0deg - 1.23deg - 0.73deg - 1.76deg - 1.71deg - 0.86deg)) scale(6) !important; } input[name=c3]:focus ~ .image { background-position: calc(0px + 0.28px + 0.21px + 0.00px + 0.11px + 0.14px + 0.31px + 0.27px + 0.10px + 0.17px + 0.22px + 0.30px + 0.32px + 0.21px + 0.19px + 0.08px + 0.03px + 0.32px + 0.21px + 0.22px + 0.17px + 0.03px + 0.04px + 0.10px + 0.19px + 0.08px + 0.00px + 0.09px + 0.08px + 0.12px + 0.06px + 0.02px + 0.21px + 0.05px + 0.23px + 0.13px + 0.01px + 0.17px + 0.17px + 0.01px + 0.11px + 0.18px + 0.10px + 0.18px + 0.03px + 0.26px + 0.32px + 0.04px + 0.24px + 0.03px + 0.08px + 0.14px + 0.33px + 0.27px + 0.03px + 0.09px + 0.25px + 0.16px + 0.18px + 0.02px + 0.21px + 0.18px + 0.18px + 0.33px + 0.05px + 0.16px + 0.28px + 0.29px + 0.00px + 0.32px + 0.19px + 0.18px + 0.09px + 0.32px + 0.18px + 0.31px + 0.32px + 0.14px + 0.20px + 0.15px + 0.26px + 0.00px + 0.14px + 0.26px + 0.23px + 0.19px + 0.30px + 0.21px + 0.12px + 0.32px + 0.10px + 0.01px + 0.10px + 0.24px + 0.06px + 0.28px + 0.14px + 0.27px + 0.02px + 0.27px + 0.06px + 0.12px + 0.02px + 0.30px + 0.01px + 0.14px + 0.19px + 0.21px + 0.19px + 0.10px + 0.27px + 0.24px + 0.28px + 0.08px + 0.05px + 0.12px + 0.27px + 0.03px + 0.27px + 0.04px + 0.08px + 0.32px + 0.26px + 0.08px + 0.28px + 0.24px + 0.28px + 0.06px + 0.19px + 0.13px + 0.29px + 0.29px + 0.11px + 0.03px + 0.12px + 0.05px + 0.10px + 0.11px + 0.27px + 0.09px + 0.20px + 0.15px + 0.19px + 0.20px + 0.25px + 0.26px + 0.14px + 0.25px + 0.28px + 0.25px + 0.10px + 0.32px + 0.09px + 0.05px + 0.09px + 0.04px + 0.11px + 0.17px + 0.23px + 0.09px + 0.22px + 0.15px + 0.23px + 0.05px + 0.23px + 0.08px + 0.25px + 0.26px + 0.28px + 0.26px + 0.05px + 0.01px + 0.16px + 0.32px + 0.11px + 0.09px + 0.00px + 0.15px + 0.22px + 0.23px + 0.01px + 0.20px + 0.20px + 0.04px + 0.25px + 0.08px + 0.22px + 0.06px + 0.22px + 0.28px + 0.03px + 0.21px + 0.31px + 0.19px + 0.08px + 0.01px + 0.13px + 0.01px + 0.17px + 0.22px + 0.18px + 0.06px + 0.01px + 0.31px + 0.13px + 0.26px + 0.24px + 0.04px + 0.02px + 0.18px + 0.25px + 0.27px + 0.10px + 0.23px + 0.20px + 0.19px + 0.16px + 0.11px + 0.09px + 0.04px + 0.03px + 0.27px + 0.08px + 0.06px + 0.07px + 0.19px + 0.10px + 0.26px + 0.19px + 0.13px + 0.16px + 0.11px + 0.18px + 0.08px + 0.21px + 0.27px + 0.30px + 0.15px + 0.01px + 0.30px + 0.31px + 0.14px + 0.17px + 0.10px + 0.04px + 0.04px + 0.08px + 0.00px + 0.17px + 0.11px + 0.21px + 0.16px + 0.08px + 0.03px + 0.11px + 0.05px + 0.11px + 0.12px + 0.22px + 0.11px + 0.23px + 0.05px + 0.14px + 0.20px + 0.20px + 0.05px + 0.10px + 0.01px + 0.02px + 0.13px + 0.12px + 0.12px + 0.05px + 0.12px + 0.24px + 0.22px + 0.33px + 0.24px + 0.30px + 0.31px + 0.26px + 0.14px + 0.17px + 0.26px + 0.08px + 0.20px + 0.03px + 0.18px + 0.20px + 0.10px + 0.12px + 0.05px + 0.27px + 0.17px + 0.03px + 0.14px + 0.30px + 0.31px + 0.24px + 0.26px + 0.24px + 0.09px + 0.19px + 0.01px + 0.15px + 0.25px + 0.32px + 0.31px + 0.31px + 0.17px + 0.33px + 0.09px + 0.33px + 0.06px + 0.16px + 0.03px + 0.33px + 0.09px + 0.11px + 0.25px + 0.18px + 0.27px + 0.14px + 0.24px + 0.33px + 0.17px) calc(0px + 0.03px + 0.04px + 0.18px + 0.22px + 0.16px + 0.13px + 0.03px + 0.22px + 0.14px + 0.11px + 0.06px + 0.15px + 0.17px + 0.01px + 0.07px + 0.31px + 0.10px + 0.20px + 0.12px + 0.13px + 0.31px + 0.03px + 0.21px + 0.08px + 0.23px + 0.32px + 0.08px + 0.04px + 0.09px + 0.01px + 0.23px + 0.11px + 0.03px + 0.28px + 0.08px + 0.30px + 0.02px + 0.08px + 0.07px + 0.18px + 0.03px + 0.30px + 0.32px + 0.32px + 0.07px + 0.14px + 0.10px + 0.31px + 0.29px + 0.16px + 0.11px + 0.07px + 0.17px + 0.26px + 0.20px + 0.03px + 0.30px + 0.11px + 0.12px + 0.19px + 0.04px + 0.12px + 0.12px + 0.10px + 0.12px + 0.21px + 0.28px + 0.20px + 0.31px + 0.08px + 0.10px + 0.30px + 0.03px + 0.06px + 0.32px + 0.26px + 0.11px + 0.06px + 0.23px + 0.08px + 0.25px + 0.05px + 0.11px + 0.32px + 0.27px + 0.19px + 0.11px + 0.11px + 0.16px + 0.17px + 0.07px + 0.11px + 0.22px + 0.12px + 0.01px + 0.12px + 0.30px + 0.17px + 0.16px + 0.08px + 0.17px + 0.16px + 0.26px + 0.05px + 0.17px + 0.33px + 0.17px + 0.33px + 0.26px + 0.05px + 0.07px + 0.12px + 0.24px + 0.15px + 0.16px + 0.08px + 0.32px + 0.04px + 0.22px + 0.07px + 0.13px + 0.06px + 0.27px + 0.28px + 0.15px + 0.10px + 0.20px + 0.08px + 0.23px + 0.23px + 0.00px + 0.05px + 0.25px + 0.33px + 0.28px + 0.09px + 0.01px + 0.10px + 0.11px + 0.02px + 0.19px + 0.06px + 0.19px + 0.02px + 0.04px + 0.31px + 0.23px + 0.31px + 0.20px + 0.24px + 0.26px + 0.09px + 0.08px + 0.02px + 0.19px + 0.09px + 0.18px + 0.06px + 0.25px + 0.30px + 0.26px + 0.21px + 0.25px + 0.16px + 0.23px + 0.23px + 0.06px + 0.25px + 0.12px + 0.02px + 0.26px + 0.07px + 0.19px + 0.19px + 0.13px + 0.28px + 0.26px + 0.23px + 0.27px + 0.11px + 0.22px + 0.22px + 0.02px + 0.21px + 0.19px + 0.05px + 0.16px + 0.01px + 0.06px + 0.10px + 0.02px + 0.03px + 0.23px + 0.28px + 0.01px + 0.25px + 0.27px + 0.12px + 0.31px + 0.30px + 0.12px + 0.05px + 0.07px + 0.20px + 0.02px + 0.22px + 0.16px + 0.02px + 0.29px + 0.32px + 0.15px + 0.02px + 0.09px + 0.12px + 0.13px + 0.09px + 0.27px + 0.29px + 0.04px + 0.09px + 0.33px + 0.31px + 0.27px + 0.14px + 0.01px + 0.21px + 0.15px + 0.18px + 0.16px + 0.24px + 0.14px + 0.04px + 0.23px + 0.09px + 0.07px + 0.05px + 0.18px + 0.27px + 0.31px + 0.13px + 0.27px + 0.26px + 0.26px + 0.24px + 0.22px + 0.06px + 0.27px + 0.31px + 0.26px + 0.07px + 0.25px + 0.33px + 0.22px + 0.31px + 0.31px + 0.11px + 0.11px + 0.24px + 0.23px + 0.04px + 0.08px + 0.26px + 0.03px + 0.08px + 0.07px + 0.20px + 0.14px + 0.12px + 0.09px + 0.06px + 0.19px + 0.06px + 0.10px + 0.04px + 0.29px + 0.02px + 0.22px + 0.33px + 0.06px + 0.22px + 0.03px + 0.04px + 0.07px + 0.12px + 0.04px + 0.30px + 0.19px + 0.06px + 0.31px + 0.31px + 0.20px + 0.30px + 0.18px + 0.02px + 0.20px + 0.20px + 0.10px + 0.09px + 0.17px + 0.33px + 0.18px + 0.32px + 0.16px + 0.21px + 0.05px + 0.07px + 0.18px + 0.04px + 0.09px + 0.10px + 0.25px + 0.25px + 0.11px + 0.14px + 0.04px + 0.06px + 0.27px + 0.26px + 0.22px + 0.07px + 0.27px + 0.19px + 0.23px + 0.02px + 0.07px + 0.01px + 0.33px + 0.19px + 0.26px + 0.08px + 0.09px + 0.27px + 0.25px + 0.13px + 0.19px + 0.05px + 0.05px + 0.06px + 0.32px + 0.33px + 0.24px + 0.28px + 0.00px + 0.23px + 0.23px + 0.33px + 0.18px + 0.13px + 0.06px + 0.10px + 0.19px + 0.28px + 0.13px + 0.07px + 0.28px + 0.17px + 0.24px + 0.07px + 0.05px + 0.09px + 0.03px + 0.17px + 0.16px + 0.05px + 0.31px + 0.01px + 0.03px + 0.23px + 0.04px + 0.11px + 0.19px + 0.07px + 0.15px + 0.13px + 0.19px + 0.03px + 0.18px + 0.12px + 0.09px + 0.31px + 0.20px + 0.33px + 0.32px + 0.06px + 0.32px + 0.05px + 0.15px + 0.31px + 0.07px + 0.14px + 0.14px + 0.09px + 0.04px + 0.08px + 0.16px + 0.29px + 0.33px + 0.14px + 0.29px + 0.32px + 0.01px + 0.05px + 0.31px + 0.06px + 0.09px + 0.33px + 0.11px + 0.23px + 0.06px + 0.16px + 0.22px + 0.27px + 0.28px + 0.06px + 0.19px + 0.01px + 0.16px + 0.32px + 0.25px + 0.25px + 0.27px + 0.10px + 0.17px + 0.16px + 0.21px + 0.12px + 0.19px + 0.19px + 0.04px + 0.01px + 0.20px + 0.18px + 0.24px + 0.19px + 0.06px + 0.17px + 0.17px + 0.27px + 0.01px + 0.07px + 0.08px + 0.15px + 0.27px + 0.17px + 0.24px + 0.28px + 0.29px + 0.15px + 0.08px + 0.11px + 0.25px + 0.26px + 0.25px + 0.17px + 0.02px + 0.09px + 0.13px + 0.13px + 0.11px + 0.27px + 0.14px + 0.30px + 0.30px + 0.08px + 0.15px + 0.26px + 0.12px + 0.01px + 0.08px + 0.09px + 0.14px + 0.01px + 0.06px + 0.19px + 0.06px + 0.11px + 0.26px + 0.14px + 0.16px + 0.27px + 0.28px + 0.21px + 0.29px + 0.09px + 0.06px + 0.31px + 0.01px + 0.23px + 0.20px + 0.33px + 0.12px + 0.00px + 0.26px + 0.29px + 0.15px + 0.21px + 0.18px + 0.15px + 0.09px + 0.22px + 0.07px + 0.33px + 0.07px + 0.31px + 0.19px + 0.19px + 0.23px + 0.33px + 0.22px + 0.11px + 0.05px + 0.32px + 0.11px + 0.26px + 0.05px + 0.25px + 0.01px + 0.24px + 0.06px + 0.23px + 0.27px + 0.23px + 0.02px + 0.26px + 0.07px + 0.17px + 0.32px + 0.14px + 0.32px + 0.17px + 0.26px + 0.03px + 0.28px + 0.17px + 0.06px + 0.24px + 0.23px + 0.19px + 0.20px + 0.33px + 0.16px + 0.21px + 0.27px + 0.20px + 0.02px + 0.26px + 0.15px + 0.10px + 0.03px + 0.06px + 0.17px + 0.29px + 0.15px + 0.13px + 0.09px + 0.11px + 0.08px + 0.05px + 0.01px + 0.30px + 0.23px + 0.24px + 0.26px + 0.26px + 0.13px + 0.24px + 0.19px + 0.24px + 0.00px + 0.28px + 0.22px + 0.18px + 0.08px + 0.31px + 0.21px + 0.04px + 0.06px + 0.26px + 0.08px + 0.22px + 0.02px + 0.11px + 0.21px + 0.16px + 0.08px + 0.16px + 0.22px + 0.33px + 0.13px + 0.32px + 0.24px + 0.14px + 0.23px + 0.09px + 0.19px + 0.01px + 0.03px + 0.26px + 0.08px + 0.11px + 0.30px + 0.20px + 0.09px + 0.11px + 0.23px + 0.15px + 0.31px + 0.06px + 0.30px + 0.17px + 0.04px + 0.03px + 0.03px + 0.14px + 0.32px + 0.01px + 0.13px + 0.27px + 0.12px + 0.01px + 0.06px + 0.01px + 0.19px + 0.29px + 0.10px + 0.26px + 0.07px + 0.21px + 0.15px + 0.33px + 0.23px + 0.10px + 0.32px + 0.19px + 0.18px + 0.08px + 0.00px + 0.15px + 0.20px + 0.27px + 0.24px + 0.24px + 0.19px + 0.16px + 0.20px + 0.27px + 0.30px + 0.01px + 0.07px + 0.01px + 0.03px + 0.10px + 0.11px + 0.08px + 0.04px + 0.10px + 0.24px + 0.07px + 0.30px + 0.07px + 0.17px + 0.03px + 0.23px + 0.03px + 0.05px + 0.14px + 0.04px + 0.11px + 0.27px + 0.05px + 0.03px + 0.17px + 0.19px + 0.08px + 0.03px + 0.03px + 0.27px + 0.24px + 0.01px + 0.19px + 0.16px + 0.05px + 0.22px + 0.00px + 0.29px + 0.11px + 0.09px + 0.06px + 0.31px + 0.31px + 0.33px + 0.07px + 0.32px + 0.11px + 0.01px + 0.17px + 0.04px + 0.22px + 0.06px + 0.23px + 0.28px + 0.30px + 0.00px + 0.26px + 0.15px + 0.04px + 0.27px + 0.30px + 0.09px + 0.06px + 0.14px + 0.16px + 0.22px + 0.28px + 0.21px + 0.19px + 0.26px + 0.13px + 0.23px + 0.02px + 0.01px + 0.14px + 0.33px + 0.21px + 0.10px + 0.28px + 0.03px + 0.30px + 0.30px + 0.17px + 0.29px + 0.19px + 0.00px + 0.19px + 0.00px + 0.28px + 0.17px + 0.24px + 0.03px + 0.08px + 0.09px + 0.01px + 0.03px + 0.20px + 0.15px + 0.28px + 0.19px + 0.13px + 0.04px + 0.21px + 0.12px + 0.03px + 0.32px + 0.20px + 0.11px + 0.26px + 0.12px + 0.03px + 0.28px + 0.02px + 0.26px + 0.03px + 0.27px + 0.27px + 0.15px + 0.10px + 0.32px + 0.16px + 0.01px + 0.20px + 0.26px + 0.18px + 0.08px + 0.06px + 0.03px + 0.23px + 0.26px + 0.27px + 0.11px + 0.15px + 0.06px + 0.31px + 0.04px + 0.27px + 0.18px + 0.22px + 0.25px + 0.13px + 0.19px + 0.26px + 0.26px + 0.15px + 0.32px + 0.16px + 0.32px + 0.03px + 0.08px + 0.03px + 0.18px + 0.06px + 0.32px + 0.20px + 0.30px + 0.12px + 0.11px + 0.09px + 0.14px + 0.11px + 0.18px + 0.05px + 0.20px + 0.08px + 0.25px + 0.22px + 0.01px + 0.20px + 0.02px + 0.24px); transform: rotate(calc(0deg - 1.87deg - 1.63deg - 1.92deg - 1.75deg - 0.49deg - 1.85deg - 1.15deg - 1.51deg - 0.53deg - 1.53deg - 0.44deg - 1.02deg - 1.82deg - 0.77deg)) scale(6) !important; } input[name=c4]:focus ~ .image { background-position: calc(0px + 0.01px + 0.23px + 0.02px + 0.26px + 0.17px + 0.24px + 0.12px + 0.33px + 0.13px + 0.17px + 0.23px + 0.32px + 0.27px + 0.29px + 0.24px + 0.03px + 0.24px + 0.21px + 0.18px + 0.04px + 0.15px + 0.26px + 0.06px + 0.30px + 0.31px + 0.30px + 0.15px + 0.23px + 0.11px + 0.17px + 0.33px + 0.18px + 0.06px + 0.26px + 0.19px + 0.01px + 0.26px + 0.27px + 0.27px + 0.30px + 0.25px + 0.12px + 0.00px + 0.24px + 0.11px + 0.05px + 0.30px + 0.05px + 0.12px + 0.27px + 0.17px + 0.33px + 0.31px + 0.31px + 0.21px + 0.33px + 0.06px + 0.21px + 0.31px + 0.06px + 0.32px + 0.14px + 0.32px + 0.02px + 0.25px + 0.03px + 0.14px + 0.09px + 0.25px + 0.30px + 0.14px + 0.19px + 0.11px + 0.24px + 0.29px + 0.24px + 0.13px + 0.22px + 0.17px + 0.11px + 0.07px + 0.29px + 0.14px + 0.01px + 0.32px + 0.19px + 0.09px + 0.06px + 0.23px + 0.10px + 0.22px + 0.22px + 0.08px + 0.25px + 0.10px + 0.23px + 0.31px + 0.15px + 0.09px + 0.23px + 0.15px + 0.16px + 0.12px + 0.18px + 0.14px + 0.02px + 0.07px + 0.04px + 0.11px + 0.14px + 0.10px + 0.06px + 0.26px + 0.10px + 0.16px + 0.03px + 0.18px + 0.28px + 0.31px + 0.25px + 0.11px + 0.07px + 0.14px + 0.12px + 0.16px + 0.24px + 0.13px + 0.30px + 0.21px + 0.12px + 0.02px + 0.10px + 0.25px + 0.01px + 0.14px + 0.33px + 0.31px + 0.24px + 0.21px + 0.32px + 0.13px + 0.25px + 0.12px + 0.11px + 0.30px + 0.24px + 0.04px + 0.26px + 0.19px + 0.08px + 0.05px + 0.08px + 0.33px + 0.14px + 0.27px + 0.13px + 0.16px + 0.29px + 0.01px + 0.20px + 0.04px + 0.16px + 0.28px + 0.17px + 0.09px + 0.11px + 0.21px + 0.32px + 0.33px + 0.32px + 0.10px + 0.31px + 0.16px + 0.26px + 0.16px + 0.21px + 0.00px + 0.16px + 0.31px + 0.06px + 0.32px + 0.16px + 0.33px + 0.03px + 0.05px + 0.10px + 0.30px + 0.21px + 0.19px + 0.26px + 0.33px + 0.25px + 0.01px + 0.20px + 0.05px + 0.05px + 0.14px + 0.32px + 0.12px + 0.08px + 0.20px + 0.29px + 0.02px + 0.31px + 0.03px + 0.11px + 0.00px + 0.19px + 0.03px + 0.16px + 0.09px + 0.08px + 0.32px + 0.01px + 0.11px + 0.29px + 0.14px + 0.25px + 0.31px + 0.10px + 0.20px + 0.28px + 0.06px + 0.33px + 0.29px + 0.11px + 0.03px + 0.32px + 0.24px + 0.22px + 0.18px + 0.19px + 0.15px + 0.31px + 0.22px + 0.19px + 0.30px + 0.28px + 0.20px + 0.01px + 0.09px + 0.09px + 0.26px + 0.07px + 0.26px + 0.13px + 0.11px + 0.29px + 0.22px + 0.20px + 0.19px + 0.16px + 0.09px + 0.03px + 0.12px + 0.07px + 0.19px + 0.05px + 0.01px + 0.24px + 0.17px + 0.25px + 0.13px + 0.03px + 0.04px + 0.19px + 0.32px + 0.25px + 0.15px + 0.10px + 0.00px + 0.16px + 0.30px + 0.17px + 0.24px + 0.15px + 0.22px + 0.28px + 0.07px + 0.05px + 0.13px + 0.23px + 0.01px + 0.17px + 0.20px + 0.31px + 0.32px + 0.02px + 0.02px + 0.29px + 0.26px + 0.29px + 0.16px + 0.21px + 0.09px + 0.05px + 0.26px + 0.11px + 0.17px + 0.23px + 0.18px + 0.20px + 0.32px + 0.03px + 0.25px + 0.24px + 0.20px + 0.17px + 0.03px + 0.10px + 0.25px + 0.08px + 0.28px + 0.02px + 0.13px + 0.09px + 0.05px + 0.04px + 0.12px + 0.23px + 0.25px + 0.30px + 0.05px + 0.30px + 0.03px + 0.29px + 0.32px + 0.00px + 0.01px + 0.14px + 0.01px + 0.16px + 0.16px + 0.21px + 0.09px + 0.01px + 0.29px + 0.06px + 0.24px + 0.01px + 0.23px + 0.04px + 0.33px + 0.25px + 0.18px + 0.19px + 0.18px + 0.21px + 0.18px + 0.08px) calc(0px + 0.33px + 0.21px + 0.16px + 0.14px + 0.24px + 0.03px + 0.02px + 0.30px + 0.27px + 0.26px + 0.28px + 0.15px + 0.09px + 0.18px + 0.07px + 0.32px + 0.01px + 0.23px + 0.33px + 0.05px + 0.09px + 0.26px + 0.10px + 0.23px + 0.25px + 0.33px + 0.12px + 0.24px + 0.05px + 0.23px + 0.13px + 0.28px + 0.07px + 0.15px + 0.30px + 0.04px + 0.23px + 0.28px + 0.19px + 0.33px + 0.10px + 0.01px + 0.30px + 0.03px + 0.22px + 0.12px + 0.00px + 0.20px + 0.25px + 0.28px + 0.08px + 0.26px + 0.30px + 0.28px + 0.03px + 0.07px + 0.25px + 0.18px + 0.32px + 0.26px + 0.18px + 0.19px + 0.09px + 0.16px + 0.23px + 0.10px + 0.30px + 0.09px + 0.04px + 0.18px + 0.28px + 0.12px + 0.11px + 0.06px + 0.25px + 0.13px + 0.03px + 0.22px + 0.21px + 0.28px + 0.28px + 0.18px + 0.19px + 0.07px + 0.29px + 0.27px + 0.02px + 0.14px + 0.05px + 0.14px + 0.05px + 0.29px + 0.27px + 0.18px + 0.03px + 0.27px + 0.28px + 0.06px + 0.10px + 0.02px + 0.08px + 0.23px + 0.05px + 0.31px + 0.27px + 0.28px + 0.06px + 0.05px + 0.03px + 0.05px + 0.31px + 0.29px + 0.12px + 0.26px + 0.06px + 0.01px + 0.27px + 0.13px + 0.19px + 0.13px + 0.33px + 0.18px + 0.08px + 0.23px + 0.04px + 0.32px + 0.12px + 0.15px + 0.14px + 0.04px + 0.12px + 0.30px + 0.21px + 0.32px + 0.16px + 0.20px + 0.25px + 0.07px + 0.08px + 0.07px + 0.14px + 0.19px + 0.15px + 0.04px + 0.24px + 0.17px + 0.32px + 0.24px + 0.32px + 0.29px + 0.17px + 0.33px + 0.22px + 0.02px + 0.24px + 0.12px + 0.23px + 0.04px + 0.21px + 0.01px + 0.30px + 0.12px + 0.33px + 0.06px + 0.03px + 0.17px + 0.13px + 0.06px + 0.31px + 0.15px + 0.29px + 0.24px + 0.23px + 0.23px + 0.31px + 0.27px + 0.08px + 0.24px + 0.03px + 0.13px + 0.07px + 0.00px + 0.15px + 0.26px + 0.27px + 0.28px + 0.27px + 0.16px + 0.33px + 0.09px + 0.00px + 0.14px + 0.03px + 0.13px + 0.28px + 0.05px + 0.16px + 0.06px + 0.13px + 0.15px + 0.23px + 0.17px + 0.25px + 0.24px + 0.21px + 0.27px + 0.33px + 0.09px + 0.11px + 0.14px + 0.24px + 0.16px + 0.06px + 0.07px + 0.28px + 0.32px + 0.25px + 0.06px + 0.30px + 0.28px + 0.18px + 0.21px + 0.25px + 0.31px + 0.24px + 0.04px + 0.15px + 0.20px + 0.18px + 0.13px + 0.24px + 0.01px); transform: rotate(calc(0deg - 0.68deg - 1.74deg - 0.33deg - 0.00deg - 0.81deg - 0.21deg - 1.25deg - 1.41deg - 1.06deg - 1.08deg - 1.61deg - 1.80deg - 0.29deg - 1.69deg - 0.15deg - 1.05deg - 1.50deg - 0.09deg - 0.67deg - 0.00deg - 0.09deg - 0.70deg - 1.02deg - 1.63deg - 0.02deg - 0.74deg - 0.51deg - 0.46deg - 0.01deg - 1.43deg - 0.51deg)) scale(6) !important; } input[name=c5]:focus ~ .image { background-position: calc(0px + 0.01px + 0.23px + 0.09px + 0.07px + 0.15px + 0.27px + 0.22px + 0.11px + 0.03px + 0.07px + 0.20px + 0.17px + 0.04px + 0.07px + 0.12px + 0.32px + 0.17px + 0.14px + 0.32px + 0.07px + 0.03px + 0.18px + 0.29px + 0.26px + 0.12px + 0.32px + 0.23px + 0.02px + 0.30px + 0.18px + 0.01px + 0.01px + 0.04px + 0.29px + 0.20px + 0.14px + 0.16px + 0.09px + 0.04px + 0.10px + 0.30px + 0.30px + 0.12px + 0.29px + 0.10px + 0.20px + 0.12px + 0.17px + 0.13px + 0.24px + 0.05px + 0.22px + 0.07px + 0.32px + 0.27px + 0.21px + 0.12px + 0.10px + 0.10px + 0.01px + 0.30px + 0.26px + 0.26px + 0.30px + 0.18px + 0.17px + 0.06px + 0.15px + 0.10px + 0.22px + 0.08px + 0.28px + 0.24px + 0.02px + 0.32px + 0.33px + 0.30px + 0.07px + 0.10px + 0.22px + 0.06px + 0.08px + 0.03px + 0.13px + 0.30px + 0.27px + 0.33px + 0.00px + 0.33px + 0.17px + 0.16px + 0.22px + 0.14px + 0.00px + 0.07px + 0.05px + 0.10px + 0.23px + 0.18px + 0.03px + 0.25px + 0.11px + 0.15px + 0.24px + 0.10px + 0.31px + 0.27px + 0.07px + 0.22px + 0.02px + 0.07px + 0.17px + 0.17px + 0.06px + 0.25px + 0.27px + 0.05px + 0.11px + 0.26px + 0.11px + 0.20px + 0.09px + 0.29px + 0.20px + 0.04px + 0.04px + 0.23px + 0.14px + 0.23px + 0.12px + 0.06px + 0.14px + 0.14px + 0.09px + 0.16px + 0.10px + 0.23px + 0.07px + 0.01px + 0.03px + 0.17px + 0.29px + 0.12px + 0.07px + 0.16px + 0.09px + 0.24px + 0.04px + 0.07px + 0.06px + 0.22px + 0.11px + 0.03px + 0.05px + 0.21px + 0.01px + 0.28px + 0.15px + 0.19px + 0.04px + 0.33px + 0.05px + 0.11px + 0.04px + 0.29px + 0.00px + 0.32px + 0.12px + 0.31px + 0.30px + 0.29px + 0.29px + 0.21px + 0.20px + 0.27px + 0.16px + 0.28px + 0.16px + 0.00px + 0.20px + 0.27px + 0.31px + 0.05px + 0.22px + 0.12px + 0.16px + 0.29px + 0.26px + 0.23px + 0.18px + 0.21px + 0.03px + 0.25px + 0.09px + 0.11px + 0.21px + 0.10px + 0.25px + 0.27px + 0.07px + 0.01px + 0.05px + 0.09px + 0.20px + 0.17px + 0.02px + 0.17px + 0.04px + 0.24px + 0.28px + 0.30px + 0.12px + 0.06px + 0.01px + 0.24px + 0.29px + 0.18px + 0.26px + 0.19px + 0.13px + 0.06px + 0.03px + 0.02px + 0.01px + 0.26px + 0.03px + 0.19px + 0.30px + 0.31px + 0.04px + 0.14px + 0.24px + 0.31px + 0.13px + 0.16px + 0.05px + 0.08px + 0.05px + 0.19px + 0.07px + 0.11px + 0.33px + 0.01px + 0.03px + 0.01px + 0.26px + 0.29px + 0.25px + 0.28px + 0.27px + 0.29px + 0.06px + 0.18px + 0.17px + 0.15px + 0.11px + 0.27px + 0.14px + 0.07px + 0.30px + 0.22px + 0.21px + 0.24px + 0.01px + 0.26px + 0.31px + 0.04px + 0.08px + 0.28px + 0.26px + 0.23px + 0.29px + 0.07px + 0.02px + 0.13px + 0.28px + 0.06px + 0.24px + 0.33px + 0.26px + 0.16px + 0.14px + 0.24px + 0.16px + 0.23px + 0.20px + 0.16px + 0.33px + 0.13px + 0.32px + 0.13px + 0.16px + 0.06px + 0.33px + 0.30px + 0.13px + 0.08px + 0.09px + 0.22px + 0.08px + 0.23px + 0.33px + 0.29px + 0.26px + 0.18px + 0.33px + 0.23px + 0.18px + 0.19px + 0.05px + 0.21px + 0.25px + 0.21px + 0.15px + 0.25px + 0.18px + 0.08px + 0.28px + 0.27px + 0.33px + 0.18px + 0.29px + 0.10px + 0.20px + 0.28px + 0.15px + 0.12px + 0.24px + 0.29px + 0.17px + 0.11px + 0.21px + 0.17px + 0.19px + 0.28px + 0.32px + 0.26px + 0.17px + 0.04px + 0.13px + 0.28px + 0.20px + 0.33px + 0.22px + 0.32px + 0.12px + 0.22px + 0.14px + 0.03px + 0.27px + 0.18px + 0.18px + 0.12px + 0.12px + 0.11px + 0.19px + 0.20px + 0.03px + 0.21px + 0.25px + 0.04px + 0.19px + 0.02px + 0.24px + 0.24px + 0.01px + 0.19px + 0.14px + 0.19px + 0.02px + 0.18px + 0.24px + 0.27px + 0.08px + 0.28px + 0.08px + 0.22px + 0.16px + 0.26px + 0.10px + 0.05px + 0.31px + 0.15px + 0.13px + 0.16px + 0.27px + 0.09px + 0.02px + 0.13px + 0.21px + 0.14px + 0.09px + 0.13px + 0.20px + 0.14px + 0.08px + 0.27px + 0.28px + 0.13px + 0.19px + 0.21px + 0.22px + 0.28px + 0.04px + 0.16px + 0.22px + 0.32px + 0.22px + 0.03px + 0.08px + 0.12px + 0.02px + 0.08px + 0.13px + 0.25px + 0.06px + 0.24px + 0.25px + 0.09px + 0.04px + 0.22px + 0.27px + 0.28px + 0.05px + 0.05px + 0.24px + 0.23px + 0.32px + 0.01px + 0.16px + 0.25px + 0.23px + 0.02px + 0.21px + 0.21px + 0.14px + 0.19px + 0.03px + 0.08px + 0.05px + 0.25px + 0.31px + 0.22px + 0.08px + 0.21px + 0.21px + 0.04px + 0.15px + 0.01px + 0.20px + 0.22px + 0.31px + 0.20px + 0.17px + 0.30px + 0.03px + 0.02px + 0.07px + 0.00px + 0.18px + 0.12px + 0.30px + 0.22px + 0.32px + 0.27px + 0.22px + 0.13px + 0.18px + 0.09px + 0.32px + 0.14px + 0.20px + 0.18px + 0.18px + 0.33px + 0.08px + 0.15px + 0.24px + 0.32px + 0.14px + 0.05px + 0.30px + 0.28px + 0.27px + 0.15px + 0.30px + 0.02px + 0.32px + 0.32px + 0.08px + 0.31px + 0.04px + 0.23px + 0.06px + 0.29px + 0.20px + 0.07px + 0.00px + 0.06px + 0.03px + 0.22px + 0.26px + 0.23px + 0.11px + 0.10px + 0.09px + 0.29px + 0.30px + 0.11px + 0.19px + 0.28px + 0.14px + 0.05px + 0.18px + 0.10px + 0.01px + 0.02px + 0.19px + 0.13px + 0.26px + 0.01px + 0.27px + 0.04px + 0.22px + 0.05px + 0.21px + 0.25px + 0.22px + 0.30px + 0.08px + 0.08px + 0.24px + 0.33px + 0.28px + 0.10px + 0.13px + 0.15px + 0.33px + 0.18px + 0.02px + 0.30px + 0.10px + 0.09px + 0.18px + 0.14px + 0.18px + 0.27px + 0.09px + 0.26px + 0.06px + 0.20px + 0.10px + 0.03px + 0.21px + 0.11px + 0.18px + 0.03px + 0.03px + 0.05px + 0.05px + 0.33px + 0.19px + 0.16px + 0.20px + 0.22px + 0.18px + 0.09px + 0.14px + 0.02px + 0.10px + 0.21px + 0.05px + 0.07px + 0.06px + 0.24px + 0.16px + 0.19px + 0.23px + 0.13px + 0.28px + 0.33px + 0.14px + 0.15px + 0.14px + 0.18px + 0.19px + 0.32px + 0.24px + 0.01px + 0.24px + 0.12px + 0.18px + 0.17px + 0.10px + 0.04px + 0.18px + 0.17px + 0.10px + 0.26px + 0.05px + 0.12px + 0.09px + 0.32px + 0.21px + 0.18px + 0.20px + 0.19px + 0.08px + 0.29px + 0.03px + 0.25px + 0.02px + 0.01px + 0.12px + 0.12px + 0.24px + 0.18px + 0.13px + 0.16px + 0.15px + 0.14px + 0.06px + 0.12px + 0.33px + 0.17px + 0.32px + 0.31px + 0.10px + 0.12px + 0.14px + 0.03px) calc(0px + 0.24px + 0.04px + 0.14px + 0.23px + 0.11px + 0.19px + 0.01px + 0.01px + 0.11px + 0.07px + 0.03px + 0.10px + 0.16px + 0.25px + 0.11px + 0.03px + 0.32px + 0.32px + 0.26px + 0.22px + 0.16px + 0.00px + 0.05px + 0.27px + 0.13px + 0.26px + 0.17px + 0.04px + 0.03px + 0.07px + 0.00px + 0.06px + 0.12px + 0.29px + 0.16px + 0.13px + 0.16px + 0.18px + 0.13px + 0.28px + 0.27px + 0.14px + 0.10px + 0.01px + 0.24px + 0.24px + 0.08px + 0.10px + 0.16px + 0.14px + 0.20px + 0.24px + 0.18px + 0.24px + 0.12px + 0.09px + 0.24px + 0.28px + 0.12px + 0.30px + 0.31px + 0.13px + 0.19px + 0.26px + 0.12px + 0.33px + 0.29px + 0.20px + 0.31px + 0.14px + 0.10px + 0.00px + 0.22px + 0.10px + 0.02px + 0.25px + 0.29px + 0.10px + 0.32px + 0.25px + 0.10px + 0.05px + 0.07px + 0.09px + 0.05px + 0.08px + 0.12px + 0.04px + 0.30px + 0.20px + 0.13px + 0.17px + 0.12px + 0.30px + 0.07px + 0.14px + 0.28px + 0.10px + 0.21px + 0.02px + 0.32px + 0.28px + 0.15px + 0.29px + 0.29px + 0.27px + 0.33px + 0.23px + 0.19px + 0.03px + 0.03px + 0.32px + 0.15px + 0.04px + 0.28px + 0.28px + 0.01px + 0.29px + 0.01px + 0.14px + 0.14px + 0.10px + 0.07px + 0.05px + 0.21px + 0.07px + 0.31px + 0.12px + 0.31px + 0.17px + 0.11px + 0.33px + 0.01px + 0.24px + 0.16px + 0.17px + 0.09px + 0.11px + 0.17px + 0.15px + 0.23px + 0.20px + 0.13px + 0.20px + 0.06px + 0.21px + 0.25px + 0.29px + 0.05px + 0.03px + 0.22px + 0.31px + 0.10px + 0.16px + 0.22px + 0.06px + 0.13px + 0.05px + 0.17px + 0.23px + 0.04px + 0.06px + 0.07px + 0.18px + 0.28px + 0.17px + 0.08px + 0.15px + 0.14px + 0.22px + 0.02px + 0.32px + 0.02px + 0.32px + 0.03px + 0.01px + 0.17px + 0.03px + 0.31px + 0.29px + 0.05px + 0.19px + 0.28px + 0.13px + 0.11px + 0.04px + 0.19px + 0.21px + 0.14px + 0.24px + 0.02px + 0.28px + 0.12px + 0.06px + 0.33px + 0.05px + 0.14px + 0.17px + 0.16px + 0.26px + 0.02px + 0.22px + 0.07px + 0.10px + 0.31px + 0.27px + 0.06px + 0.20px + 0.32px + 0.18px + 0.33px + 0.27px + 0.15px + 0.30px + 0.23px + 0.11px + 0.17px + 0.08px + 0.14px + 0.28px + 0.23px + 0.28px + 0.03px + 0.24px + 0.08px + 0.05px + 0.02px + 0.33px + 0.15px + 0.20px + 0.01px + 0.22px + 0.15px + 0.12px + 0.14px + 0.15px + 0.09px + 0.08px + 0.03px + 0.30px + 0.07px + 0.05px + 0.11px + 0.17px + 0.08px + 0.14px + 0.20px + 0.13px + 0.30px + 0.31px + 0.17px + 0.13px + 0.29px + 0.33px + 0.17px + 0.32px + 0.00px + 0.28px + 0.09px + 0.24px + 0.28px + 0.26px + 0.14px + 0.05px + 0.19px + 0.26px + 0.21px + 0.31px + 0.21px + 0.13px + 0.10px + 0.19px + 0.09px + 0.27px + 0.08px + 0.16px + 0.23px + 0.05px + 0.22px + 0.30px + 0.18px + 0.12px + 0.11px + 0.24px + 0.30px + 0.01px + 0.15px + 0.19px + 0.18px + 0.05px + 0.03px + 0.30px + 0.04px + 0.07px + 0.23px + 0.20px + 0.01px + 0.20px + 0.25px + 0.20px + 0.25px + 0.05px + 0.22px + 0.14px + 0.20px + 0.03px + 0.08px + 0.03px + 0.29px + 0.30px + 0.15px + 0.00px + 0.09px + 0.26px + 0.32px + 0.00px + 0.03px + 0.26px + 0.27px + 0.03px + 0.17px + 0.12px + 0.22px + 0.03px + 0.16px + 0.14px + 0.31px + 0.10px + 0.14px + 0.25px + 0.20px + 0.32px + 0.02px + 0.01px + 0.01px + 0.31px + 0.12px + 0.10px + 0.21px + 0.14px + 0.26px + 0.12px + 0.02px + 0.26px + 0.10px + 0.23px + 0.32px + 0.30px + 0.26px + 0.33px + 0.04px + 0.10px + 0.26px + 0.22px + 0.06px + 0.32px + 0.20px + 0.07px + 0.15px + 0.17px + 0.13px + 0.19px + 0.30px + 0.09px + 0.24px + 0.27px + 0.28px + 0.07px + 0.01px + 0.05px + 0.08px + 0.15px + 0.13px + 0.12px + 0.22px + 0.04px + 0.29px + 0.01px + 0.01px + 0.16px + 0.23px + 0.06px + 0.15px + 0.27px + 0.18px + 0.21px + 0.31px + 0.17px + 0.04px + 0.14px + 0.25px + 0.33px + 0.31px + 0.19px + 0.08px + 0.18px + 0.09px + 0.15px + 0.15px + 0.22px + 0.11px + 0.29px + 0.13px + 0.00px + 0.05px + 0.15px + 0.25px + 0.18px + 0.21px + 0.01px + 0.01px + 0.27px + 0.09px + 0.16px + 0.29px + 0.19px + 0.07px + 0.16px + 0.01px + 0.33px + 0.01px + 0.01px + 0.04px + 0.12px + 0.21px + 0.05px + 0.16px + 0.10px + 0.30px + 0.30px + 0.00px + 0.13px + 0.32px + 0.08px + 0.17px + 0.19px + 0.32px + 0.15px + 0.19px + 0.03px + 0.02px + 0.24px + 0.27px + 0.00px + 0.26px + 0.21px + 0.04px + 0.31px + 0.14px + 0.25px + 0.16px + 0.27px + 0.24px + 0.30px + 0.14px + 0.31px + 0.03px + 0.28px + 0.25px + 0.31px + 0.25px + 0.09px + 0.12px + 0.29px + 0.17px + 0.05px + 0.02px + 0.17px + 0.22px + 0.12px + 0.14px + 0.17px + 0.15px + 0.11px + 0.08px + 0.22px + 0.31px + 0.13px + 0.02px + 0.17px + 0.33px + 0.20px + 0.12px + 0.06px + 0.22px + 0.29px + 0.30px + 0.14px + 0.31px + 0.17px + 0.19px + 0.26px + 0.15px + 0.11px + 0.30px + 0.22px + 0.19px + 0.05px + 0.21px + 0.01px + 0.05px + 0.07px + 0.23px + 0.26px + 0.09px + 0.30px + 0.31px + 0.31px + 0.29px + 0.27px + 0.03px + 0.30px + 0.10px + 0.09px + 0.08px + 0.09px + 0.03px + 0.05px + 0.29px + 0.01px + 0.13px + 0.12px + 0.00px + 0.30px + 0.07px + 0.33px + 0.04px + 0.04px + 0.33px + 0.04px + 0.16px + 0.21px + 0.32px + 0.12px + 0.13px + 0.22px + 0.28px + 0.10px + 0.21px + 0.14px + 0.09px + 0.09px + 0.14px + 0.09px + 0.33px + 0.14px + 0.12px + 0.02px + 0.18px + 0.18px + 0.21px + 0.22px + 0.01px + 0.22px + 0.18px + 0.19px + 0.17px + 0.24px + 0.26px + 0.02px + 0.06px + 0.05px + 0.14px + 0.00px + 0.06px + 0.16px + 0.19px + 0.22px + 0.11px + 0.08px + 0.32px + 0.08px + 0.08px + 0.06px + 0.24px + 0.30px + 0.08px + 0.09px + 0.11px + 0.09px + 0.27px + 0.09px + 0.32px + 0.08px + 0.08px + 0.04px + 0.12px + 0.08px + 0.09px + 0.28px + 0.29px + 0.28px + 0.03px + 0.18px + 0.15px + 0.27px + 0.02px + 0.22px + 0.08px + 0.13px + 0.05px + 0.13px + 0.14px + 0.30px + 0.20px + 0.06px + 0.19px + 0.22px + 0.13px + 0.28px + 0.17px + 0.06px + 0.32px + 0.09px + 0.05px + 0.23px + 0.24px + 0.26px + 0.11px + 0.01px + 0.09px + 0.11px + 0.30px + 0.22px + 0.18px + 0.22px + 0.16px + 0.23px + 0.02px + 0.15px + 0.07px + 0.27px + 0.07px + 0.14px + 0.31px + 0.14px + 0.25px + 0.30px + 0.08px + 0.32px + 0.23px + 0.21px + 0.13px + 0.32px + 0.15px + 0.30px + 0.17px + 0.26px + 0.19px + 0.13px + 0.21px + 0.23px + 0.04px + 0.03px + 0.05px + 0.18px + 0.05px + 0.15px + 0.21px + 0.31px + 0.04px + 0.30px + 0.17px + 0.22px + 0.23px + 0.12px + 0.12px + 0.16px + 0.29px + 0.33px + 0.03px + 0.31px + 0.13px + 0.08px + 0.14px + 0.05px + 0.10px + 0.07px + 0.33px + 0.32px + 0.08px + 0.28px + 0.26px + 0.20px + 0.00px + 0.12px + 0.22px + 0.25px + 0.29px + 0.07px + 0.15px + 0.17px + 0.11px + 0.18px + 0.22px + 0.09px + 0.06px + 0.09px + 0.26px + 0.10px + 0.32px + 0.21px + 0.25px + 0.19px + 0.12px + 0.00px + 0.20px + 0.23px + 0.15px + 0.26px + 0.04px + 0.03px + 0.02px + 0.03px + 0.08px + 0.23px + 0.32px + 0.23px + 0.27px + 0.26px + 0.02px + 0.12px + 0.04px + 0.26px + 0.09px + 0.23px + 0.10px + 0.23px + 0.20px + 0.15px + 0.25px + 0.21px + 0.13px + 0.32px + 0.06px + 0.03px + 0.03px + 0.15px + 0.21px + 0.17px + 0.33px + 0.00px + 0.25px + 0.20px + 0.28px + 0.27px + 0.17px + 0.07px + 0.32px + 0.31px + 0.16px + 0.03px + 0.24px + 0.30px + 0.01px + 0.27px + 0.29px + 0.18px + 0.06px + 0.00px + 0.18px + 0.22px + 0.10px + 0.29px + 0.20px + 0.19px + 0.15px + 0.08px + 0.13px + 0.10px + 0.06px + 0.15px + 0.14px + 0.12px + 0.19px + 0.23px + 0.22px + 0.04px + 0.30px + 0.20px + 0.20px + 0.23px + 0.32px + 0.01px + 0.32px + 0.04px + 0.30px + 0.30px + 0.29px + 0.10px + 0.33px + 0.06px + 0.07px + 0.29px + 0.28px + 0.03px + 0.04px + 0.01px + 0.01px + 0.19px + 0.05px + 0.15px + 0.31px + 0.31px + 0.15px + 0.26px + 0.03px + 0.02px + 0.23px + 0.17px + 0.22px + 0.21px + 0.00px + 0.32px + 0.27px + 0.24px + 0.10px + 0.09px + 0.09px + 0.30px + 0.33px + 0.01px + 0.21px + 0.07px + 0.31px + 0.05px + 0.30px + 0.12px + 0.21px + 0.11px + 0.16px + 0.13px + 0.02px + 0.03px + 0.03px + 0.15px + 0.13px + 0.16px + 0.14px + 0.16px + 0.18px + 0.24px + 0.17px + 0.24px + 0.01px + 0.30px + 0.24px + 0.06px + 0.14px + 0.10px + 0.13px + 0.21px + 0.20px + 0.31px + 0.15px + 0.15px + 0.22px + 0.21px + 0.15px + 0.12px + 0.14px + 0.09px + 0.10px + 0.15px + 0.09px + 0.33px + 0.02px + 0.23px + 0.05px + 0.08px + 0.11px + 0.01px + 0.19px + 0.09px + 0.26px + 0.09px + 0.26px + 0.00px + 0.24px + 0.25px + 0.10px + 0.14px + 0.29px + 0.15px + 0.31px + 0.20px + 0.04px + 0.23px + 0.06px + 0.24px + 0.19px + 0.23px + 0.00px + 0.13px + 0.27px + 0.10px + 0.20px + 0.20px + 0.06px + 0.22px + 0.00px + 0.22px + 0.15px + 0.20px + 0.14px + 0.04px + 0.28px + 0.33px + 0.32px + 0.13px + 0.01px + 0.19px + 0.05px + 0.06px + 0.32px + 0.03px + 0.09px + 0.15px + 0.06px + 0.14px + 0.11px + 0.19px + 0.24px + 0.31px + 0.06px + 0.01px + 0.04px + 0.10px + 0.03px + 0.01px + 0.11px + 0.24px + 0.12px + 0.03px + 0.05px + 0.08px + 0.26px + 0.11px + 0.07px + 0.25px + 0.27px + 0.02px + 0.17px + 0.09px + 0.07px + 0.30px + 0.16px + 0.29px + 0.04px + 0.16px + 0.18px + 0.12px + 0.03px + 0.20px + 0.07px + 0.01px + 0.31px + 0.06px + 0.26px + 0.15px + 0.19px + 0.10px + 0.19px + 0.09px + 0.20px + 0.28px + 0.24px + 0.09px + 0.03px + 0.31px + 0.20px + 0.01px + 0.09px + 0.31px + 0.05px + 0.01px + 0.03px + 0.07px + 0.16px + 0.01px + 0.18px + 0.07px + 0.21px + 0.29px + 0.22px + 0.17px + 0.01px + 0.09px + 0.06px); transform: rotate(calc(0deg - 1.68deg - 1.18deg - 0.97deg - 0.58deg - 1.08deg - 1.97deg - 0.34deg - 0.15deg - 0.94deg - 1.70deg - 1.18deg - 0.27deg - 1.67deg - 1.36deg - 1.33deg - 1.86deg - 1.06deg - 1.62deg - 0.81deg - 1.65deg - 0.74deg - 0.23deg - 1.28deg - 0.08deg)) scale(6) !important; } input[name=c6]:focus ~ .image { background-position: calc(0px + 0.14px + 0.18px + 0.22px + 0.19px + 0.25px + 0.28px + 0.31px + 0.27px + 0.13px + 0.23px + 0.21px + 0.24px + 0.02px + 0.00px + 0.04px + 0.19px + 0.29px + 0.13px + 0.32px + 0.21px + 0.10px + 0.29px + 0.27px + 0.31px + 0.07px + 0.16px + 0.15px + 0.25px + 0.18px + 0.07px + 0.31px + 0.13px + 0.10px + 0.11px + 0.20px + 0.05px + 0.13px + 0.29px + 0.16px + 0.12px + 0.05px + 0.18px + 0.21px + 0.27px + 0.17px + 0.18px + 0.02px + 0.06px + 0.24px + 0.21px + 0.02px + 0.33px + 0.08px + 0.32px + 0.21px + 0.24px + 0.13px + 0.15px + 0.13px + 0.32px + 0.17px + 0.16px + 0.12px + 0.30px + 0.10px + 0.02px + 0.21px + 0.13px + 0.13px + 0.30px + 0.05px + 0.27px + 0.11px + 0.09px + 0.28px + 0.17px + 0.22px + 0.29px + 0.08px + 0.33px + 0.10px + 0.09px + 0.32px + 0.05px + 0.06px + 0.15px + 0.18px + 0.23px + 0.14px + 0.17px + 0.32px + 0.21px + 0.29px + 0.22px + 0.33px + 0.14px + 0.31px + 0.31px + 0.06px + 0.06px + 0.02px + 0.07px + 0.07px + 0.27px + 0.10px + 0.26px + 0.26px + 0.05px + 0.03px + 0.04px + 0.01px + 0.12px + 0.06px + 0.11px + 0.19px + 0.19px + 0.00px + 0.08px + 0.06px + 0.04px + 0.24px + 0.31px + 0.32px + 0.16px + 0.13px + 0.29px + 0.17px + 0.23px + 0.03px + 0.04px + 0.33px + 0.21px + 0.28px + 0.08px + 0.29px + 0.03px + 0.28px + 0.11px + 0.29px + 0.03px + 0.01px + 0.13px + 0.05px + 0.00px + 0.01px + 0.22px + 0.28px + 0.03px + 0.16px + 0.16px + 0.31px + 0.27px + 0.08px + 0.24px + 0.03px + 0.32px + 0.22px + 0.08px + 0.09px + 0.30px + 0.29px + 0.07px + 0.23px + 0.02px + 0.31px + 0.32px + 0.03px + 0.21px + 0.01px + 0.04px + 0.01px + 0.19px + 0.18px + 0.32px + 0.06px + 0.05px + 0.22px + 0.25px + 0.25px + 0.31px + 0.17px + 0.33px + 0.05px + 0.01px + 0.02px + 0.01px + 0.06px + 0.33px + 0.16px + 0.10px + 0.05px + 0.16px + 0.25px + 0.20px + 0.22px + 0.15px + 0.01px + 0.29px + 0.29px + 0.10px + 0.05px + 0.31px + 0.28px + 0.31px + 0.08px + 0.27px + 0.24px + 0.28px + 0.04px + 0.14px + 0.15px + 0.18px + 0.21px + 0.02px + 0.26px + 0.03px + 0.27px + 0.12px + 0.28px + 0.26px + 0.14px + 0.22px + 0.10px + 0.23px + 0.15px + 0.19px + 0.29px + 0.17px + 0.26px + 0.01px + 0.21px + 0.25px + 0.27px + 0.33px + 0.03px + 0.30px + 0.27px + 0.33px + 0.20px + 0.14px + 0.18px + 0.07px + 0.32px + 0.05px + 0.03px + 0.08px + 0.17px + 0.18px + 0.20px + 0.14px + 0.16px + 0.07px + 0.12px + 0.26px + 0.17px + 0.14px + 0.17px + 0.03px + 0.19px + 0.30px + 0.09px + 0.05px + 0.26px + 0.16px + 0.06px + 0.30px + 0.12px + 0.08px + 0.17px + 0.14px + 0.05px + 0.25px + 0.04px + 0.24px + 0.29px + 0.24px + 0.18px + 0.32px + 0.26px + 0.11px + 0.25px + 0.22px + 0.09px + 0.17px + 0.24px + 0.02px + 0.27px + 0.13px + 0.12px + 0.23px + 0.32px + 0.28px + 0.03px + 0.27px + 0.13px + 0.10px + 0.15px + 0.30px + 0.01px + 0.15px + 0.22px + 0.27px + 0.09px + 0.18px + 0.19px + 0.03px + 0.02px + 0.23px + 0.32px + 0.20px + 0.25px + 0.02px + 0.31px + 0.27px + 0.30px + 0.32px + 0.21px + 0.18px + 0.03px + 0.32px + 0.29px + 0.22px + 0.13px + 0.12px + 0.20px + 0.12px + 0.23px + 0.19px + 0.07px + 0.17px + 0.15px + 0.17px + 0.10px + 0.11px + 0.14px + 0.24px + 0.22px + 0.27px + 0.26px + 0.27px + 0.02px + 0.17px + 0.19px + 0.12px + 0.10px + 0.27px + 0.20px + 0.33px + 0.15px + 0.28px + 0.19px + 0.01px + 0.14px + 0.07px + 0.01px + 0.21px + 0.22px + 0.25px + 0.01px + 0.11px + 0.07px + 0.22px + 0.00px + 0.28px + 0.10px + 0.23px + 0.13px + 0.00px + 0.25px + 0.12px + 0.02px + 0.13px + 0.14px + 0.23px + 0.32px + 0.10px + 0.14px + 0.18px + 0.07px + 0.12px + 0.26px + 0.15px + 0.26px + 0.07px + 0.08px + 0.17px + 0.07px + 0.20px + 0.32px + 0.14px + 0.22px + 0.22px + 0.04px + 0.27px + 0.15px + 0.26px + 0.28px + 0.31px + 0.21px + 0.18px + 0.03px + 0.02px + 0.24px + 0.28px + 0.31px + 0.07px + 0.14px + 0.17px + 0.25px + 0.11px + 0.09px + 0.02px + 0.00px + 0.31px + 0.12px + 0.31px + 0.15px + 0.03px + 0.05px + 0.02px + 0.30px + 0.12px + 0.10px + 0.14px + 0.06px + 0.24px + 0.02px + 0.21px + 0.25px + 0.08px + 0.28px + 0.20px + 0.28px + 0.10px + 0.29px + 0.12px + 0.04px + 0.04px + 0.21px + 0.17px + 0.27px + 0.17px + 0.24px + 0.15px + 0.20px + 0.28px + 0.06px + 0.26px + 0.10px + 0.32px + 0.07px + 0.25px + 0.11px + 0.02px + 0.19px + 0.15px + 0.33px + 0.03px + 0.11px + 0.26px + 0.31px + 0.21px + 0.07px + 0.15px + 0.10px + 0.28px + 0.12px + 0.25px + 0.18px + 0.33px + 0.14px + 0.04px + 0.27px + 0.03px + 0.21px + 0.31px + 0.20px + 0.07px + 0.20px + 0.11px + 0.03px + 0.31px + 0.25px + 0.13px + 0.17px + 0.18px + 0.13px + 0.17px + 0.19px + 0.10px + 0.16px + 0.03px + 0.07px + 0.17px + 0.27px + 0.20px + 0.13px + 0.31px + 0.33px + 0.29px + 0.13px + 0.26px + 0.13px + 0.02px + 0.11px + 0.21px + 0.31px + 0.19px + 0.19px + 0.33px + 0.01px + 0.16px + 0.16px + 0.18px + 0.03px + 0.31px + 0.32px + 0.19px + 0.08px + 0.20px + 0.03px + 0.24px + 0.12px + 0.03px + 0.30px + 0.03px + 0.25px + 0.15px + 0.15px + 0.08px + 0.31px + 0.21px + 0.25px + 0.09px + 0.11px + 0.07px + 0.27px + 0.20px + 0.27px + 0.02px + 0.20px + 0.31px + 0.29px + 0.26px + 0.04px + 0.23px + 0.00px + 0.27px + 0.27px + 0.20px + 0.01px + 0.27px + 0.25px + 0.05px + 0.24px + 0.13px + 0.32px + 0.03px + 0.16px + 0.31px + 0.29px + 0.31px + 0.32px + 0.14px + 0.07px + 0.12px + 0.08px + 0.10px + 0.15px + 0.21px + 0.12px + 0.08px + 0.23px + 0.27px + 0.20px + 0.20px + 0.03px + 0.23px + 0.05px + 0.14px + 0.07px + 0.24px + 0.18px + 0.16px + 0.20px + 0.31px + 0.12px + 0.27px + 0.07px + 0.24px + 0.20px + 0.06px + 0.07px + 0.17px + 0.19px + 0.22px + 0.11px + 0.09px + 0.26px + 0.08px + 0.32px + 0.02px + 0.26px + 0.14px + 0.21px + 0.05px + 0.04px + 0.30px + 0.07px + 0.11px + 0.16px + 0.24px + 0.07px + 0.15px + 0.19px + 0.16px + 0.06px + 0.12px + 0.01px + 0.09px + 0.07px + 0.27px + 0.27px + 0.31px + 0.25px + 0.30px + 0.01px + 0.33px + 0.01px + 0.18px + 0.07px + 0.22px + 0.21px + 0.05px + 0.27px + 0.13px + 0.04px + 0.07px + 0.31px + 0.21px + 0.22px + 0.30px + 0.07px + 0.21px + 0.03px + 0.16px + 0.14px + 0.19px + 0.15px + 0.09px + 0.24px + 0.18px + 0.19px + 0.04px + 0.26px + 0.15px + 0.06px + 0.21px + 0.01px + 0.12px + 0.33px + 0.15px + 0.23px + 0.01px + 0.10px + 0.32px + 0.31px + 0.24px + 0.30px + 0.15px + 0.23px + 0.16px + 0.10px + 0.24px + 0.08px + 0.22px + 0.10px + 0.19px + 0.27px + 0.18px + 0.08px + 0.11px + 0.25px + 0.13px + 0.31px + 0.18px + 0.07px + 0.23px + 0.28px + 0.01px + 0.11px + 0.33px + 0.02px + 0.25px + 0.30px + 0.27px + 0.18px + 0.08px + 0.14px + 0.14px + 0.06px + 0.11px + 0.29px + 0.31px + 0.30px + 0.17px + 0.27px + 0.33px + 0.06px + 0.02px + 0.16px + 0.26px + 0.32px + 0.30px + 0.14px + 0.25px + 0.24px + 0.03px + 0.07px + 0.18px + 0.01px + 0.23px + 0.27px + 0.20px + 0.29px + 0.22px + 0.11px + 0.21px + 0.24px + 0.24px + 0.12px + 0.03px + 0.16px + 0.23px + 0.08px + 0.04px + 0.31px + 0.24px + 0.05px + 0.03px + 0.19px + 0.07px + 0.32px + 0.07px + 0.05px + 0.32px + 0.33px + 0.32px + 0.15px + 0.13px + 0.19px + 0.15px + 0.04px + 0.16px + 0.12px + 0.04px + 0.11px + 0.14px + 0.03px + 0.33px + 0.11px + 0.31px + 0.09px + 0.18px + 0.27px + 0.08px + 0.16px + 0.31px + 0.05px + 0.28px + 0.10px + 0.22px + 0.22px + 0.28px + 0.13px + 0.25px + 0.21px + 0.09px) calc(0px + 0.20px + 0.01px + 0.31px + 0.03px + 0.16px + 0.05px + 0.14px + 0.31px + 0.24px + 0.06px + 0.00px + 0.24px + 0.33px + 0.33px + 0.23px + 0.18px + 0.28px + 0.11px + 0.30px + 0.19px + 0.01px + 0.18px + 0.07px + 0.20px + 0.14px + 0.02px + 0.01px + 0.12px + 0.01px + 0.12px + 0.11px + 0.22px + 0.31px + 0.25px + 0.24px + 0.16px + 0.06px + 0.08px + 0.21px + 0.14px + 0.30px + 0.25px + 0.22px + 0.14px + 0.33px + 0.29px + 0.32px + 0.18px + 0.23px + 0.27px + 0.06px + 0.19px + 0.03px + 0.11px + 0.15px + 0.05px + 0.20px + 0.04px + 0.18px + 0.21px + 0.02px + 0.32px + 0.03px + 0.28px + 0.20px + 0.28px + 0.33px + 0.25px + 0.28px + 0.01px + 0.14px + 0.30px + 0.04px + 0.22px + 0.23px + 0.18px + 0.28px + 0.15px + 0.04px + 0.13px + 0.02px + 0.24px + 0.28px + 0.12px + 0.17px + 0.20px + 0.33px + 0.22px + 0.21px + 0.08px + 0.32px + 0.26px + 0.05px + 0.13px + 0.15px + 0.15px + 0.03px + 0.32px + 0.12px + 0.23px + 0.27px + 0.12px + 0.09px + 0.33px + 0.01px + 0.28px + 0.20px + 0.28px + 0.06px + 0.10px + 0.15px + 0.13px + 0.00px + 0.05px + 0.24px + 0.29px + 0.08px + 0.16px + 0.04px + 0.06px + 0.03px + 0.28px + 0.30px + 0.26px + 0.04px + 0.24px + 0.14px + 0.10px + 0.17px + 0.23px + 0.07px + 0.25px + 0.06px + 0.10px + 0.21px + 0.24px + 0.11px + 0.17px + 0.15px + 0.09px + 0.14px + 0.22px + 0.30px + 0.32px + 0.06px + 0.24px + 0.24px + 0.19px + 0.06px + 0.17px + 0.13px + 0.07px + 0.30px + 0.01px + 0.11px + 0.27px + 0.23px + 0.07px + 0.09px + 0.11px + 0.23px + 0.31px + 0.33px + 0.26px + 0.14px + 0.04px + 0.17px + 0.17px + 0.24px + 0.14px + 0.29px + 0.28px + 0.17px + 0.05px + 0.14px + 0.26px + 0.23px + 0.26px + 0.23px + 0.18px + 0.18px + 0.04px + 0.27px + 0.09px + 0.25px + 0.02px + 0.25px + 0.27px + 0.23px + 0.09px + 0.07px + 0.00px + 0.10px + 0.05px + 0.12px + 0.06px + 0.12px + 0.13px + 0.03px + 0.04px + 0.22px + 0.06px + 0.28px + 0.28px + 0.18px + 0.15px + 0.02px + 0.07px + 0.28px + 0.04px + 0.22px + 0.04px + 0.17px + 0.15px + 0.29px + 0.30px + 0.11px + 0.11px + 0.23px + 0.11px + 0.31px + 0.31px + 0.03px + 0.08px + 0.08px + 0.32px + 0.31px + 0.13px + 0.11px + 0.16px + 0.28px + 0.21px + 0.30px + 0.10px + 0.04px + 0.08px + 0.03px + 0.24px + 0.16px + 0.28px + 0.20px + 0.26px + 0.27px + 0.22px + 0.07px + 0.29px + 0.01px + 0.16px + 0.22px + 0.33px + 0.08px + 0.17px + 0.16px + 0.32px + 0.14px + 0.05px + 0.13px + 0.22px + 0.13px + 0.24px + 0.23px + 0.26px + 0.18px + 0.09px + 0.02px + 0.29px + 0.09px + 0.23px + 0.01px + 0.19px + 0.27px + 0.29px + 0.16px + 0.24px + 0.05px + 0.33px + 0.33px + 0.09px + 0.15px + 0.10px + 0.16px + 0.25px + 0.25px + 0.10px + 0.03px + 0.04px + 0.33px + 0.15px + 0.12px + 0.32px + 0.15px + 0.05px + 0.10px + 0.32px + 0.15px + 0.01px + 0.14px + 0.33px + 0.27px + 0.08px + 0.12px + 0.26px + 0.23px + 0.08px + 0.33px + 0.14px + 0.23px + 0.17px + 0.27px + 0.04px + 0.01px + 0.22px + 0.07px + 0.06px + 0.23px + 0.02px + 0.29px + 0.09px + 0.33px + 0.20px + 0.22px + 0.23px + 0.02px + 0.26px + 0.11px + 0.28px + 0.05px + 0.15px + 0.29px + 0.08px + 0.12px + 0.14px + 0.32px + 0.11px + 0.24px + 0.00px + 0.01px + 0.18px + 0.15px + 0.18px + 0.01px + 0.24px + 0.25px + 0.15px + 0.29px + 0.05px + 0.18px + 0.14px + 0.22px + 0.10px + 0.18px + 0.24px + 0.06px + 0.03px + 0.13px + 0.03px + 0.02px + 0.03px + 0.13px + 0.11px + 0.05px + 0.13px + 0.14px + 0.23px + 0.09px + 0.16px + 0.19px + 0.00px + 0.20px + 0.23px + 0.25px + 0.23px + 0.23px + 0.07px + 0.19px + 0.27px + 0.28px + 0.09px + 0.15px + 0.23px + 0.03px + 0.08px + 0.32px + 0.09px + 0.22px + 0.31px + 0.12px + 0.02px + 0.09px + 0.10px + 0.11px + 0.08px + 0.10px + 0.07px + 0.06px + 0.00px + 0.11px + 0.06px + 0.02px + 0.10px + 0.17px + 0.26px + 0.12px + 0.02px + 0.16px + 0.17px + 0.25px + 0.03px + 0.15px + 0.14px + 0.16px + 0.06px + 0.25px + 0.26px + 0.13px + 0.10px + 0.22px + 0.18px + 0.30px + 0.11px + 0.20px + 0.14px + 0.06px + 0.27px + 0.05px + 0.15px + 0.28px + 0.20px + 0.27px + 0.09px + 0.04px + 0.02px + 0.05px + 0.02px + 0.23px + 0.03px + 0.07px + 0.24px + 0.13px + 0.25px + 0.25px + 0.00px + 0.05px + 0.30px + 0.17px + 0.20px + 0.08px + 0.21px + 0.16px + 0.11px + 0.14px + 0.28px + 0.32px + 0.14px + 0.12px + 0.05px + 0.21px + 0.15px + 0.14px + 0.26px + 0.19px + 0.10px + 0.20px + 0.11px + 0.30px + 0.16px + 0.23px + 0.09px + 0.16px + 0.19px + 0.01px + 0.14px + 0.05px + 0.11px + 0.02px + 0.20px + 0.01px + 0.28px + 0.02px + 0.15px + 0.25px + 0.12px + 0.23px + 0.02px + 0.15px + 0.23px + 0.33px + 0.13px + 0.20px + 0.02px + 0.10px + 0.11px + 0.17px + 0.11px + 0.24px + 0.06px + 0.27px + 0.00px + 0.25px + 0.05px + 0.28px + 0.33px + 0.31px + 0.24px + 0.13px + 0.28px + 0.27px + 0.25px + 0.17px + 0.17px + 0.32px + 0.11px + 0.18px + 0.03px + 0.29px + 0.08px + 0.21px + 0.29px + 0.18px + 0.12px + 0.13px + 0.31px + 0.03px + 0.03px + 0.09px + 0.02px + 0.32px + 0.33px + 0.18px + 0.08px + 0.28px + 0.10px + 0.06px + 0.26px + 0.31px + 0.07px + 0.18px + 0.26px + 0.00px + 0.11px + 0.27px + 0.21px + 0.16px + 0.15px + 0.09px + 0.20px + 0.08px + 0.32px + 0.09px + 0.25px + 0.23px + 0.28px + 0.14px + 0.19px + 0.18px + 0.28px + 0.10px + 0.09px + 0.06px + 0.18px + 0.30px + 0.08px + 0.30px + 0.11px + 0.19px + 0.23px + 0.22px + 0.04px); transform: rotate(calc(0deg - 0.56deg - 0.61deg - 1.16deg - 0.66deg - 0.34deg - 0.55deg - 0.74deg - 1.45deg - 1.18deg - 1.30deg - 1.32deg - 1.89deg - 0.03deg - 0.70deg - 0.75deg - 1.56deg - 0.14deg - 1.59deg - 0.48deg - 1.15deg - 1.18deg - 1.46deg - 1.68deg - 1.99deg - 0.09deg - 1.92deg - 0.89deg - 1.30deg - 1.35deg - 1.74deg - 1.30deg - 0.37deg - 1.03deg - 1.74deg - 0.52deg - 1.63deg - 1.71deg - 0.79deg - 1.63deg - 0.85deg - 0.13deg)) scale(6) !important; }
+</style>
+    <div class="relative min-h-screen max-w-5xl mx-auto flex flex-col lg:flex-row justify-center lg:justify-between lg:space-x-12">
+    <div class="flex-col flex self-center lg:px-14 sm:max-w-4xl xl:max-w-md ">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaIAAABlCAYAAAAPkefXAAAACXBIWXMAAAsTAAALEwEAmpwYAAAG7mlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDMgNzkuMTY0NTI3LCAyMDIwLzEwLzE1LTE3OjQ4OjMyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMSAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA5LTI3VDE0OjI1OjM4KzAzOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIzLTA5LTI3VDE0OjI1OjM4KzAzOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wOS0yN1QxNDoyNTozOCswMzowMCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpiMjM3MGIzNC02OGMxLTg0NGQtYWU0MS01MWVhOWFhOWI2MGEiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo3OTUyMzlhYS03OTIxLTA3NDctOWQ3Ny05YzRlNGJjYjM0NzMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1OGQ1NWFmZC04MzYxLTkyNGMtYmM4Yi05OGJmYThmMTU0MDEiIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo1OGQ1NWFmZC04MzYxLTkyNGMtYmM4Yi05OGJmYThmMTU0MDEiIHN0RXZ0OndoZW49IjIwMjMtMDktMjdUMTQ6MjU6MzgrMDM6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMi4xIChXaW5kb3dzKSIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6YjIzNzBiMzQtNjhjMS04NDRkLWFlNDEtNTFlYTlhYTliNjBhIiBzdEV2dDp3aGVuPSIyMDIzLTA5LTI3VDE0OjI1OjM4KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjIuMSAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDxwaG90b3Nob3A6VGV4dExheWVycz4gPHJkZjpCYWc+IDxyZGY6bGkgcGhvdG9zaG9wOkxheWVyTmFtZT0iTkUgIFVTIiBwaG90b3Nob3A6TGF5ZXJUZXh0PSJORSAgVVMiLz4gPHJkZjpsaSBwaG90b3Nob3A6TGF5ZXJOYW1lPSJYIiBwaG90b3Nob3A6TGF5ZXJUZXh0PSJYIi8+IDxyZGY6bGkgcGhvdG9zaG9wOkxheWVyTmFtZT0iTkVYVCBHRU5FUkFUSU9OIE1BUktFVCIgcGhvdG9zaG9wOkxheWVyVGV4dD0iTkVYVCBHRU5FUkFUSU9OIE1BUktFVCIvPiA8L3JkZjpCYWc+IDwvcGhvdG9zaG9wOlRleHRMYXllcnM+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpS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" class="w-72 lg:w-96 mx-auto py-6">
+    </div>
+    <div class="flex justify-center self-center">
+    <div class="p-12 bg-white/10 mx-auto rounded-3xl w-full shadow-lg shadow-base-500/10">
+    <div class="mb-7 text-center">
+        <h3 class="font-semibold text-3xl text-white mb-3">DDoS Protection</h3>
+    </div>
+    <div class="space-y-6 text-center">
+<p class="alert alert-danger text-center"><strong>Error: </strong>You Got That Wrong. Try again</p>
+<form class="ddos_form" method="post">
+        <div style="margin-bottom: 10px;">
+        <input class="ch bg-white/10 rounded-lg" type="text" name="c1" maxlength="1" pattern="[A-Za-z0-9]" autocomplete="off" autofocus="">
+<input class="ch bg-white/10 rounded-lg" type="text" name="c2" maxlength="1" pattern="[A-Za-z0-9]" autocomplete="off">
+<input class="ch bg-white/10 rounded-lg" type="text" name="c3" maxlength="1" pattern="[A-Za-z0-9]" autocomplete="off">
+<input class="ch bg-white/10 rounded-lg" type="text" name="c4" maxlength="1" pattern="[A-Za-z0-9]" autocomplete="off">
+<input class="ch bg-white/10 rounded-lg" type="text" name="c5" maxlength="1" pattern="[A-Za-z0-9]" autocomplete="off">
+<input class="ch bg-white/10 rounded-lg" type="text" name="c6" maxlength="1" pattern="[A-Za-z0-9]" autocomplete="off">
+<div class="image" style="background-image:url(data:image/webp;base64,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);"></div>
+</div>
+        <div class="expire">
+            <div class="timer">
+                <div class="time-part-wrapper">
+                    <div class="time-part seconds tens">
+                        <div class="digit-wrapper">
+                            <span class="digit">0</span>
+                            <span class="digit">5</span>
+                            <span class="digit">4</span>
+                            <span class="digit">3</span>
+                            <span class="digit">2</span>
+                            <span class="digit">1</span>
+                            <span class="digit">0</span>
+                        </div>
+                    </div>
+                    <div class="time-part seconds ones">
+                        <div class="digit-wrapper">
+                            <span class="digit">0</span>
+                            <span class="digit">9</span>
+                            <span class="digit">8</span>
+                            <span class="digit">7</span>
+                            <span class="digit">6</span>
+                            <span class="digit">5</span>
+                            <span class="digit">4</span>
+                            <span class="digit">3</span>
+                            <span class="digit">2</span>
+                            <span class="digit">1</span>
+                            <span class="digit">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="time-part-wrapper">
+                    <div class="time-part hundredths tens">
+                        <div class="digit-wrapper">
+                            <span class="digit">0</span>
+                            <span class="digit">9</span>
+                            <span class="digit">8</span>
+                            <span class="digit">7</span>
+                            <span class="digit">6</span>
+                            <span class="digit">5</span>
+                            <span class="digit">4</span>
+                            <span class="digit">3</span>
+                            <span class="digit">2</span>
+                            <span class="digit">1</span>
+                            <span class="digit">0</span>
+                        </div>
+                    </div>
+                    <div class="time-part hundredths ones">
+                        <div class="digit-wrapper">
+                            <span class="digit">0</span>
+                            <span class="digit">9</span>
+                            <span class="digit">8</span>
+                            <span class="digit">7</span>
+                            <span class="digit">6</span>
+                            <span class="digit">5</span>
+                            <span class="digit">4</span>
+                            <span class="digit">3</span>
+                            <span class="digit">2</span>
+                            <span class="digit">1</span>
+                            <span class="digit">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><button class="before" type="submit">Submit</button>
+        <button class="expired" type="submit"> Refresh (expired)</button>
+        </form>
+        </div>
+        </div>
+        </div>
+        </div>
+    
+
+</body>
