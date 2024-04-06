@@ -19,6 +19,16 @@ import hashlib
 
 import config.constants as c
 
+# TODO - Set up crawler behaviour / error messaging for the situation when a warm start is applied. In that situation,
+#        seed is not required and the next request address is gained from the pre-stored queue.
+
+# TODO - Set up logging for when a warm start was applied.
+
+# TODO - Implement the detect captcha class in the runner method. When a the crawler bounces upon a captcha page, it
+#        might be detected. First, build in a method to verify if it was detected: for instance, being redirected
+#        multiple times. If that's the case, the crawled pages should be added to the training data, also, the cookie
+#        should be deleted since it is no longer useful.
+
 
 class Crawler:
 
@@ -38,23 +48,32 @@ class Crawler:
         self.queue = deque()
         self.requests_send_counter = int()
         self.resource_path = str()  # the path from the repo root to the specific resource marketplace directory
-        self.seed = set()
+        self.seed = str()
         self.exit_condition = bool()
         self.request_interval = 1
         self.request_timing = 'constant'
 
     def set_cookies(self, cookies: list):
+        """Method that sets the cookies that will be used for sending requests. A cookie can be obtained by creating a
+        account on a dark web marketplace, inspecting the send request with tor and copying the cookie.
+        :param cookies: a list of strings"""
         if not isinstance(cookies, list):
             raise TypeError('Cookies should be inserted as list')
         else:
             self.cookies = cookies
 
-    def set_seed(self, seed: str):
-        if not isinstance(seed, str):
-            raise TypeError('Seed should string')
-        self.seed = seed
+    def set_seed(self, url: str):
+        """The seed is an union url
+        :param url: string that ends with .onion
+        """
+        if not isinstance(url, str):
+            raise TypeError('Seed should be of type string')
+        self.seed = url
 
     def set_max_pages_to_crawl(self, max_pages: int):
+        """Method that will terminate the crawler when the maximum number of pages crawled in one session has been
+        reached.
+        :param max_pages: an integer representing the maximum number of pages to crawl in a session."""
         if not isinstance(max_pages, int):
             raise TypeError('Condition is not of type bool')
         else:
@@ -355,7 +374,7 @@ class Crawler:
 
         # error handling
         if not self.seed:
-            raise ValueError('The SEED attribute must be set before crawling')
+            raise ValueError('The seed attribute must be set before crawling')
 
         if not self.resource_path:
             raise ValueError('The resource path must be inserted before crawling')
