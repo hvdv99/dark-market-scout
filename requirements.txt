@@ -8,3 +8,4 @@ cryptography
 stem
 google-cloud-storage
 google-auth
+pytest
