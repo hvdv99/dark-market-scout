@@ -1,1 +1,11 @@
+beautifulsoup4
+fake-useragent
+requests
+pysocks
+requests[socks]
+requests[security]
+cryptography
+stem
+google-cloud-storage
+google-auth
 pytest
