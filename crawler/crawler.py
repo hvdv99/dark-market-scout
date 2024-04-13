@@ -25,6 +25,9 @@ from captcha.detector import CaptchaDetector
 
 # TODO - Set up logging for when a warm start was applied.
 
+# TODO - Fix cookie removal error
+# TODO - Implement error handling for just any error
+
 
 class Crawler:
 
