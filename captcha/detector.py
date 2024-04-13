@@ -34,10 +34,6 @@ class CaptchaDetector:
         returns:
             bool: True if the page contains a captcha, False otherwise.
         """
-        #TODO: Implement a more sophisticated way to detect captchas.
-        # Currently, it just checks if the html contains any of the predefined captcha fingerprints.
-        # But we want to have a pipeline of some sort that combines multiple methods to detect captchas.
-        # First, need to gather more data on how captchas are implemented on different websites.
         return self._bayes_decide(html)
 
     def _find_fingerprint(self, html: str) -> bool:

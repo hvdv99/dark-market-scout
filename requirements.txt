@@ -9,3 +9,4 @@ stem
 google-cloud-storage
 google-auth
 pytest
+scikit-learn

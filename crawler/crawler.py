@@ -18,16 +18,17 @@ import json
 import hashlib
 
 import config.constants as c
-
-# TODO - Set up crawler behaviour / error messaging for the situation when a warm start is applied. In that situation,
-#        seed is not required and the next request address is gained from the pre-stored queue.
-
-# TODO - Set up logging for when a warm start was applied.
+from ..captcha.detector import CaptchaDetector
 
 # TODO - Implement the detect captcha class in the runner method. When a the crawler bounces upon a captcha page, it
 #        might be detected. First, build in a method to verify if it was detected: for instance, being redirected
 #        multiple times. If that's the case, the crawled pages should be added to the training data, also, the cookie
 #        should be deleted since it is no longer useful.
+
+# TODO - Set up crawler behaviour / error messaging for the situation when a warm start is applied. In that situation,
+#        seed is not required and the next request address is gained from the pre-stored queue.
+
+# TODO - Set up logging for when a warm start was applied.
 
 
 class Crawler:
@@ -52,6 +53,7 @@ class Crawler:
         self.exit_condition = bool()
         self.request_interval = 1
         self.request_timing = 'constant'
+        self.captcha_detector = CaptchaDetector()
 
     def set_cookies(self, cookies: list):
         """Method that sets the cookies that will be used for sending requests. A cookie can be obtained by creating a
@@ -362,7 +364,7 @@ class Crawler:
         :return: None
         """
 
-        def _write_json_file(file_location, file_data):
+        def _write_network_data(file_location, file_data):
             """
             overwriting existing file with the new data
             :param file_location:
@@ -380,12 +382,12 @@ class Crawler:
             raise ValueError('The resource path must be inserted before crawling')
 
         # setting up file path for the file where the network data is stored
-        json_file_name = os.path.basename(self.resource_path) + '.json'
-        json_file_loc = os.path.join(self.resource_path, json_file_name)
+        network_data_filename = os.path.basename(self.resource_path) + '.json'
+        network_data_file_loc = os.path.join(self.resource_path, network_data_filename)
 
         # opening existing file or creating new one if not exists
-        if os.path.exists(json_file_loc):
-            with open(json_file_loc, 'r') as jf:
+        if os.path.exists(network_data_file_loc):
+            with open(network_data_file_loc, 'r') as jf:
                 json_file = json.load(jf)
         else:
             # if the file does not exist jet, we start with an empty dictionairy
@@ -405,6 +407,8 @@ class Crawler:
                 if (url not in self.visited) and (hashed_url not in json_file.keys()):
                     # Send tor request to download the page
                     web_page = self._send_request(url)
+
+                    # TODO - Detect captcha
 
                     # insert some waiting time in between each request
                     if self.request_timing_behaviour == 'constant':
@@ -429,7 +433,7 @@ class Crawler:
                     if self._hash_url(url) not in json_file.keys():
                         json_file.update(url_object)  # updating the current json file in memory
                         if sys.getsizeof(json_file) > (10 * 1024 * 1024):
-                            _write_json_file(file_location=json_file_loc, file_data=json_file)  # writing if > 10 MB
+                            _write_network_data(file_location=network_data_file_loc, file_data=json_file)  # writing if > 10 MB
 
                     # Save the page into the resource folder
                     self._save_resource(url, web_page)
@@ -444,13 +448,13 @@ class Crawler:
                     logging.info('URL: {} has already been scraped!'.format(url))
 
         except (KeyboardInterrupt, Timeout):  # writing when interrupted or request taking too long
-            _write_json_file(file_location=json_file_loc, file_data=json_file)
+            _write_network_data(file_location=network_data_file_loc, file_data=json_file)
             if self._write_queue_to_file():
                 logging.info('Interrupted and queue written to file')
             self.sync_resources()
 
         else:
-            _write_json_file(file_location=json_file_loc, file_data=json_file)  # writing when everything went fine
+            _write_network_data(file_location=network_data_file_loc, file_data=json_file)  # writing when everything went fine
             if self._write_queue_to_file():
                 logging.info('Process finished and queue written to file')
             self.sync_resources()
