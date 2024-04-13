@@ -20,11 +20,6 @@ import hashlib
 import config.constants as c
 from captcha.detector import CaptchaDetector
 
-# TODO - Set up crawler behaviour / error messaging for the situation when a warm start is applied. In that situation,
-#        seed is not required and the next request address is gained from the pre-stored queue.
-
-# TODO - Set up logging for when a warm start was applied.
-
 
 class Crawler:
     """
@@ -333,8 +328,6 @@ class Crawler:
                 # Download the file
                 blob.download_to_filename(local_file_path)
                 logging.info(f"Downloaded {blob.name} to {local_file_path}")
-            else:
-                logging.debug(f"{blob.name} is up to date with bucket")
 
     def delete_resource(self, resource_name: str):
         """
