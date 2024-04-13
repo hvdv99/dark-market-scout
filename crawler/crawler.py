@@ -18,12 +18,7 @@ import json
 import hashlib
 
 import config.constants as c
-from ..captcha.detector import CaptchaDetector
-
-# TODO - Implement the detect captcha class in the runner method. When a the crawler bounces upon a captcha page, it
-#        might be detected. First, build in a method to verify if it was detected: for instance, being redirected
-#        multiple times. If that's the case, the crawled pages should be added to the training data, also, the cookie
-#        should be deleted since it is no longer useful.
+from captcha.detector import CaptchaDetector
 
 # TODO - Set up crawler behaviour / error messaging for the situation when a warm start is applied. In that situation,
 #        seed is not required and the next request address is gained from the pre-stored queue.
@@ -48,7 +43,8 @@ class Crawler:
         self.visited = set()
         self.queue = deque()
         self.requests_send_counter = int()
-        self.resource_path = str()  # the path from the repo root to the specific resource marketplace directory
+        self.marketplace_name = str()  # name of the marketplace
+        self.resource_path = str()  # the marketplace directory from the repo root
         self.seed = str()
         self.exit_condition = bool()
         self.request_interval = 1
@@ -108,11 +104,12 @@ class Crawler:
         self.ua_behaviour = new_ua_behaviour
         logging.info('New user agent behaviour configured')
 
-    def set_resource_dir(self, path: str):
+    def set_resource_dir(self, marketplace_name: str):
+        self.marketplace_name = marketplace_name
         main_resource_dir = os.path.join('..', 'resources')
         if not os.path.exists(main_resource_dir):
             os.mkdir(main_resource_dir)
-        specific_resource_dir = os.path.join(main_resource_dir, path)
+        specific_resource_dir = os.path.join(main_resource_dir, self.marketplace_name)
         if not os.path.exists(specific_resource_dir):
             os.makedirs(specific_resource_dir)
             logging.info('New resource directory created')
@@ -310,7 +307,7 @@ class Crawler:
 
             # Check if the file exists locally and if the cloud version is newer
             # Some Python-pro knowledge: In the case that the file not exists, the second condition will not be
-            # evaluated this is beneficial, because if this was not the case, os.path.getmtime would throw an error!
+            # evaluated this is beneficial, because if this was not the case, os.marketplace_dir.getmtime would throw an error!
             if not os.path.exists(local_file_path) or (datetime.timestamp(blob.updated.replace(tzinfo=timezone.utc)) >
                                                        os.path.getmtime(local_file_path)):
                 # Ensure the local directory structure exists
@@ -345,18 +342,22 @@ class Crawler:
                     logging.info(f"File {file} removed locally")
                     return
 
-    def sync_resources(self) -> None:
-        # error handling
-        if not self.resource_path:
-            raise ValueError("Resource directory must be set before synchronizing resources")
+    def sync_resources(self, enabled=True) -> None:
+        """Method used to synchronize all files in '../resources' with a cloud bucket. If a file must be deleted for
+        some reason use self.delete_resource.
+        """
+        if enabled:
+            # error handling
+            if not self.resource_path:
+                raise ValueError("Resource directory must be set before synchronizing resources")
 
-        # First download
-        self._download_resources()
+            # First download
+            self._download_resources()
 
-        # Then upload
-        self._upload_resources()
+            # Then upload
+            self._upload_resources()
 
-        logging.info('Synchronized resources')
+            logging.info('Synchronized resources')
 
     def crawl(self):
         """
@@ -379,9 +380,9 @@ class Crawler:
             raise ValueError('The seed attribute must be set before crawling')
 
         if not self.resource_path:
-            raise ValueError('The resource path must be inserted before crawling')
+            raise ValueError('The resource marketplace_dir must be inserted before crawling')
 
-        # setting up file path for the file where the network data is stored
+        # setting up file marketplace_dir for the file where the network data is stored
         network_data_filename = os.path.basename(self.resource_path) + '.json'
         network_data_file_loc = os.path.join(self.resource_path, network_data_filename)
 
@@ -408,7 +409,26 @@ class Crawler:
                     # Send tor request to download the page
                     web_page = self._send_request(url)
 
-                    # TODO - Detect captcha
+                    if self.captcha_detector.detect_captcha(web_page.text):
+                        # save file to captcha training data
+                        new_captcha_page = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + ' ' + \
+                                           self.marketplace_name + '.html'
+                        captcha_page_location = os.path.join('..', 'captcha', 'training-data',
+                                                             'captcha', new_captcha_page)
+
+                        with open(captcha_page_location, 'w') as cp:
+                            cp.write(web_page.text)
+
+                        # Delete the cookie if the crawler has cookies
+                        if self.cookies:
+                            used_cookie = '; '.join(
+                                [key + '=' + value for key, value in web_page.cookies.get_dict().items()])
+                            self.cookies.remove(used_cookie)
+                            logging.info('Removed cookie from list')
+
+                        # raise error message when no more cookies left
+                        if not self.cookies:
+                            raise CaptchaDetectedError('The Crawler detected a page with captcha and stopped crawling')
 
                     # insert some waiting time in between each request
                     if self.request_timing_behaviour == 'constant':
@@ -458,3 +478,8 @@ class Crawler:
             if self._write_queue_to_file():
                 logging.info('Process finished and queue written to file')
             self.sync_resources()
+
+
+class CaptchaDetectedError(Exception):
+    def __init__(self, message):
+        super().__init__(message)

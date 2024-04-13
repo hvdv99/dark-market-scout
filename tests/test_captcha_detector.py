@@ -6,7 +6,7 @@ from captcha.detector import CaptchaDetector
 def list_html_files(directory):
     """Lists all HTML files in the given directory."""
     base_dir = os.path.dirname(os.path.abspath(__file__))  # Gets the directory of the current file
-    full_path = os.path.join(base_dir, directory)  # Builds the full path to the data directory
+    full_path = os.path.join(base_dir, directory)  # Builds the full marketplace_dir to the data directory
     return [os.path.join(full_path, f) for f in os.listdir(full_path) if f.endswith('.html')]
 
 
