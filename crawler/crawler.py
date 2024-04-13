@@ -183,7 +183,7 @@ class Crawler:
             return True
         return False
 
-    def _send_request(self, url) -> requests.Response:
+    def _send_request(self, url) -> (requests.Response, dict):
         """
         Function to set up a tor connection and send a request under tor network.
         Cookie is chosen randomly from the list of COOKIES
@@ -198,7 +198,7 @@ class Crawler:
             header = {'Cookie': random.choice(self.cookies), 'User-Agent': self.user_agent}
         web_page = requests.get(url, headers=header, proxies=self.proxies)
         self.requests_send_counter += 1
-        return web_page
+        return web_page, header['Cookie']
 
     def _detect_captcha(self, web_page) -> bool:
         """
@@ -434,10 +434,11 @@ class Crawler:
                 # url can not be in current crawling session and not in previous crawls
                 if (url not in self.visited) and (hashed_url not in network_data.keys()):
                     # Send tor request to download the page
-                    web_page = self._send_request(url)
+                    web_page, used_cookie = self._send_request(url)
 
                     # Check if the page is a captcha
                     if self.captcha_detector.detect_captcha(web_page.text):
+                        logging.info('Captcha Detected ')
                         # save file to captcha training data
                         new_captcha_page = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + ' ' + \
                                            self.marketplace_name + '.html'
@@ -449,7 +450,6 @@ class Crawler:
 
                         # Delete the cookie if the crawler has cookies
                         if self.cookies:
-                            used_cookie = web_page.headers.get('Set-Cookie')
                             self.cookies.remove(used_cookie)
                             logging.info('Removed cookie from list')
 
