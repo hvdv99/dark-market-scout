@@ -20,14 +20,6 @@ import hashlib
 import config.constants as c
 from captcha.detector import CaptchaDetector
 
-# TODO - Set up crawler behaviour / error messaging for the situation when a warm start is applied. In that situation,
-#        seed is not required and the next request address is gained from the pre-stored queue.
-
-# TODO - Set up logging for when a warm start was applied.
-
-# TODO - Fix cookie removal error
-# TODO - Implement error handling for just any error
-
 
 class Crawler:
 
@@ -124,7 +116,7 @@ class Crawler:
         the runner was not finished running.
         :return: True if queue written to file, else file
         """
-        if self.queue:  # only write when there is data in deque
+        if self.queue:  # only write when there is data in queue
             marketplace_dir = os.path.basename(self.resource_path)
             deque_filename = '{}-queue.pkl'.format(marketplace_dir)
             with open(os.path.join(self.resource_path, deque_filename), 'wb') as f:  # overrides file if exists
@@ -469,16 +461,22 @@ class Crawler:
                 else:
                     logging.info('URL: {} has already been scraped!'.format(url))
 
-        except (KeyboardInterrupt, Timeout):  # writing when interrupted or request taking too long
+        except Timeout:
             _write_network_data(file_location=network_data_file_loc, file_data=json_file)
-            if self._write_queue_to_file():
-                logging.info('Interrupted and queue written to file')
+            self._write_queue_to_file()
+            logging.info('Request timed out')
+            self.sync_resources()
+
+        except Exception as e:  # writing when interrupted or request taking too long
+            _write_network_data(file_location=network_data_file_loc, file_data=json_file)
+            self._write_queue_to_file()
+            logging.info('Interrupted and queue written to file')
             self.sync_resources()
 
         else:
             _write_network_data(file_location=network_data_file_loc, file_data=json_file)  # writing when everything went fine
-            if self._write_queue_to_file():
-                logging.info('Process finished and queue written to file')
+            self._write_queue_to_file()
+            logging.info('Process finished and queue written to file')
             self.sync_resources()
 
 
