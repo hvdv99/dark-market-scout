@@ -424,8 +424,7 @@ class Crawler:
 
                         # Delete the cookie if the crawler has cookies
                         if self.cookies:
-                            used_cookie = '; '.join(
-                                [key + '=' + value for key, value in web_page.cookies.get_dict().items()])
+                            used_cookie = web_page.headers.get('Set-Cookie')
                             self.cookies.remove(used_cookie)
                             logging.info('Removed cookie from list')
 
