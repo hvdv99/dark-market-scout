@@ -20,13 +20,19 @@ import hashlib
 import config.constants as c
 from captcha.detector import CaptchaDetector
 
-# TODO - Set up crawler behaviour / error messaging for the situation when a warm start is applied. In that situation,
-#        seed is not required and the next request address is gained from the pre-stored queue.
-
-# TODO - Set up logging for when a warm start was applied.
-
 
 class Crawler:
+    """
+    Crawler class is used to crawl pages on the darkweb.
+    ...
+    Attributes
+    ----------
+
+    ...
+    Methods
+    ----------
+
+    """
 
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 
@@ -50,6 +56,7 @@ class Crawler:
         self.request_interval = 1
         self.request_timing = 'constant'
         self.captcha_detector = CaptchaDetector()
+        self.synchronize = True
 
     def set_cookies(self, cookies: list):
         """Method that sets the cookies that will be used for sending requests. A cookie can be obtained by creating a
@@ -61,11 +68,15 @@ class Crawler:
             self.cookies = cookies
 
     def set_seed(self, url: str):
-        """The seed is an union url
+        """Method that sets the union address of the first request. If a queue already exists for marketplace, then
+        this method is not required.
         :param url: string that ends with .onion
         """
         if not isinstance(url, str):
-            raise TypeError('Seed should be of type string')
+            raise TypeError('url should be of type string')
+        if 'onion' not in url:
+            raise ValueError('url should be an union url')
+
         self.seed = url
 
     def set_max_pages_to_crawl(self, max_pages: int):
@@ -139,6 +150,7 @@ class Crawler:
         if os.path.exists(location):
             with open(location, 'rb') as f:
                 self.queue = pickle.load(f)
+            logging.info('Loaded queue from file')
             return True
         return False
 
@@ -342,11 +354,12 @@ class Crawler:
                     logging.info(f"File {file} removed locally")
                     return
 
-    def sync_resources(self, enabled=True) -> None:
-        """Method used to synchronize all files in '../resources' with a cloud bucket. If a file must be deleted for
+    def synchronize_resources(self) -> None:
+        """
+        Method used to synchronize all files in '../resources' with a cloud bucket. If a file must be deleted for
         some reason use self.delete_resource.
         """
-        if enabled:
+        if self.synchronize:
             # error handling
             if not self.resource_path:
                 raise ValueError("Resource directory must be set before synchronizing resources")
@@ -362,6 +375,11 @@ class Crawler:
     def crawl(self):
         """
         This method is used to neatly set up invoke the main functionality of the class: 🕸🕷️️ CRAWLING 🕷️🕸️
+        To start crawling, a few ingredients are required:
+        - The location where the crawled resources should be kept. In this directory the following three items will be
+        stored: the HTML pages, the queue.pkl file and network information data in json format.
+        - A seed. An exception exists in the case that there already is a queue stored in a file. If that is the case,
+        seed does not have to be set.
         :return: None
         """
 
@@ -376,39 +394,44 @@ class Crawler:
                 json.dump(file_data, f)
 
         # error handling
-        if not self.seed:
-            raise ValueError('The seed attribute must be set before crawling')
-
         if not self.resource_path:
-            raise ValueError('The resource marketplace_dir must be inserted before crawling')
+            raise ValueError('The resource directory name must be inserted before crawling')
 
         # setting up file marketplace_dir for the file where the network data is stored
         network_data_filename = os.path.basename(self.resource_path) + '.json'
         network_data_file_loc = os.path.join(self.resource_path, network_data_filename)
 
-        # opening existing file or creating new one if not exists
+        # opening existing network file or creating new one if not exists
         if os.path.exists(network_data_file_loc):
             with open(network_data_file_loc, 'r') as jf:
-                json_file = json.load(jf)
+                network_data = json.load(jf)
+                logging.info('Loaded network data from existing file')
         else:
-            # if the file does not exist jet, we start with an empty dictionairy
-            json_file = dict()
+            # if the file does not exist jet, we start with an empty dictionary
+            network_data = dict()
 
+        # getting a seed and adding it to the queue if the queue was not loaded from file
         if not self._load_queue_from_file():
-            # getting a SEED and adding it to the queue when queue was not loaded from file
+
+            if not self.seed:
+                raise ValueError(
+                    'The seed attribute must be set before crawling or an existing crawler queue must exist'
+                )
+
             self.queue.append(self.seed)
 
         try:
             # start crawling until exit condition was reached
             while self.queue and self._check_max_pages():
                 url = self.queue.popleft()
-                hashed_url = self._hash_url(url)  # required later for logging
+                hashed_url = self._hash_url(url)  # later needed for logging network information
 
                 # url can not be in current crawling session and not in previous crawls
-                if (url not in self.visited) and (hashed_url not in json_file.keys()):
+                if (url not in self.visited) and (hashed_url not in network_data.keys()):
                     # Send tor request to download the page
                     web_page = self._send_request(url)
 
+                    # Check if the page is a captcha
                     if self.captcha_detector.detect_captcha(web_page.text):
                         # save file to captcha training data
                         new_captcha_page = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + ' ' + \
@@ -450,10 +473,11 @@ class Crawler:
                     # url_object[hashed_url].get("original") OR url_object[hashed_url].get("children")
 
                     # checking if the url is not already in the data
-                    if self._hash_url(url) not in json_file.keys():
-                        json_file.update(url_object)  # updating the current json file in memory
-                        if sys.getsizeof(json_file) > (10 * 1024 * 1024):
-                            _write_network_data(file_location=network_data_file_loc, file_data=json_file)  # writing if > 10 MB
+                    if self._hash_url(url) not in network_data.keys():
+                        network_data.update(url_object)  # updating the current json file in memory
+                        # writing network data to file if > 10 MB
+                        if sys.getsizeof(network_data) > (10 * 1024 * 1024):
+                            _write_network_data(file_location=network_data_file_loc, file_data=network_data)
 
                     # Save the page into the resource folder
                     self._save_resource(url, web_page)
@@ -468,16 +492,16 @@ class Crawler:
                     logging.info('URL: {} has already been scraped!'.format(url))
 
         except (KeyboardInterrupt, Timeout):  # writing when interrupted or request taking too long
-            _write_network_data(file_location=network_data_file_loc, file_data=json_file)
+            _write_network_data(file_location=network_data_file_loc, file_data=network_data)
             if self._write_queue_to_file():
                 logging.info('Interrupted and queue written to file')
-            self.sync_resources()
+            self.synchronize_resources()
 
         else:
-            _write_network_data(file_location=network_data_file_loc, file_data=json_file)  # writing when everything went fine
+            _write_network_data(file_location=network_data_file_loc, file_data=network_data)  # writing when everything went fine
             if self._write_queue_to_file():
                 logging.info('Process finished and queue written to file')
-            self.sync_resources()
+            self.synchronize_resources()
 
 
 class CaptchaDetectedError(Exception):
