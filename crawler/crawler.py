@@ -501,17 +501,24 @@ class Crawler:
                 logging.info('Process finished and queue written to file')
                 self.synchronize_resources()
 
+        except CaptchaDetectedError:
+            _write_network_data(file_location=network_data_file_loc, file_data=network_data)
+            self._write_queue_to_file()
+            self.synchronize_resources()
+            logging.info('Captcha detected')
+
         except Timeout:
             _write_network_data(file_location=network_data_file_loc, file_data=network_data)
             self._write_queue_to_file()
-            logging.info('Request timed out')
             self.synchronize_resources()
+            logging.info('Request timed out')
 
         except Exception as e:  # writing when interrupted or request taking too long
+            print(f'An error occurred with {e}')
             _write_network_data(file_location=network_data_file_loc, file_data=network_data)
             self._write_queue_to_file()
-            logging.info('Interrupted and queue written to file')
             self.synchronize_resources()
+            logging.info('Interrupted and queue written to file')
 
 
 class CaptchaDetectedError(Exception):
