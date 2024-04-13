@@ -494,24 +494,24 @@ class Crawler:
                             self.queue.append(new_url)
                 else:
                     logging.info('URL: {} has already been scraped!'.format(url))
+            else:
+                _write_network_data(file_location=network_data_file_loc,
+                                    file_data=network_data)  # writing when everything went fine
+                self._write_queue_to_file()
+                logging.info('Process finished and queue written to file')
+                self.synchronize_resources()
 
         except Timeout:
-            _write_network_data(file_location=network_data_file_loc, file_data=json_file)
+            _write_network_data(file_location=network_data_file_loc, file_data=network_data)
             self._write_queue_to_file()
             logging.info('Request timed out')
-            self.sync_resources()
+            self.synchronize_resources()
 
         except Exception as e:  # writing when interrupted or request taking too long
-            _write_network_data(file_location=network_data_file_loc, file_data=json_file)
+            _write_network_data(file_location=network_data_file_loc, file_data=network_data)
             self._write_queue_to_file()
             logging.info('Interrupted and queue written to file')
-            self.sync_resources()
-
-        else:
-            _write_network_data(file_location=network_data_file_loc, file_data=json_file)  # writing when everything went fine
-            self._write_queue_to_file()
-            logging.info('Process finished and queue written to file')
-            self.sync_resources()
+            self.synchronize_resources()
 
 
 class CaptchaDetectedError(Exception):
