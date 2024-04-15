@@ -18,7 +18,7 @@ import json
 import hashlib
 
 import config.constants as c
-from crawler.captcha import CaptchaDetector
+from crawler.captcha.detector import CaptchaDetector
 
 
 class Crawler:

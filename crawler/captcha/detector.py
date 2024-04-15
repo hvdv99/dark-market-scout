@@ -2,7 +2,6 @@ import os
 from bs4 import BeautifulSoup as bs
 
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import ComplementNB
 
 
@@ -67,7 +66,7 @@ class CaptchaDetector:
         return page.lower().replace("\t", "").replace("\\", "").strip()
 
     def _load_data(self):
-        train_data_dir = os.path.join('.', 'captcha', 'training-data')
+        train_data_dir = os.path.join('crawler', 'captcha', 'training-data')
         captcha_files = [os.path.join(train_data_dir, 'captcha', f) for f in
                          os.listdir(os.path.join(train_data_dir, 'captcha')) if f.endswith('.html')]
         non_captcha_files = [os.path.join(train_data_dir, 'non_captcha', f) for f in
