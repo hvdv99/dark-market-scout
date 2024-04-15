@@ -1,6 +1,6 @@
 import pytest
 import os
-from captcha.detector import CaptchaDetector
+from crawler.captcha import CaptchaDetector
 
 
 def list_html_files(directory):

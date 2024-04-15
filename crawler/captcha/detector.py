@@ -67,7 +67,7 @@ class CaptchaDetector:
         return page.lower().replace("\t", "").replace("\\", "").strip()
 
     def _load_data(self):
-        train_data_dir = os.path.join('..', 'captcha', 'training-data')
+        train_data_dir = os.path.join('.', 'captcha', 'training-data')
         captcha_files = [os.path.join(train_data_dir, 'captcha', f) for f in
                          os.listdir(os.path.join(train_data_dir, 'captcha')) if f.endswith('.html')]
         non_captcha_files = [os.path.join(train_data_dir, 'non_captcha', f) for f in
@@ -93,9 +93,7 @@ class CaptchaDetector:
 
         X = self.vectorizer.fit_transform(docs)
 
-        X_train, X_test, y_train, y_test = train_test_split(X, labels,
-                                                            test_size=0.2, random_state=42, shuffle=True)
         model = ComplementNB()
-        model.fit(X_train, y_train)
+        model.fit(X, labels)
 
         return model
