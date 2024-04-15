@@ -193,7 +193,7 @@ class Crawler:
             header = {'Cookie': random.choice(self.cookies), 'User-Agent': self.user_agent}
         web_page = requests.get(url, headers=header, proxies=self.proxies)
         self.requests_send_counter += 1
-        return web_page, header['Cookie']
+        return web_page, header.get('Cookie')
 
     def _detect_captcha(self, web_page) -> bool:
         """
