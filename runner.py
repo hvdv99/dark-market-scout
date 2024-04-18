@@ -12,9 +12,9 @@ crawl_scout.synchronize = True
 crawl_scout.synchronize_resources()
 
 # configuring the crawler
-crawl_scout.set_seed(
-    'http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/1e9c917e808c184d3f88c73869aa3459a623'
-)
+# crawl_scout.set_seed(
+#     'http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/1e9c917e808c184d3f88c73869aa3459a623'
+# )
 crawl_scout.set_cookies(c.COOKIES)
 crawl_scout.set_max_pages_to_crawl(200)
 crawl_scout.set_request_interval(5)  # time between each request

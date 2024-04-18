@@ -1,3 +1,4 @@
+import bs4
 from fake_useragent import UserAgent
 import requests
 from requests.exceptions import Timeout
@@ -34,7 +35,7 @@ class Crawler:
 
     """
 
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout, )
 
     def __init__(self):
         self.cookies = list()
@@ -186,21 +187,33 @@ class Crawler:
         :param url: the url to download
         :return: response
         """
+
+        def _check_for_queue(web_page: requests.Response) -> bool:
+            waiting_cue_words = ['waiting', 'checking your browser before accessing nexus market']
+            web_page_soup = bs4.BeautifulSoup(web_page.text, features="html.parser").text.lower()
+            for word in waiting_cue_words:
+                if word in web_page_soup:
+                    return True
+            return False
+
         self._replace_user_agent()
         if not self.cookies:
             header = {'User-Agent': self.user_agent}
         else:
             header = {'Cookie': random.choice(self.cookies), 'User-Agent': self.user_agent}
         web_page = requests.get(url, headers=header, proxies=self.proxies)
-        self.requests_send_counter += 1
-        return web_page, header.get('Cookie')
 
-    def _detect_captcha(self, web_page) -> bool:
-        """
-        function that will scan the web page for a captcha
-        :return: True if captcha is detected, false if not
-        """
-        pass
+        # if queue detected: change cookies
+        # if _check_for_queue(web_page):
+        #     logging.info('Crawler in queue, waiting 30 seconds')
+        #     cookie = web_page.headers.get('Set-Cookie')
+        #     # TODO - Try if it works with only dcap cookie
+        #     time.sleep(30)
+        #     new_header = {'Cookie': cookie, 'User-Agent': self.user_agent}
+        #     web_page = requests.get(url, headers=new_header, proxies=self.proxies)
+
+        self.requests_send_counter += 1
+        return web_page, header.get('Cookie', None)
 
     @staticmethod
     def _extract_internal_links(web_page: requests.Response) -> list:
@@ -303,8 +316,8 @@ class Crawler:
                 elif os.path.getmtime(local_file) > datetime.timestamp(blob.updated.replace(tzinfo=timezone.utc)):
                     blob.upload_from_filename(local_file)
                     print(f"Replaced local file: {local_file} with {relative_path}")
-                else:
-                    logging.info(f'Local file: {local_file} up-to-date in bucket')
+                # else:
+                #     logging.info(f'Local file: {local_file} up-to-date in bucket')
 
     def _download_resources(self):
         """
@@ -319,7 +332,8 @@ class Crawler:
 
             # Check if the file exists locally and if the cloud version is newer
             # Some Python-pro knowledge: In the case that the file not exists, the second condition will not be
-            # evaluated this is beneficial, because if this was not the case, os.marketplace_dir.getmtime would throw an error!
+            # evaluated this is beneficial, because if this was not the case, os.marketplace_dir.getmtime
+            # would throw an error!
             if not os.path.exists(local_file_path) or (datetime.timestamp(blob.updated.replace(tzinfo=timezone.utc)) >
                                                        os.path.getmtime(local_file_path)):
                 # Ensure the local directory structure exists
@@ -428,27 +442,30 @@ class Crawler:
                 if (url not in self.visited) and (hashed_url not in network_data.keys()):
                     # Send tor request to download the page
                     web_page, used_cookie = self._send_request(url)
+                else:
+                    logging.info("Url: {} already visited")
+                    continue
 
-                    # Check if the page is a captcha
-                    if self.captcha_detector.detect_captcha(web_page.text):
-                        logging.info('Captcha Detected ')
-                        # save file to captcha training data
-                        new_captcha_page = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + ' ' + \
-                                           self.marketplace_name + '.html'
-                        captcha_page_location = os.path.join('..', 'captcha', 'training-data',
-                                                             'captcha', new_captcha_page)
+                # Check if the page is a captcha
+                if self.captcha_detector.detect_captcha(web_page.text):
+                    logging.info('Captcha Detected ')
+                    # save file to captcha training data
+                    new_captcha_page = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + ' ' + \
+                                       self.marketplace_name + '.html'
+                    captcha_page_location = os.path.join('..', 'captcha', 'training-data',
+                                                         'captcha', new_captcha_page)
 
-                        with open(captcha_page_location, 'w') as cp:
-                            cp.write(web_page.text)
+                    with open(captcha_page_location, 'w') as cp:
+                        cp.write(web_page.text)
 
-                        # Delete the cookie if the crawler has cookies
-                        if self.cookies:
-                            self.cookies.remove(used_cookie)
-                            logging.info('Removed cookie from list')
+                    # Delete the cookie if the crawler has cookies
+                    if self.cookies:
+                        self.cookies.remove(used_cookie)
+                        logging.info('Removed cookie from list')
 
-                        # raise error message when no more cookies left
-                        if not self.cookies:
-                            raise CaptchaDetectedError('The Crawler detected a page with captcha and stopped crawling')
+                    # raise error message when no more cookies left
+                    if not self.cookies:
+                        raise CaptchaDetectedError('The Crawler detected a page with captcha and stopped crawling')
 
                     # insert some waiting time in between each request
                     if self.request_timing_behaviour == 'constant':
@@ -485,8 +502,8 @@ class Crawler:
                     for new_url in new_urls:
                         if new_url not in self.queue and new_url not in self.visited:
                             self.queue.append(new_url)
-                else:
-                    logging.info('URL: {} has already been scraped!'.format(url))
+                    else:
+                        logging.debug('URL: {} has already been scraped!'.format(url))
             else:
                 _write_network_data(file_location=network_data_file_loc,
                                     file_data=network_data)  # writing when everything went fine
@@ -505,6 +522,12 @@ class Crawler:
             self._write_queue_to_file()
             self.synchronize_resources()
             logging.info('Request timed out')
+
+        except KeyboardInterrupt:
+            _write_network_data(file_location=network_data_file_loc, file_data=network_data)
+            self._write_queue_to_file()
+            self.synchronize_resources()
+            logging.info('Crawler manually interrupted')
 
         except Exception as e:  # writing when interrupted or request taking too long
             print(f'An error occurred with {e}')
