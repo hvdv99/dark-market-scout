@@ -22,4 +22,4 @@ crawl_scout.set_request_timing_behaviour(new_timing_behaviour='random')  # defau
 crawl_scout.set_user_agent_behaviour(3)  # after how many requests the user agent will be replaced for new one
 
 # start crawling
-crawl_scout.crawl()
+# crawl_scout.crawl()

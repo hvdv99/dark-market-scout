@@ -445,7 +445,7 @@ class Crawler:
                     # Send tor request to download the page
                     web_page, used_cookie = self._send_request(url)
                 else:
-                    logging.info("Url: {} already visited")
+                    logging.info("Url: {} already visited".format(url))
                     continue
 
                 # Check if the page is a captcha
@@ -460,14 +460,16 @@ class Crawler:
                     with open(captcha_page_location, 'w') as cp:
                         cp.write(web_page.text)
 
-                    # Delete the cookie if the crawler has cookies
-                    if self.cookies:
-                        self.cookies.remove(used_cookie)
-                        logging.info('Removed cookie from list')
+                    time.sleep(32)
 
-                    # raise error message when no more cookies left
-                    if not self.cookies:
-                        raise CaptchaDetectedError('The Crawler detected a page with captcha and stopped crawling')
+                    # # Delete the cookie if the crawler has cookies
+                    # if self.cookies:
+                    #     self.cookies.remove(used_cookie)
+                    #     logging.info('Removed cookie from list')
+                    #
+                    # # raise error message when no more cookies left
+                    # if not self.cookies:
+                    #     raise CaptchaDetectedError('The Crawler detected a page with captcha and stopped crawling')
 
                     # put url back in queue
                     self.queue.appendleft(url)
