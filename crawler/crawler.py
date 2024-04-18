@@ -118,7 +118,7 @@ class Crawler:
 
     def set_resource_dir(self, marketplace_name: str):
         self.marketplace_name = marketplace_name
-        main_resource_dir = os.path.join('..', 'resources')
+        main_resource_dir = os.path.join('resources')
         if not os.path.exists(main_resource_dir):
             os.mkdir(main_resource_dir)
         specific_resource_dir = os.path.join(main_resource_dir, self.marketplace_name)
@@ -452,7 +452,7 @@ class Crawler:
                     # save file to captcha training data
                     new_captcha_page = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + ' ' + \
                                        self.marketplace_name + '.html'
-                    captcha_page_location = os.path.join('..', 'captcha', 'training-data',
+                    captcha_page_location = os.path.join('crawler', 'captcha', 'training-data',
                                                          'captcha', new_captcha_page)
 
                     with open(captcha_page_location, 'w') as cp:
@@ -534,7 +534,7 @@ class Crawler:
             self.synchronize_resources()
             logging.info('Crawler manually interrupted')
 
-        except Exception as e:  # writing when interrupted or request taking too long
+        except Exception as e:  # just any error
             print(f'An error occurred with {e}')
             _write_network_data(file_location=network_data_file_loc, file_data=network_data)
             self._write_queue_to_file()
