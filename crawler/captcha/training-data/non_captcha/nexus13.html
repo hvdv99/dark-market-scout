@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="NIAG59oCpzBr9BYIqGLUXdejeiY6u8uxw1ZDvvpE">
+
+        <title>Nexus Market - Kung Fu Tea Accounts</title>
+
+        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+
+        <link href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/css/icons.css" rel="stylesheet">
+        <link href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/css/custom.css" rel="stylesheet">
+        <link href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/css/style.css" rel="stylesheet">
+    </head>
+    <body class="bg-gray-900">
+        <style>
+@media (max-width: 767px) {
+  .navicon {
+    width: 1.125em;
+    height: .125em;
+  }
+
+  .navicon::before,
+  .navicon::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all .2s ease-out;
+    content: '';
+    background: #3D4852;
+  }
+
+  .navicon::before {
+    top: 5px;
+  }
+
+  .navicon::after {
+    top: -5px;
+  }
+
+  .menu-btn:not(:checked) ~ .menu {
+    display: none;
+  }
+
+  .menu-btn:checked ~ .menu {
+    display: block;
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon {
+    background: transparent;
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon::before {
+    transform: rotate(-45deg);
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon::after {
+    transform: rotate(45deg);
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon::before,
+  .menu-btn:checked ~ .menu-icon .navicon::after {
+    top: 0;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+</style>
+
+<style>
+    #sortbox{
+/*      transition: 2s;*/
+    }
+    #sortbox:hover > #sortboxmenu {
+      
+        display: block;
+        transition: 3s;
+    }
+
+    @media (max-width: 767px) {
+  .navicon {
+    width: 1.125em;
+    height: .125em;
+  }
+
+  .navicon::before,
+  .navicon::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all .2s ease-out;
+    content: '';
+    background: #5f5b68;
+  }
+
+  .navicon::before {
+    top: 6.5px;
+  }
+
+  .navicon::after {
+    top: -6.5px;
+  }
+
+  .menu-btn:not(:checked) ~ .menu {
+    display: none;
+  }
+
+  .menu-btn:checked ~ .menu {
+    display: block;
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon {
+    background: transparent;
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon::before {
+    transform: rotate(-45deg);
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon::after {
+    transform: rotate(45deg);
+  }
+
+  .menu-btn:checked ~ .menu-icon .navicon::before,
+  .menu-btn:checked ~ .menu-icon .navicon::after {
+    top: 0;
+  }
+}
+
+</style>
+
+<div class="flex flex-col h-screen">
+    <nav class="nav text-primary flex flex-wrap items-center justify-between py-1 px-6 2xl:container 2xl:mx-auto">
+    <div class="flex flex-no-shrink items-center mr-6 py-1 text-grey-darkest">
+      <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion">
+        <img src="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/image/logo-dark.png" class="w-40" />
+      </a>
+    </div>
+
+    <input class="menu-btn hidden" type="checkbox" id="menu-btn">
+    <label class="menu-icon block cursor-pointer md:hidden py-4 relative select-none" for="menu-btn">
+      <span class="navicon bg-base-500 flex items-center relative"></span>
+    </label>
+
+    <ul class="menu md:border-none flex justify-end list-reset m-0 w-full md:w-auto">
+      <li>
+        <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion" class="block uppercase text-sm md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-base-500 duration-[750ms]">Home</a>
+      </li>
+      <li>
+        <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/account/my_orders" class="relative block uppercase text-sm md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-base-500 duration-[750ms]">
+                    My orders
+        </a>
+      </li>
+      <li>
+                <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/become/vendor" class="block uppercase text-sm md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-base-500 duration-[750ms]">Become a Vendor</a>
+              </li>
+    </ul>
+    <div class="flex"> 
+      <div id="sortbox" class="relative ml-3">
+        <div class="bg-slate-900 rounded-xl">
+          <div class="flex justify-center items-center space-x-2 w-48 h-[52px] px-3">
+            <div class="ml-2">
+              <i class="icss-money-wallet text-xl"></i>
+            </div>
+            <div class="w-full text-left text-sm font-normal py-1 leading-none text-secondary">
+              WALLET
+            </div>
+            <div class="ml-2.5 mr-1.5 text-primary">
+              <i class="icss-chevron-down text-xs"></i>
+            </div>
+          </div>
+        </div>
+        <div id="sortboxmenu" class="absolute hidden right-0 w-48 pt-0.5 origin-top-right z-10 animate-fadeInTop">
+          <div class="py-2 bg-slate-900 rounded-xl border border-slate-900 px-2 shadow-lg">
+            <h3 class="uppercase text-xs text-secondary text-center font-mono mb-1 border-b border-secondary/20 focus:border-secondary/50 pb-2">My account balance</h3>
+            <div class="bg-slate-900 p-1 rounded-xl text-center">
+              <div class="mb-1 font-mono" title="0.000000000000 BTC"><span class=" font-semibold select-all">0.00000000</span> BTC</div>
+              <div class="mb-1 font-mono" title="0.000000000000 XMR"><span class=" font-semibold select-all">0.00000000</span> XMR</div>
+              <div class="mb-1 font-mono" title="0.000000000000 LTC"><span class=" font-semibold select-all">0.00000000</span> LTC</div>
+            </div>
+            <div class="bg-slate-800 rounded-xl p-1 flex flex-col text-center">
+              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/account/deposit" class="px-3 py-1.5 text-sm font-normal text-primary hover:bg-slate-900/60 hover:text-base-500 duration-[750ms] rounded-xl text-center">Deposit</a>
+              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/account/withdraw" class="px-3 py-1.5 text-sm font-normal text-primary hover:bg-slate-900/60 hover:text-base-500 duration-[750ms] rounded-xl text-center mt-1">Withdraw</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sortbox" class="relative ml-3">
+        <div class="bg-slate-800 rounded-lg">
+
+          <div class="flex items-center w-48 p-1.5">
+            <div class="flex items-center w-full text-left">
+              <div class="flex-shrink-0">
+                                <div class="w-10 h-10 rounded-lg ring-4 ring-opacity-20 ring-gray-200 }} flex justify-center items-center">
+                  <i class="icss-image text-xl text-secondary border-slate-900 opacity-50"></i>
+                </div>
+                              </div>
+              <div class="ml-3">
+                <div class="text-base font-semibold leading-none text-primary truncate" style="max-width: 95px" title="treehugger64">treehugger64</div>
+                                <div class="mt-1 text-sm font-normal leading-none text-secondary">User</div>
+                              </div>
+            </div>
+            <div class="ml-2.5 text-base-500">
+              <i class="icss-chevron-down text-xs"></i>
+            </div>
+          </div>
+        </div>
+        <div id="sortboxmenu" class="absolute hidden right-0 w-48 pt-0.5 origin-top-right z-10 animate-fadeInTop">
+          <div class="py-1 bg-slate-800 px-1.5 py-2 shadow-lg">
+                        <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/@treehugger64/cc5cdbb78809f84c128bad48d0ab74a0f852" class="flex flex-row items-center px-3 py-1.5 text-sm font-normal text-primary bg-slate-800 hover:bg-slate-900/60 hover:text-base-500 mt-1">My profile</a></li>
+                        <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/account/general" class="flex flex-row items-center px-3 py-1.5 text-sm font-normal text-primary bg-slate-800 hover:bg-slate-900/60 hover:text-base-500 mt-1">Account settings</a></li>
+            <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/account/pgp" class="flex flex-row items-center px-3 py-1.5 text-sm font-normal text-primary bg-slate-800 hover:bg-slate-900/60 hover:text-base-500 mt-1">PGP public key</a></li>
+            <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/account/tickets" class="flex flex-row items-center px-3 py-1.5 text-sm font-normal text-primary bg-slate-800 hover:bg-slate-900/60 hover:text-base-500 mt-1">Tickets</a></li>
+                        <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/themelight" class="flex flex-row items-center px-3 py-1.5 text-sm font-normal text-primary bg-slate-800 hover:bg-slate-900/60 hover:text-base-500 mt-1">Light mode</a></li>
+                        
+            <form method="POST" action="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/logout" class="mt-1">
+              <input type="hidden" name="_token" value="NIAG59oCpzBr9BYIqGLUXdejeiY6u8uxw1ZDvvpE">              <button class="px-3 py-1.5 text-sm font-semibold text-red-500 bg-slate-800 hover:bg-slate-900/60 w-full text-start">Sign out</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="px-6 2xl:container 2xl:mx-auto mt-1">
+      <div class="">
+          <div class="lg:flex justify-between space-x-4">
+            <div id="sortbox" class="relative">
+              <div class="border border-slate-900 bg-slate-900 rounded-xl h-12 w-full md:w-56 flex items-center px-3">
+                <div class="flex items-center space-x-2 w-full text-left">
+                  <i class="icss-openlayers text-primary"></i>
+                  <div class="text-sm font-semibold uppercase leading-none text-primary">
+                    Categories
+                  </div>
+                </div>
+                <div class="text-secondary">
+                  <i class="icss-chevron-down text-xs"></i>
+                </div>
+              </div>
+              <div id="sortboxmenu" class="absolute hidden right-0 w-full md:w-56 pt-0.5 origin-top-right z-10 animate-fadeInTop">
+                <div class="category py-2.5 bg-slate-900 rounded-xl shadow-lg">
+                  <ul class="w-full">
+                                                                  <li class="has-sub hover:text-base-500">
+                          <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/e79387148ee9484ce78aab08540a7a6d8743" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                            Cannabis &amp; Hash
+                            <span class="font-semibold font-mono">
+                              [958]
+                            </span>
+                          </a>
+                        <ul class="border-l-2 border-base-500 bg-slate-900">
+                                                                                  <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/11266f93666c9640766a80264c63ee6d8094" class="text-secondary hover:text-base-500 text-sm">
+                                Buds &amp; Flowers
+                                <span class="font-semibold font-mono">
+                                  [547]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/1462717e8a36384fb089d8d84fd5b732738a" class="text-secondary hover:text-base-500 text-sm">
+                                Edibles
+                                <span class="font-semibold font-mono">
+                                  [51]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/4800337172f46746857838f77ae5e539684e" class="text-secondary hover:text-base-500 text-sm">
+                                Seeds
+                                <span class="font-semibold font-mono">
+                                  [9]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/687a14bb75da1745e17bd9671550db8b3414" class="text-secondary hover:text-base-500 text-sm">
+                                Hash
+                                <span class="font-semibold font-mono">
+                                  [138]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/784e1db35bd9b54f775a7195f92fe6a3da2c" class="text-secondary hover:text-base-500 text-sm">
+                                Others
+                                <span class="font-semibold font-mono">
+                                  [72]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/bde3eba54601b44b924937241d5aafc18426" class="text-secondary hover:text-base-500 text-sm">
+                                Synthetic
+                                <span class="font-semibold font-mono">
+                                  [2]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/f3ab57702a0f024b1b2b9f22a938c9945581" class="text-secondary hover:text-base-500 text-sm">
+                                Concentrates
+                                <span class="font-semibold font-mono">
+                                  [123]
+                                </span>
+                              </a>
+                            </li>
+                                                                              </ul>
+                                                                                        <li class="has-sub hover:text-base-500">
+                          <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/9dfab62f1c795142581ba64193a796482726" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                            Benzos
+                            <span class="font-semibold font-mono">
+                              [478]
+                            </span>
+                          </a>
+                        <ul class="border-l-2 border-base-500 bg-slate-900">
+                                                                                  <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/32a8200542c854403f4857248a7b7c97ce0d" class="text-secondary hover:text-base-500 text-sm">
+                                Others
+                                <span class="font-semibold font-mono">
+                                  [13]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/4c493c2d4f413447714892e47c8195714cd0" class="text-secondary hover:text-base-500 text-sm">
+                                Pills
+                                <span class="font-semibold font-mono">
+                                  [428]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/fe6f15e562d7b640096a94b65367e020accc" class="text-secondary hover:text-base-500 text-sm">
+                                Powder
+                                <span class="font-semibold font-mono">
+                                  [18]
+                                </span>
+                              </a>
+                            </li>
+                                                                              </ul>
+                                                                                        <li class="has-sub hover:text-base-500">
+                          <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/a5093d0491b2294b539bbab92b50dd233d06" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                            Ecstasy
+                            <span class="font-semibold font-mono">
+                              [359]
+                            </span>
+                          </a>
+                        <ul class="border-l-2 border-base-500 bg-slate-900">
+                                                                                  <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/07bb5f2b20b3a248fe2aa7d2bd54b99ad5db" class="text-secondary hover:text-base-500 text-sm">
+                                Pills
+                                <span class="font-semibold font-mono">
+                                  [128]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/134bc6cd58ff954b545840d58404cdc9f6ce" class="text-secondary hover:text-base-500 text-sm">
+                                MDA
+                                <span class="font-semibold font-mono">
+                                  [4]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/324cc2ed6e10964ee46ac3d60cb4528011a4" class="text-secondary hover:text-base-500 text-sm">
+                                MDMA
+                                <span class="font-semibold font-mono">
+                                  [204]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/3b14b4ab39e613415439d5337adf3ad17b8b" class="text-secondary hover:text-base-500 text-sm">
+                                Others
+                                <span class="font-semibold font-mono">
+                                  [3]
+                                </span>
+                              </a>
+                            </li>
+                                                                              </ul>
+                                                                                        <li class="has-sub hover:text-base-500">
+                          <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/90c420bc1a22814a001939015578a5dad775" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                            Stimulants
+                            <span class="font-semibold font-mono">
+                              [876]
+                            </span>
+                          </a>
+                        <ul class="border-l-2 border-base-500 bg-slate-900">
+                                                                                  <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/28944c1d77e4374def78ce6749f961845226" class="text-secondary hover:text-base-500 text-sm">
+                                Others
+                                <span class="font-semibold font-mono">
+                                  [73]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/643011cd3fba534a413a65f36942ff8d6cad" class="text-secondary hover:text-base-500 text-sm">
+                                Cocaine
+                                <span class="font-semibold font-mono">
+                                  [305]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/798844498773184ea58b0a78459b2caf2345" class="text-secondary hover:text-base-500 text-sm">
+                                Adderal
+                                <span class="font-semibold font-mono">
+                                  [131]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/a00015dd1bbc2147641be841c2720615ecd0" class="text-secondary hover:text-base-500 text-sm">
+                                Meth
+                                <span class="font-semibold font-mono">
+                                  [168]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/a778eab514a441430c1949c1d9d8ff7676af" class="text-secondary hover:text-base-500 text-sm">
+                                Speed
+                                <span class="font-semibold font-mono">
+                                  [171]
+                                </span>
+                              </a>
+                            </li>
+                                                                              </ul>
+                                                                                      <li>
+                        <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/3efe698b70a567454f7baee79c8fb14b8b57" class="text-secondary hover:text-base-500 text-sm">
+                          Steroids
+                          <span class="font-semibold font-mono">
+                            [183]
+                          </span>
+                        </a>
+                      </li>
+                                                                                        <li class="has-sub hover:text-base-500">
+                          <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/1056aa395d94f549ae590da5f582eb4f717e" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                            Opioids
+                            <span class="font-semibold font-mono">
+                              [545]
+                            </span>
+                          </a>
+                        <ul class="border-l-2 border-base-500 bg-slate-900">
+                                                                                  <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/1b8c134610fcd1424d182891e7928c475ccb" class="text-secondary hover:text-base-500 text-sm">
+                                Pills
+                                <span class="font-semibold font-mono">
+                                  [87]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/62aff7a81c80f148e71a83814098884bcce6" class="text-secondary hover:text-base-500 text-sm">
+                                Heroin
+                                <span class="font-semibold font-mono">
+                                  [80]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/6ebff3f30cac904e68088920262bb75ace34" class="text-secondary hover:text-base-500 text-sm">
+                                Morphine
+                                <span class="font-semibold font-mono">
+                                  [7]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/9d22fc6251036546cd5bebb5b8e16cc6efda" class="text-secondary hover:text-base-500 text-sm">
+                                Dihydrocodeine
+                                <span class="font-semibold font-mono">
+                                  [3]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/d6580184311fa3429e3be083feab5e887cf3" class="text-secondary hover:text-base-500 text-sm">
+                                Hydrocodone
+                                <span class="font-semibold font-mono">
+                                  [20]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/da349ad212aea14496196a914df33e893b3a" class="text-secondary hover:text-base-500 text-sm">
+                                Codeine
+                                <span class="font-semibold font-mono">
+                                  [4]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/e900c3769b95e940ef99c069ec50664d5af9" class="text-secondary hover:text-base-500 text-sm">
+                                Oxycodone
+                                <span class="font-semibold font-mono">
+                                  [307]
+                                </span>
+                              </a>
+                            </li>
+                                                                              </ul>
+                                                                                        <li class="has-sub hover:text-base-500">
+                          <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/ab991ae38f9a384374881c080273749fc0a1" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                            Dissociatives
+                            <span class="font-semibold font-mono">
+                              [285]
+                            </span>
+                          </a>
+                        <ul class="border-l-2 border-base-500 bg-slate-900">
+                                                                                  <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/28555a77468e344875493c046ace753e473b" class="text-secondary hover:text-base-500 text-sm">
+                                GHB
+                                <span class="font-semibold font-mono">
+                                  [36]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/3d57d3283dc09345353b89b34767989cc344" class="text-secondary hover:text-base-500 text-sm">
+                                Others
+                                <span class="font-semibold font-mono">
+                                  [7]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/67b5d7213d24234c36385033c11489756a14" class="text-secondary hover:text-base-500 text-sm">
+                                Ketamine
+                                <span class="font-semibold font-mono">
+                                  [230]
+                                </span>
+                              </a>
+                            </li>
+                                                                              </ul>
+                                                                                        <li class="has-sub hover:text-base-500">
+                          <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/c7d7a6892b53d24c4c2892f2a68d35d4f890" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                            Psychedelics
+                            <span class="font-semibold font-mono">
+                              [402]
+                            </span>
+                          </a>
+                        <ul class="border-l-2 border-base-500 bg-slate-900">
+                                                                                  <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/0131d17a51db854e9b5bb9151b4c3664c284" class="text-secondary hover:text-base-500 text-sm">
+                                LSA
+                                <span class="font-semibold font-mono">
+                                  [0]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/1ae86cc6749a77420c7aa397ce0f268e85e5" class="text-secondary hover:text-base-500 text-sm">
+                                RC
+                                <span class="font-semibold font-mono">
+                                  [8]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/3defeddd86339845248a1cc87e67cb929263" class="text-secondary hover:text-base-500 text-sm">
+                                DMA/DOX
+                                <span class="font-semibold font-mono">
+                                  [3]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/6afc861f678fd64b126b320607637e31b503" class="text-secondary hover:text-base-500 text-sm">
+                                Shrooms
+                                <span class="font-semibold font-mono">
+                                  [97]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/a7ab07bc951e994f849a1439c9fab64e7584" class="text-secondary hover:text-base-500 text-sm">
+                                DMT
+                                <span class="font-semibold font-mono">
+                                  [42]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/c21e553c23bad24dcf2aefc2285921d35714" class="text-secondary hover:text-base-500 text-sm">
+                                NBOME
+                                <span class="font-semibold font-mono">
+                                  [0]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/c4dcedf5301bf3471a3854e381e5eab5b6e1" class="text-secondary hover:text-base-500 text-sm">
+                                Mescaline
+                                <span class="font-semibold font-mono">
+                                  [3]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/dd7117f4690ca64a92680a269d4569c1d104" class="text-secondary hover:text-base-500 text-sm">
+                                2C-B
+                                <span class="font-semibold font-mono">
+                                  [55]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/e23781c972e657422c7856c73629cecac656" class="text-secondary hover:text-base-500 text-sm">
+                                Others
+                                <span class="font-semibold font-mono">
+                                  [23]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/fe7addf233dcb34bbe3b203399602057a272" class="text-secondary hover:text-base-500 text-sm">
+                                LSD
+                                <span class="font-semibold font-mono">
+                                  [170]
+                                </span>
+                              </a>
+                            </li>
+                                                                              </ul>
+                                                                                        <li class="has-sub hover:text-base-500">
+                          <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/5f3ffc2d010c6047b7080210ed3591172bb4" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                            Prescriptions
+                            <span class="font-semibold font-mono">
+                              [453]
+                            </span>
+                          </a>
+                        <ul class="border-l-2 border-base-500 bg-slate-900">
+                                                                                  <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/1a011ea74d62f445604b7f14000578d1f973" class="text-secondary hover:text-base-500 text-sm">
+                                Prescriptions
+                                <span class="font-semibold font-mono">
+                                  [412]
+                                </span>
+                              </a>
+                            </li>
+                                                                              </ul>
+                                                                                      <li>
+                        <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/dea81ee27b48a74dda7aa0d73dea5f1127a8" class="text-secondary hover:text-base-500 text-sm">
+                          Others
+                          <span class="font-semibold font-mono">
+                            [21]
+                          </span>
+                        </a>
+                      </li>
+                                                                                        <li class="has-sub hover:text-base-500">
+                          <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/182a339b72c1974c2578dd77827886046143" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                            Digital
+                            <span class="font-semibold font-mono">
+                              [9662]
+                            </span>
+                          </a>
+                        <ul class="border-l-2 border-base-500 bg-slate-900">
+                                                                                    <li class="has-sub"><a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/16acdba44931b4459d4ac4447dcab432fbbc" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                                Counterfeit Items
+                                <span class="font-semibold font-mono">
+                                  [613]
+                                </span>
+                              </a>
+                              <ul class="border-l-2 border-base-500 bg-slate-900 hover:text-base-500">
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/037fdb6c526fe54be75ab2e59776f6b32a5e" class="text-secondary hover:text-base-500 text-sm">
+                                      Fake Passports
+                                      <span class="font-semibold font-mono">
+                                        [81]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/0a74ce7d8e6648401b891be88388e5a9df4a" class="text-secondary hover:text-base-500 text-sm">
+                                      Others Items
+                                      <span class="font-semibold font-mono">
+                                        [131]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/1886eb4e50287543695b2e451659aefb96db" class="text-secondary hover:text-base-500 text-sm">
+                                      Financial Documents
+                                      <span class="font-semibold font-mono">
+                                        [72]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/232aa27831d0c347d138c14374f28d96d929" class="text-secondary hover:text-base-500 text-sm">
+                                      Jewelry
+                                      <span class="font-semibold font-mono">
+                                        [0]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/37d732c0399f6342873927f3060fe2c6983a" class="text-secondary hover:text-base-500 text-sm">
+                                      Cothing
+                                      <span class="font-semibold font-mono">
+                                        [0]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/862fe4eb3e5d2345de3afba331fff67a9571" class="text-secondary hover:text-base-500 text-sm">
+                                      IDs/DLs
+                                      <span class="font-semibold font-mono">
+                                        [187]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/9c3efbe088afb8458c88a278aa1a28344ea9" class="text-secondary hover:text-base-500 text-sm">
+                                      Licenses and Permits
+                                      <span class="font-semibold font-mono">
+                                        [41]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/b4753f309b9db943b8987139a774077df689" class="text-secondary hover:text-base-500 text-sm">
+                                      Money
+                                      <span class="font-semibold font-mono">
+                                        [21]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/b8faeb6005d4c0408f0bbb4001def210a34a" class="text-secondary hover:text-base-500 text-sm">
+                                      Electronics
+                                      <span class="font-semibold font-mono">
+                                        [0]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/ed37946b6e8e96424f685c668b602f0dae8a" class="text-secondary hover:text-base-500 text-sm">
+                                      Fake Identity Documents
+                                      <span class="font-semibold font-mono">
+                                        [40]
+                                      </span>
+                                    </a>
+                                </li>
+                                                              </ul>
+                                                                                                                <li class="has-sub"><a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/16b901a10d87f04ce9096090d94518675cbf" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                                Gold &amp; Jewels
+                                <span class="font-semibold font-mono">
+                                  [26]
+                                </span>
+                              </a>
+                              <ul class="border-l-2 border-base-500 bg-slate-900 hover:text-base-500">
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/757bbf2e328e43450038f463f782c9c9fe40" class="text-secondary hover:text-base-500 text-sm">
+                                      Gold
+                                      <span class="font-semibold font-mono">
+                                        [0]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/a07e9184489a7446cb4a9cf49562f636c304" class="text-secondary hover:text-base-500 text-sm">
+                                      Others
+                                      <span class="font-semibold font-mono">
+                                        [26]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/b1d49e3b9b980949d098f419ce06dd3ba897" class="text-secondary hover:text-base-500 text-sm">
+                                      Silver
+                                      <span class="font-semibold font-mono">
+                                        [0]
+                                      </span>
+                                    </a>
+                                </li>
+                                                              </ul>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/1e9c917e808c184d3f88c73869aa3459a623" class="text-secondary hover:text-base-500 text-sm">
+                                Accounts
+                                <span class="font-semibold font-mono">
+                                  [764]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                                <li class="has-sub"><a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/4e27161f46a83448ed4b49646420d0557b11" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                                Fraud
+                                <span class="font-semibold font-mono">
+                                  [3686]
+                                </span>
+                              </a>
+                              <ul class="border-l-2 border-base-500 bg-slate-900 hover:text-base-500">
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/4cdf96d26df9964ade689d76bf560d50499c" class="text-secondary hover:text-base-500 text-sm">
+                                      Accounts &amp; Bank Drops
+                                      <span class="font-semibold font-mono">
+                                        [678]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/7a0561c64806744f444b1de40b3b9a1f6832" class="text-secondary hover:text-base-500 text-sm">
+                                      Personal Infos
+                                      <span class="font-semibold font-mono">
+                                        [223]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/d62512c75ee74548475af00574de7fbdb801" class="text-secondary hover:text-base-500 text-sm">
+                                      Others
+                                      <span class="font-semibold font-mono">
+                                        [855]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/e1fff57f48e89444084b20c45dcd0cbf0cd1" class="text-secondary hover:text-base-500 text-sm">
+                                      CVV &amp; Cards
+                                      <span class="font-semibold font-mono">
+                                        [1266]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/fad564405a2ef5499a588435d87f302ffc5b" class="text-secondary hover:text-base-500 text-sm">
+                                      Stolen Database
+                                      <span class="font-semibold font-mono">
+                                        [174]
+                                      </span>
+                                    </a>
+                                </li>
+                                                              </ul>
+                                                                                                                <li class="has-sub"><a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/7a092bac1c96d140be1a3e7179c16246b5c8" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                                Hacking and Cybersecurity
+                                <span class="font-semibold font-mono">
+                                  [921]
+                                </span>
+                              </a>
+                              <ul class="border-l-2 border-base-500 bg-slate-900 hover:text-base-500">
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/54ff25b44395744d154abf34c88a0f47879d" class="text-secondary hover:text-base-500 text-sm">
+                                      Courses and Tutorials
+                                      <span class="font-semibold font-mono">
+                                        [204]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/6741902b1428014be2182a019f680e9382d4" class="text-secondary hover:text-base-500 text-sm">
+                                      Cybersecurity and Protection
+                                      <span class="font-semibold font-mono">
+                                        [49]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/809d9ef5687b9646576866c6e9a8328463f1" class="text-secondary hover:text-base-500 text-sm">
+                                      Hacking Tools and Equipment
+                                      <span class="font-semibold font-mono">
+                                        [161]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/a3d03541322de341f93a4ef30df9a940640a" class="text-secondary hover:text-base-500 text-sm">
+                                      Others
+                                      <span class="font-semibold font-mono">
+                                        [331]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/ec22a14a358fa3485d3aadf360f6e7a1f4ad" class="text-secondary hover:text-base-500 text-sm">
+                                      Hacking Services
+                                      <span class="font-semibold font-mono">
+                                        [102]
+                                      </span>
+                                    </a>
+                                </li>
+                                                              </ul>
+                                                                                                                <li class="has-sub"><a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/9198d3769211c94c6798cd89eb745e5cc059" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                                Guides &amp; Tutorials
+                                <span class="font-semibold font-mono">
+                                  [2568]
+                                </span>
+                              </a>
+                              <ul class="border-l-2 border-base-500 bg-slate-900 hover:text-base-500">
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/3169afeb0af6c04fe4082aa0168558f49b29" class="text-secondary hover:text-base-500 text-sm">
+                                      Others
+                                      <span class="font-semibold font-mono">
+                                        [913]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/335971c4945a494d5b998d591c4973e81331" class="text-secondary hover:text-base-500 text-sm">
+                                      Fraud
+                                      <span class="font-semibold font-mono">
+                                        [840]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/54630d4e80759845848826586b0ed88bab66" class="text-secondary hover:text-base-500 text-sm">
+                                      Social Engineering
+                                      <span class="font-semibold font-mono">
+                                        [180]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/72e1f9cd98d5a944be9b782963297aed5786" class="text-secondary hover:text-base-500 text-sm">
+                                      Drugs
+                                      <span class="font-semibold font-mono">
+                                        [44]
+                                      </span>
+                                    </a>
+                                </li>
+                                                              </ul>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/a97771562eed524f452891c25994094da0e8" class="text-secondary hover:text-base-500 text-sm">
+                                Software
+                                <span class="font-semibold font-mono">
+                                  [278]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/abac183371bfc74e467b77f79c0effa460fd" class="text-secondary hover:text-base-500 text-sm">
+                                E-Books
+                                <span class="font-semibold font-mono">
+                                  [130]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                                <li class="has-sub"><a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/b63c6f432d7da245202a67229fc3b926521e" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                                Software &amp; Hosting
+                                <span class="font-semibold font-mono">
+                                  [260]
+                                </span>
+                              </a>
+                              <ul class="border-l-2 border-base-500 bg-slate-900 hover:text-base-500">
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/56c4c1950932f04c3408b860ddecd11bd6d7" class="text-secondary hover:text-base-500 text-sm">
+                                      Hosting
+                                      <span class="font-semibold font-mono">
+                                        [1]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/6336d78f0216a04f6c0bd210fdc996cacce8" class="text-secondary hover:text-base-500 text-sm">
+                                      SOCKS
+                                      <span class="font-semibold font-mono">
+                                        [11]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/8bfc05c02ed73249a72b8e22d37f70df1b9e" class="text-secondary hover:text-base-500 text-sm">
+                                      Others
+                                      <span class="font-semibold font-mono">
+                                        [15]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/b17198b32cad9244b42bf2a28761a1cc9dca" class="text-secondary hover:text-base-500 text-sm">
+                                      Software &amp; Malware
+                                      <span class="font-semibold font-mono">
+                                        [154]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/c833e1045a60754f055a03d531e07101da7d" class="text-secondary hover:text-base-500 text-sm">
+                                      VPN
+                                      <span class="font-semibold font-mono">
+                                        [39]
+                                      </span>
+                                    </a>
+                                </li>
+                                                              </ul>
+                                                                                                              <li>
+                              <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/c54058530f4cb047310b3cf0a52b67f93c67" class="text-secondary hover:text-base-500 text-sm">
+                                Others
+                                <span class="font-semibold font-mono">
+                                  [24]
+                                </span>
+                              </a>
+                            </li>
+                                                                                                                <li class="has-sub"><a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/e95db0a228c13244932ab5521214214c5e2d" class="text-secondary hover:text-base-500 duration-[750ms] text-sm">
+                                Services
+                                <span class="font-semibold font-mono">
+                                  [326]
+                                </span>
+                              </a>
+                              <ul class="border-l-2 border-base-500 bg-slate-900 hover:text-base-500">
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/be6664ca003c104fdf088a60c714b8c118d0" class="text-secondary hover:text-base-500 text-sm">
+                                      Carding
+                                      <span class="font-semibold font-mono">
+                                        [243]
+                                      </span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/d83c89d67db9f74e5d7afa879f6ffe820988" class="text-secondary hover:text-base-500 text-sm">
+                                      Others
+                                      <span class="font-semibold font-mono">
+                                        [77]
+                                      </span>
+                                    </a>
+                                </li>
+                                                              </ul>
+                                                                              </ul>
+                                              
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center bg-gray-900 border-2 border-slate-900 rounded-xl h-12 overflow-hidden pl-3 pr-1 w-60 justify-between space-x-2 lg:mr-1">
+                                <i class="text-secondary icss-data-base-link text-md"></i>
+                <p class="text-secondary text-sm text-medium">
+                  DIGITAL MODE
+                </p>
+                <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/interest/physical/change" class="px-3 py-1.5 text-sm relative inline-flex overflow-hidden items-center justify-center cursor-pointer rounded-lg font-semibold font-mono tracking-wide leading-relaxed text-white/90 bg-slate-900 focus:ring-zinc-300 transition duration-[500ms] focus:outline-none group flex-shrink-0">
+    <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-md group-hover:w-full group-hover:h-full opacity-10"></span>
+    <span class="relative"><span class="text-xs">Change</span></span>
+</a>
+                              </div>
+            </div>
+            <form action="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/search" method="POST">
+              <input type="hidden" name="_token" value="NIAG59oCpzBr9BYIqGLUXdejeiY6u8uxw1ZDvvpE">                <div class="flex items-center bg-gray-900 border-2 border-slate-900 rounded-xl h-12 overflow-hidden pl-3 pr-1 justify-between lg:mr-1 mb-1">
+                    <div class="pointer-events-none">
+                      <i class="icss-search text-md"></i>
+                    </div>
+                    <input class="pl-1.5 w-60 bg-gray-900 text-base text-gray-400 flex-grow border-transparent focus:border-transparent focus:ring-0 " name="q" type="text" placeholder="What do you need?" />
+                    <button class="bg-slate-900 text-secondary text-base rounded-md px-4 py-1.5 font-thin">Search</button>
+                </div>
+            </form>
+            <div class="flex w-full items-center rounded-md h-12 overflow-hidden justify-center lg:justify-end">
+                <div class="flex min-h-screen items-center justify-center text-primary">
+                  <a href="http://g66ol3eb5ujdckzqqfmjsbpdjufmjd5nsgdipvxmsh7rckzlhywlzlqd.onion/d/nexus" target="_blank" class="bg-slate-800 border-2 border-slate-900 shadow-sm hover:text-base-500 duration-[750ms] rounded-md ml-1 mr-1">
+                    <div class="flex items-center justify-center relative text-center">
+                      <img class="w-10 h-10 rounded-md" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHYAAAB2CAYAAAAdp2cRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAAGYktHRAD/AP8A/6C9p5MAAAbBSURBVHhe7Z1ZbFRVGID/2TprpzN0Zzp2SmkLtAKlUIoKggTDEkiM8QFjeDE+mJhoNEZjNEYTH3wwPhifiE8mPvGghhASTHgAN7TIJqJdWKQLXZjue6fe/+aQYBAzc2buPXP+/l8ymfsfEob249w55z//Oddx9PCJJWDI4RTvDDFYLFFYLFFYLFFYLFFYLFFYLFFYLFFYLFFYLFFYLFFYLFFYLFFYLFFYLFFYLFFYLFFYLFG4NCYNPD4X7H61GVY2FsPM+LxoTQ+P3wXjg9Nw85c70H6sQ7RaD/fYNHA4neAv8oLT7YRA1JvRy+NzQzDqA2/II/42e2CxabC0tGS+ZFlKLUFq0d4bI4slCoslCoslCoslCoslCoslCoslCoslCoslCoslCoslCoslCoslCoslCoslCoslCoslCotNG4d41wMWmwYLs4vGa0FEekCqStHtdUGo2AehEj/4wgVmIZnDafS0LOqVFudT4PG7oXFvAgpL/aI1M2bG5qDz+1746cs/RIv16C3WcBaNhSC2vgTK66OwIl4IvkJDqCHC6cqfWyeLTROXxwmJLeVQv6MKyhuiZk/NZ1SI1e47tqa1Ag59sA12vbLR7Kn5LlUV2oiNrAzCvre3wO7XmqE4ERatzMPQQuzq7TE49OFjZg9l0iPvxbY8Vwc7X14PBQG3aGHSIW/F4jTliReboPmZ1aKFyYS8Fbv9pSZYszsuIiZT8lJs2wtrof7JKhExMuSd2DVPxaFpf0JEjCx5JbZsdQRan28QEZMNeSMWU4BtR9Yao197NwhTJW/ENu2vMXtsLpkZn4M7fyWh80wPXDl5Ay4fv26+d57tNdvxz6mSF7liXDXZ/+5W6dWT+8Gd47cvDUL3j33Qfy0JU8mZ/9xNjneIQNQHpbVFsKqtEh7ZVGbmoK1g2S4CbHq2znhlP1/t/X0Yzh/rgP4/k6IlfTBNif+O6pYy0ZI7luUiQLDYBw27spvaYI/8+atrcOKjc1JSkeEbY3Dqk3Y4/flFErdo5WLjG0ohuMInosxJLaTg9GcXzO/PXNBl9KyTH/9q3MJnRYueKBWLacNEa4WI5Dhz9ApcP9cvotww1D0K3316Huan9SqHuR+lYosqg2blgyx4IFaHMeK1goHOETj7xRUR6YdSsSvXrTBPPZOh7+pwzm6/D6Prhz64euqWiPRCmVg8qaysTr63XvimGxbmFkVkHZePd5ujWt1QJrawNADReEhEmdFzaQh6Lg+JyFrwHMSOs9bc7q1EmdhIVQgCRV4RZcbN9jviyh5unR8A0KzkT5nYcJkfCoKZ54WnR2aN3josInsY7BqFga4REemBMrGYzpNJ4eGtcbR/UkT2gDsBkrcnRKQHysRiYbcMI332Sr3HmKLPlUWZWKzWl2E6OSOu7GVas5GxMrHuArmPnptSkw2an9ErC6VMrNMl99G4SUoF+Ll2HyadDcrEyp7Y7XSr2WyF67dO3LmnCcrEyvY8j19N6QxuydRp77MysQszculAf1huNJ0t3kK9arGUiZ2dkBtlhisC4spewuVBcaUHysROjc6ZT7fIlHB5APwRuVRkNkRjLDYtJganpKYueAwBLvfZSUlNGIoTRSLSA2Vikz0T0rVF8ebcF5z9H5WNxdrt9lMmdrR3EkYMuTIkNpebZaN2gKnP+u0xEemDMrHYW7H8RAY8nmDdnmoRWUvt45UQjReKSB+UicUsDtYBy85n63bE4NEDNSKyhkgsBBsP1YpIL5QWjGM2Z4Pxi8PaYiwjzQTstVMjs3Dh6y5zWS3X4CLF3rc2Z1Vsdw8+DihDsHx11dYKc+qExW25AteJ8bGiuO0jF/BxQBmC8+ASYxC15/VNxpQkN4MpzGzteaMlZ1JVobVYZNrorTgV2ffOFmjcW53VxqpqY7R94L2tUEXgdBrtxd7DG/TAtiPr4OD7bdCwsyrteSc+7Bd759Nvtpg9HwdMFND6OxZZf3AVtB5+cBc81kb1X7sLd2+Nw1j/pDG9modFY4CGS284N8Wcc7QqZNY2444EK89e5MGTBA8T+y+MnzC1mDIPQXUY/hyGRAde2AQPnqzCcIi3XPz+xXc7papieYhdhrBYorBYorBYorBYorBYorBYorBYomgv1spUoM5oL/b2pSHzOKDJu2p24aWDq8ApfYiKLNrnihHstVhvXFIbMZ/2gedbBCIF5kmqmELM5klZ2eL2uc3/dH//NgAXv+0WrdZDQizzIDx4IgqLJQqLJQqLJQqLJQqLJQqLJQqLJQqLJQqLJQqLJQqLJQqLJQqLJQqLJQqLJQqLJQnAP0n/9o/1pDj/AAAAAElFTkSuQmCC" />
+                    </div>
+                  </a>
+                  <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/account/tickets" class="bg-slate-800 border-2 border-slate-900 shadow-sm hover:text-yellow-500 duration-[750ms] rounded-md px-1.5 pt-1.5 pb-0.5 ml-1" title="Support/Tickets">
+                    <div class="flex items-center justify-center relative text-center">
+                                            <i class="icss-headset text-xl"></i>
+                                          </div>
+                                        <div class="w-10 mx-auto bg-secondary opacity-25 h-0.5 px-4 mt-1.5 mb-0.5"></div>
+                                      </a>
+                  <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/account/messenger" class="bg-slate-800 border-2 border-slate-900 shadow-sm hover:text-base-500 duration-[750ms] rounded-md px-1.5 pt-1.5 pb-0.5 ml-1" title="Messenger">
+                    <div class="flex items-center justify-center relative text-center">
+                                            <i class="icss-chat text-xl"></i>
+                                          </div>
+                                        <div class="w-10 mx-auto bg-secondary opacity-25 h-0.5 px-4 mt-1.5 mb-0.5"></div>
+                                      </a>
+                  <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/account/notifications/open" class="bg-slate-800 border-2 border-slate-900 shadow-sm hover:text-base-500 hover:text-base-500 duration-[750ms] rounded-md px-1.5 pt-1.5 pb-0.5 ml-1" title="Notifications">
+                    <div class="flex items-center justify-center relative">
+                                            <i class="icss-bell text-xl"></i>
+                                          </div>
+                                        <div class="w-10 mx-auto bg-secondary opacity-25 h-0.5 px-4 mt-1.5 mb-0.5"></div>
+                                      </a>
+                  <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/cart" class="bg-slate-800 border-2 border-slate-900 shadow-sm hover:text-base-500 duration-[750ms] rounded-md px-1.5 pt-1.5 pb-0.5 ml-1" title="Cart">
+                    <div class="flex items-center justify-center relative">
+                                            <i class="icss-shopping-cart text-xl "></i>
+                                          </div>
+                                        <div class="w-10 mx-auto bg-secondary opacity-25 h-0.5 px-4 mt-1.5 mb-0.5"></div>
+                                      </a>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+    <div class="mt-2 px-6 2xl:container 2xl:mx-auto">
+        
+      </div>
+
+        
+        <div class="px-6 2xl:container 2xl:mx-auto mb-10 mt-1">
+            <div class="mx-auto pb-6 mt-4">
+  <div class="md:flex md:space-x-4">
+    <div class="w-full md:w-2/6">
+      <div class="image-gallery w-full mb-4">
+                <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/storage/images/products/0qqan6bxUKYb0TZjf0dLQx6wI44510VktepZRtNicj0MyRUL4CoVoP5.jpg" class="image-box" style="background-image: url(http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/storage/images/products/lc/0qqan6bxUKYb0TZjf0dLQx6wI44510VktepZRtNicj0MyRUL4CoVoP5.jpg);" target="_blank"></a>
+                                              <div class="image-box cursor-pointer mx-auto bg-slate-800 flex justify-center items-center">
+            <i class="icss-image text-4xl text-secondary border-slate-900 opacity-50"></i>
+          </div>
+                    <div class="image-box cursor-pointer mx-auto bg-slate-800 flex justify-center items-center">
+            <i class="icss-image text-4xl text-secondary border-slate-900 opacity-50"></i>
+          </div>
+                    <div class="image-box cursor-pointer mx-auto bg-slate-800 flex justify-center items-center">
+            <i class="icss-image text-4xl text-secondary border-slate-900 opacity-50"></i>
+          </div>
+                        </div>
+      <div class="flex flex-col space-y-3 bg-slate-900 p-4 w-full rounded-lg">
+        <h1 class="text-lg font-semibold text-primary">Bulk prices</h1>
+                  <p class="text-secondary">
+            Not available for this product
+          </p>
+              </div>
+    </div>
+    <div class="w-full md:w-4/6">
+      <div class="md:flex md:justify-between md:space-x-4 mt-4 md:mt-0">
+        <div class="w-full md:w-4/6">
+                                                    <form action="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/cart/add/3c40617f0fd7504b4d0b7bd04eb05f5ecbef" method="POST">
+            <input type="hidden" name="_token" value="NIAG59oCpzBr9BYIqGLUXdejeiY6u8uxw1ZDvvpE">            <h1 class="text-primary text-2xl title-font font-medium mb-2">Kung Fu Tea Accounts</h1>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center overflow-x-auto whitespace-nowrap text-sm text-secondary">
+      <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/182a339b72c1974c2578dd77827886046143" class="hover:text-base-500 duration-[750ms]">
+      Digital
+    </a>
+    <span class="mx-2">
+        <i class="icss-quotation-l text-xs"></i>
+    </span>
+    
+    <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/products/1e9c917e808c184d3f88c73869aa3459a623" class="hover:text-base-500 duration-[750ms]">
+      Accounts
+    </a>
+  </div>                          </div>
+            <dl class="grid grid-cols-1 gap-0.5 overflow-hidden rounded-md text-center sm:grid-cols-2 lg:grid-cols-3 mb-0.5">
+              <div class="flex flex-col border bg-slate-900 border-slate-900 p-2">
+                <dt class="text-xs font-semibold leading-6 text-secondary">Unit Price</dt>
+                <dd class="order-first text-sm font-semibold tracking-tight text-green-500">11.00 <span class="text-primary">USD</span></dd>
+              </div>
+              <div class="flex flex-col border bg-slate-900 border-slate-900 p-2">
+                <dt class="text-xs font-semibold leading-6 text-secondary">Unit</dt>
+                <dd class="order-first text-sm font-semibold tracking-tight text-primary">item</dd>
+              </div>
+              <div class="flex flex-col border bg-slate-900 border-slate-900 p-2">
+                <dt class="text-xs font-semibold leading-6 text-secondary">Minimum quantity</dt>
+                <dd class="order-first text-sm font-semibold tracking-tight text-primary">1</dd>
+              </div>
+              <div class="flex flex-col border bg-slate-900 border-slate-900 p-2">
+                <dt class="text-xs font-semibold leading-6 text-secondary">In stock</dt>
+                <dd class="order-first text-sm font-semibold tracking-tight text-primary">
+                                      324233
+                                  </dd>
+              </div>
+              <div class="flex flex-col border bg-slate-900 border-slate-900 p-2">
+                <dt class="text-xs font-semibold leading-6 text-secondary">Payments accepted</dt>
+                <dd class="order-first text-sm font-semibold tracking-tight text-primary flex justify-center space-x-4">
+                  <img class="w-6 h-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAARVBMVEVHcEz2kxr2kxr4kxr/lBb3kxn4lRn3kxr3kxr3kxr3kxn2khn3lBr3kxr////4min6sFj948P/+/b7w4D+8N7806H4ozvEiQ97AAAADXRSTlMAG1WKC5gm98rpg0Hi/gFriwAAAS1JREFUOMuFU+22hCAItMzKzip+v/+jXrIUat1z+VMJMcM4CNFjmdWujdG7mhfxHZPcTI9Nre/8wdK1RD66TLv5in2i/KrNID7rKO8Kveu7x8L7p2BchIZyFcj+N5hivfG2FZijAjT+xdrkbQabaJYTRLWv4oPFCNikh0QGTIBor0iut1jEbB4FHpzHktiOZkLAwFTGR0acdqQEnxE5uBuJJuUinb1dccnSIFoMOCICseQFJ4VYZ3WkBIe4KIDnHT6dJFQKJzcI1zA3yTZmDnheNQTLClQTCi6ZfY4xPYXqUruaubUGkppuG72AMp+dfCEE9CNdd/UCME9t1XVHw0iRe6EbRrDrgBwfxr6tPw1NTab9ZXvNtmv9Z3HQePK9esd7OVfFl1dOg/0er/8ftDoqhU0qu4sAAAAASUVORK5CYII=" title="Bitcoin">
+                  <img class="w-6 h-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAUVBMVEXzYgTzYQPzYQNJSUnzYgNKSkpJSUlHcEx+UTzzYQTyYgDzYgPwYQfzYgJJSUlISEjxYQZKSkpJSUlKSkrzYQNJSUm6WiL0YgXzYQRJSUlKSkpnhfquAAAAGnRSTlP/y+fpjLW7AAesE5siVs0eJZZ9uYBTKC+tLbvA37QAAAEUSURBVDjLddNbsoMgEATQ4SUjRFFvrNy4/4WGp4OI/REt+kSQQtBnzGQZB+DMToZGodwsFqrYpQEooYnEGiwMbmGGwIdDJ/xTwNLtvTAJIIOHMIxAwmPeASz+Zuwg+e9/jAfh/cf7Y6Qew35oMBBBK6SOABCmDK7C9wlMYAuoRegTsMBOQCL2CTDgBIp4awJ5DzNIQuoKAIENkwj/x42ecE6hhihiPygC5yLV8ZePAKpD0SIlgSx8T0DSRvnhKEJPYAJ8+ZgMvIh9BCY0eB7aBA6VL/dTnUHOBexDjKiBSGN7OnLz8ZA5HTntRL8Xrqzh2xXiS4t0nVlmd/n0trbfsHlNt1bziNXd90Hjvs4eiXndkUZ/Pz0gwCeBrdwAAAAASUVORK5CYII=" title="Monero">
+                  <img class="w-6 h-6" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAVFBMVEVHcEw5SKo4Sqs5SKs5R6s4Saw5Sas4SKo4SKo5Sas4SKv////p6/XP0eW8weCnrNSNlMdyfL9YYas5Sas2Rqc3RaIxQKEtOpkoNJIjL4wfKoYaI3/TefWIAAAAC3RSTlMAEidXWYeYnMro94FuVZsAAAE0SURBVHjabZNXFoQgDEXFQosFERvsf58DikAc35/nXkkIUOWQlnEhpeC0IdV/aiaXFMnqN+8iTkqHf+fLXzgpuFg+ImrEvwwSBbT+rIsqsb+Sa4DZpK/uKoD6VwCrTYYMRRiqO0LvXDaon59EAsDknDtNXqJFfAbQXrDJaF4VJoDTc2uPaFC8R9PDoOdpsOd5PDsVZQEFd1Yv7PewKvnAsYeYflzP47gNmQQVodL76f8PQjBkKqH7UWmAydrE982XyE0eznlBJx6EzTdJl2wogAPxzdCqWbIxwID5atpy1BpAvXg4LVaepMbcMHTcI+RMF5c1ujA9EjxfOnTltCoyB86fJxWHtT3zCfFckPe1NmV/4dqnEB6NgnPy9fTMw8PTwyFUXsbF0+PFSkO5kEZw1har/wBlWDnD7o5nIwAAAABJRU5ErkJggg==" title="Litecoin">
+                </dd>
+              </div>
+              <div class="flex flex-col border bg-slate-900 border-slate-900 p-2">
+                <dt class="text-xs font-semibold leading-6 text-secondary">Payment option</dt>
+                                                    <dd class="order-first text-sm font-semibold tracking-tight">
+                                      <span class="text-green-500">Escrow</span>
+                                      </dd>
+                              </div>
+            </dl>
+                        <p class="text-primary font-medium mb-4">
+              Shipped automatically
+                              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-red-400 border-red-400 text-xs font-semibold border">
+    No
+</span>                          </p>
+            
+            <div class="sm:flex sm:items-end sm:space-x-4">
+                            <div class="w-full sm:w-2/12">
+                <label class="block mb-2 text-xs font-medium text-secondary" for="qty">
+    Quantity*
+</label>
+                <input  class="bg-slate-900 px-2.5 py-2 text-sm w-full placeholder:text-secondary placeholder-opacity-50 transition duration-[750ms] border border-secondary/20 focus:border-secondary/50 text-primary rounded-md focus:ring-0" id="qty" type="number" name="qty" value="1" min="1">              </div>
+                            <div class="w-full sm:w-5/12 mt-3 sm:mt-0">
+                <button class="px-3 py-1.5 text-sm relative inline-flex overflow-hidden items-center justify-center cursor-pointer rounded-lg font-semibold font-mono tracking-wide leading-relaxed text-green-900 bg-gradient-to-r from-green-500 to-green-600 bg-green-500  focus:ring-green-300 focus:outline-none group w-full" type="submit">
+    <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-md group-hover:w-full group-hover:h-full opacity-10"></span>
+    <span class="relative"><i class="icss-shopping-cart"></i>
+                  Add to Cart</span>
+</button>
+              </div>
+              
+            </div>
+          </form>
+        </div>
+        <div class="w-full md:w-2/6 mt-4 md:mt-0">
+          <div class="relative">
+            <div class=" border-2 border-slate-900 relative shadow rounded-xl w-full relative mt-8">
+              <div class="flex justify-center relative ">
+                                <div class="flex-shrink-0 w-16 h-16 mx-auto absolute -top-8" tooltip="At this moment CyberGhost is offline" flow="left">
+                  <div class="bg-gray-900 w-full h-full rounded-lg ring-4 ring-opacity-20 ring-gray-200 flex justify-center items-center">
+                    <i class="icss-image text-xl text-secondary border-slate-900 opacity-50"></i>
+                  </div>
+                </div>
+                              </div>
+              
+              <div class="mt-12">
+                <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/@CyberGhost/d287ecf46d62664b4e68700685ed7eb33ac3"><h1 class="font-semibold text-center text-xl text-lime-500">CyberGhost</h1></a>
+                <div class="my-2">
+                  <p class="text-sm text-center text-secondary font-light">Last activity: <span class="font-normal italic text-primary">A few hours ago</span></p>
+                </div>
+                                <div class="my-4 px-3">
+                  <label class="px-5 py-2 text-sm relative inline-flex overflow-hidden items-center justify-center cursor-pointer rounded-lg font-semibold font-mono tracking-wide leading-relaxed text-white/90 bg-slate-900 focus:ring-zinc-300 transition duration-[500ms] focus:outline-none group w-full" for="contact-d287ecf46d62664b4e68700685ed7eb33ac3">
+    <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-md group-hover:w-full group-hover:h-full opacity-10"></span>
+    <span class="relative"><i class="icss-comment-o"></i>
+                    Message</span>
+</label>
+                  <input type="checkbox" name="modal_state" id="contact-d287ecf46d62664b4e68700685ed7eb33ac3" class="modal_state hidden">
+<div class="modal_bg flex justify-center items-center fixed top-0 bottom-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-100 max-h-full">
+  <div class="relative w-full max-w-lg max-h-full">
+    <div class="relative bg-slate-800 p-4 rounded-md shadow-lg shadow-base-500/10">
+      <div class="flex items-center justify-between rounded-t text-lg">
+                  <h3 class="font-semibold text-primary">
+            Open conversation
+          </h3>
+                <label class="text-gray-400 bg-transparent hover:text-red-500 rounded-lg ml-auto inline-flex items-center cursor-pointer" for="contact-d287ecf46d62664b4e68700685ed7eb33ac3">
+          <i class="icss-x"></i>
+        </label>
+      </div>
+      <form action="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/account/messenger/conversation/create/d287ecf46d62664b4e68700685ed7eb33ac3" method="POST">
+        <input type="hidden" name="_token" value="NIAG59oCpzBr9BYIqGLUXdejeiY6u8uxw1ZDvvpE">                <input type="hidden" name="product" value="3c40617f0fd7504b4d0b7bd04eb05f5ecbef">
+                <div class="py-4 text-center text-lg">
+          <textarea  class="bg-slate-900 w-full placeholder:text-secondary placeholder-opacity-50 p-4 text-base placeholder:text-secondary placeholder-opacity-50 transition duration-[750ms] border border-secondary/20 focus:border-secondary/50 text-primary rounded-md focus:ring-0" rows="6" placeholder="Your message..." name="message"></textarea>        </div>
+        <div class="flex justify-center items-center space-x-4 rounded-b mt-4">
+          <label class="px-5 py-2 text-sm relative inline-flex overflow-hidden items-center justify-center cursor-pointer rounded-lg font-semibold font-mono tracking-wide leading-relaxed text-white/90 bg-slate-900 focus:ring-zinc-300 transition duration-[500ms] focus:outline-none group" for="contact-d287ecf46d62664b4e68700685ed7eb33ac3">
+    <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-md group-hover:w-full group-hover:h-full opacity-10"></span>
+    <span class="relative"><i class="icss-x"></i>
+            Close</span>
+</label>
+          <button class="px-5 py-2 text-sm relative inline-flex overflow-hidden items-center justify-center cursor-pointer rounded-lg font-semibold font-mono tracking-wide leading-relaxed text-sky-900 bg-gradient-to-r from-sky-400 to-sky-500 bg-green-400 focus:ring-sky-300 focus:outline-none group" name="action" value="accept">
+    <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-md group-hover:w-full group-hover:h-full opacity-10"></span>
+    <span class="relative"><i class="icss-paper-plane"></i>
+            Submit</span>
+</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>                </div>
+                                <div class="my-4 px-3">
+                  <dl class="grid grid-cols-1 gap-0.5 text-center sm:grid-cols-2 lg:grid-cols-4 bg-slate-900 rounded-xl mb-2">
+                    <div class="flex flex-col border border-slate-900 rounded-xl p-2">
+                      <dt class="text-xs font-semibold leading-6 text-secondary">Sales</dt>
+                      <dd class="order-first text-sm font-semibold tracking-tight text-primary">107</dd>
+                    </div>
+                    <div class="flex flex-col border border-slate-900 rounded-xl p-2" tooltip="Historical sales" flow="up">
+                      <dt class="text-xs font-semibold leading-6 text-secondary">H. Sales</dt>
+                      <dd class="order-first text-sm font-semibold tracking-tight text-primary">749</dd>
+                    </div>
+                    <div class="flex flex-col border border-slate-900 rounded-xl p-2">
+                      <dt class="text-xs font-semibold leading-6 text-secondary">Rating</dt>
+                      <dd class="order-first text-sm font-semibold tracking-tight text-primary">3.2</dd>
+                    </div>
+                    
+                    <div class="flex flex-col border border-slate-900 rounded-xl p-2">
+                      <dt class="text-xs font-semibold leading-6 text-secondary">Level</dt>
+                      <dd class="order-first text-sm font-semibold tracking-tight text-primary">2</dd>
+                    </div>
+                  </dl>
+                  <p class="text-secondary text-center text-xs font-light text-opacity-70 hover:text-opacity-100 duration-[550ms]">Does the vendor not follow the rules? <a href="" class="font-normal hover:text-red-400">Report it</a>!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-main text-secondary mt-6">
+  <span id="refund-policy" class="tab-target"></span>
+  <a href="#refund-policy" class="tab">
+    <span class="mr-1">
+      <i class="icss-gavel"></i>
+    </span> Refund policy
+  </a>
+  <div id="refund-policy-data" class="tab-content p-6 rounded-lg bg-slate-800 my-4">
+    <p class="whitespace-pre-line">IMPORTANT
+Terms & Conditions:
+- PM if something goes wrong before opening dispute, if FE is running out feel free to open dispute and of course i'll manage the situation but if you dont ask first you'll be blacklisted instantly
+- Dead cards report within 6-8 hours and checking proof, upload images and live videos to anonfiles or linx.do, videos and images must show your fraud score, ip address and city and in the same video you must show the checking proof too (To check use paypal, spotify, google pay or chipotle if you use checkers i wont replace) the reason why i need live videos where you are checking is to avoid buyers trying to scam market and vendors, if you dont provide any of these there wont be chance to refund or replacement and once you purchase you agree to my terms and conditions
+- Steam accounts are not refundable or can't be replaced i always make sure theyre live before delivering if account dies ill cancel the order or contact admins myself to cancel the order because i have completely access to those accounts so i can guarantee if account is dead or live
+- Replacement for Fullz with wrong info report within 6-8 hours and proof
+- Digital items are not refundable unless links are not working ill provide new link
+- Bank logs 100% WORKING, no refundable - 6 hours to check and replacement
+- I don't guarantee 2FA accounts
+- PayPal Accounts Check withing 6 Hours for replacement in case not working - Replacement can be replaced only once you can also ask for replacement if account got less than $300 left - upload images and live videos to anonfiles or linx.do, videos and images must show your fraud score, ip address and city and in the same video you must show the checking and login proof too, the reason why i need live videos where you are checking and logging is to avoid buyers trying to scam market and vendors, if you dont provide any of these there wont be chance to refund or replacement and once you purchase you agree to my terms and conditions</p>
+  </div>
+
+    <span id="reviews" class="tab-target"></span>
+  <a href="#reviews" class="tab">
+    <span class="mr-1">
+      <i class="icss-star"></i>
+    </span> Reviews <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-primary border-slate-900 text-xs font-semibold border ml-1">
+    0
+</span>  </a>
+  <div id="reviews-data" class="tab-content rounded-lg my-4">
+        <div class="flex items-center h-full">
+      <div class="flex flex-col items-center justify-center px-5 mx-auto my-10 space-y-8 text-center">
+        <i class="icss-star text-5xl text-secondary opacity-25"></i>
+        <p class="text-2xl font-light text-primary opacity-75">There are no reviews for this product yet...</p>
+      </div>
+    </div>
+      </div>
+  
+  <span id="description" class="tab-target"></span>
+  <a href="#description" class="tab">
+    <span class="mr-1">
+      <i class="icss-scroll"></i>
+    </span> Description
+  </a>
+  <div id="description-data" class="tab-content p-6 rounded-lg bg-slate-800 my-4">
+    <p class="whitespace-pre-line">ONLY BUY IF YOU KNOW WHAT YOU’RE DOING
+Replacements are very limited for this and all products
+
+Method is very self explanatory here but it’s still recommended for knowledge
+
+Use clean IP only (LTE)
+Private tab in a private browser e.g duckduckgo</p>
+  </div>
+</div>
+        </div>
+   
+        <footer class="mt-auto px-6 2xl:container 2xl:mx-auto text-secondary">
+  <div class="border-b-2 border-slate-900 pb-6 mt-8">
+    <div class="flex flex-col md:flex-row justify-center bg-slate-800 items-center border-2 border-slate-900 rounded-xl md:border-opacity-70 py-3">
+      <div class="pr-6 mb-4 md:mb-0">
+        <span class="self-center text-xl font-light whitespace-nowrap text-primary ">You can also find us on</span>
+      </div>
+      <div class="flex items-center justify-center md:justify-start md:border-l-2 border-slate-900">
+        <div class="md:pl-6">
+          <ul class="font-medium text-center md:text-left">
+            <li class="mb-2">
+              <a href="https://tor.link/site/nexus-market/info" target="_blank" class="hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] text-[#4eb139]">Tor.link</a>
+            </li>
+            <li>
+              <a href="https://torhoo.com/reviews/nexus-market/" target="_blank" class="hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] text-[#8040bf]">Torhoo!</a>
+            </li> 
+          </ul>
+        </div>
+        <div>
+          <ul class="text-secondary font-medium text-center md:text-left">
+            <li class="mb-2">
+              <a href="http://dntrustmuq5ccf3lygrnhsprpdliakq7r2ljsspczmdsslj5wl4teeid.onion" target="_blank" class="ml-6 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6">DarkNet Trust</a>
+            </li>
+            <li>
+              <a href="http://darkeyepxw7cuu2cppnjlgqaav6j42gyt43clcn4vjjf7llfyly5cxid.onion/hs/nexus-market.html" target="_blank" class="ml-6 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6">Dark Eye</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul class="text-secondary font-medium text-center md:text-left">
+            <li class="mb-2">
+              <a href="https://tor.fish" target="_blank" class="ml-6 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6">Tor.Fish</a>
+            </li>
+            <li>
+              <a href="https://darkdotnet.com/nexus-market/" target="_blank" class="ml-6 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6">DarkDotNet</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul class="text-secondary font-medium text-center md:text-left">
+            <li class="mb-2">
+              <a href="https://darkweblink.com/top-darknet-markets/nexus-market" target="_blank" class="ml-6 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6">Darkweblink</a>
+            </li>
+            <li>
+              <a href="https://dump.li" target="_blank" class="ml-6 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6">dump.li</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul class="text-secondary font-medium text-center md:text-left">
+            <li class="mb-2">
+              <a href="https://dark.contact" target="_blank" class="ml-6 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6">dark.contact</a>
+            </li>
+            <li>
+              <a href="https://darkipedia.net" target="_blank" class="ml-6 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6">Darkipedia</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="flex mt-6 flex-col-reverse md:flex-row justify-between">
+      <ul class="flex flex-col md:flex-row items-center justify-center text-primary mt-4 md:mt-0">
+        <li class="md:border-r border-slate-900 text-center md:text-left">
+          <span class="font-semibold text-primary text-opacity-70 hover:text-opacity-100 duration-[750ms] md:mr-4">13-04-2024 19:49:20 UTC</span>
+        </li>
+        <li class="text-center md:text-left">
+          <a href="https://www.drugusersbible.com/2018/01/pdf.html" target="_blank" class="hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-4 text-primary font-bold flex items-center space-x-2">
+            <i class="icss-book"></i>
+            <span>THE DRUG USERS BIBLE</span>
+          </a>
+        </li>
+      </ul>
+      <div>
+        <ul class="flex flex-wrap items-center justify-center text-primary">
+          <li>
+            <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/support" class="ml-4 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6 ">Support</a>
+          </li>
+          <li>
+            <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/faq" class="ml-4 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6 ">FAQ</a>
+          </li>
+          <li>
+            <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/rules" class="ml-4 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6">Rules</a>
+          </li>
+          <li>
+            <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/market-pgp.txt" target="_blank" class="ml-4 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6 ">PGP</a>
+          </li>
+          <li>
+            <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/mirrors.txt" target="_blank" class="ml-4 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6 ">Mirrors</a>
+          </li>
+          <li>
+            <a href="http://nexusabcdkq4pdlubs6wk6ad7pobuupzoomoxi6p7l32ci4vjtb2z7yd.onion/canary.txt" target="_blank" class="ml-4 hover:underline decoration-dashed decoration-base-500 underline-offset-4 duration-[750ms] md:ml-6">Canary</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="flex items-center justify-center mt-4 mb-4">
+      <span class="text-sm text-secondary sm:text-center">Born: <span class="text-green-500 font-semibold">143 days ago</span>
+      </span>
+  </div>
+</footer>
+    </body>
+</html>
