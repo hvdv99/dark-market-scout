@@ -59,6 +59,7 @@ class Crawler:
         self.request_timing = 'constant'
         self.captcha_detector = CaptchaDetector()
         self.synchronize = True
+        self.captcha_detected_counter = 0
 
     def set_cookies(self, cookies: list):
         """Method that sets the cookies that will be used for sending requests. A cookie can be obtained by creating a
@@ -436,7 +437,7 @@ class Crawler:
 
         try:
             # start crawling until exit condition was reached
-            while self.queue and self._check_max_pages():
+            while self.queue and self._check_max_pages() and self.captcha_detected_counter <= 10:
                 url = self.queue.popleft()
                 hashed_url = self._hash_url(url)  # later needed for logging network information
 
@@ -450,6 +451,7 @@ class Crawler:
 
                 # Check if the page is a captcha
                 if self.captcha_detector.detect_captcha(web_page.text):
+                    self.captcha_detected_counter += 1
                     logging.info('Captcha Detected ')
                     # save file to captcha training data
                     new_captcha_page = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + ' ' + \
