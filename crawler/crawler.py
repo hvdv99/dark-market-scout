@@ -1,5 +1,6 @@
 import bs4
 from fake_useragent import UserAgent
+import pytz
 import requests
 from requests.exceptions import Timeout
 from bs4 import BeautifulSoup
@@ -334,8 +335,9 @@ class Crawler:
             # Some Python-pro knowledge: In the case that the file not exists, the second condition will not be
             # evaluated this is beneficial, because if this was not the case, os.marketplace_dir.getmtime
             # would throw an error!
-            if not os.path.exists(local_file_path) or (datetime.timestamp(blob.updated.replace(tzinfo=timezone.utc)) >
-                                                       os.path.getmtime(local_file_path)):
+            if not os.path.exists(local_file_path) or (blob.updated >
+                                                       datetime.fromtimestamp(os.path.getmtime(local_file_path),
+                                                                              tz=pytz.UTC)):
                 # Ensure the local directory structure exists
                 os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
 
