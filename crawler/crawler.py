@@ -467,12 +467,10 @@ class Crawler:
                     if not self.cookies:
                         raise CaptchaDetectedError('The Crawler detected a page with captcha and stopped crawling')
 
-                    # insert some waiting time in between each request
-                    if self.request_timing_behaviour == 'constant':
-                        time.sleep(self.request_interval)  # time between each request
-                    elif self.request_timing_behaviour == 'random':
-                        time.sleep(random.randint(0, self.request_interval))
+                    # put url back in queue
+                    self.queue.appendleft(url)
 
+                else:
                     # Update the visited pages
                     self.visited.add(url)
 
@@ -502,8 +500,15 @@ class Crawler:
                     for new_url in new_urls:
                         if new_url not in self.queue and new_url not in self.visited:
                             self.queue.append(new_url)
-                    else:
-                        logging.debug('URL: {} has already been scraped!'.format(url))
+                        else:
+                            logging.debug('URL: {} has already been scraped!'.format(url))
+
+                    # insert some waiting time in between each request
+                    if self.request_timing_behaviour == 'constant':
+                        time.sleep(self.request_interval)  # time between each request
+                    elif self.request_timing_behaviour == 'random':
+                        time.sleep(random.randint(0, self.request_interval))
+
             else:
                 _write_network_data(file_location=network_data_file_loc,
                                     file_data=network_data)  # writing when everything went fine
