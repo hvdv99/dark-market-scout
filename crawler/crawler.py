@@ -9,7 +9,7 @@ from google.oauth2 import service_account
 
 import os
 import time
-from datetime import datetime, timezone
+from datetime import datetime
 import random
 import logging
 import sys
@@ -44,8 +44,7 @@ class Crawler:
         self.proxies = {'http': 'socks5h://localhost:9050',
                         'https': 'socks5h://localhost:9050'}
         self.max_pages_to_crawl = None
-        self.request_interval = 1  # the time between each request
-        self.request_timing_behaviour = 'constant'  # defaults to constant, see: set_request_timing_behaviour()
+        self.request_waiting_time = None  # the time between each request
         self.ua_behaviour = 1
         self.user_agent = None
         self.visited = set()
@@ -55,8 +54,6 @@ class Crawler:
         self.resource_path = str()  # the marketplace directory from the repo root
         self.seed = str()
         self.exit_condition = bool()
-        self.request_interval = 1
-        self.request_timing = 'constant'
         self.captcha_detector = CaptchaDetector()
         self.synchronize = True
         self.captcha_detected_counter = 0
@@ -91,20 +88,32 @@ class Crawler:
         else:
             self.max_pages_to_crawl = max_pages
 
-    def set_request_interval(self, new_interval: int):
-        if not isinstance(new_interval, int):
-            raise TypeError('Interval should be of type integer')
-        if new_interval < 0:
-            raise ValueError('Interval should be positive or zero')
-        self.request_interval = new_interval
+    def set_request_timing(self, waiting_time: int | tuple):
+        # Validate that the input is either an integer or a tuple
+        if not isinstance(waiting_time, (int, tuple)):
+            raise TypeError('Time should be either an integer or a tuple of two integers')
 
-    def set_request_timing_behaviour(self, new_timing_behaviour: str):
-        timing_types = {'constant', 'random'}
-        if not isinstance(new_timing_behaviour, str):
-            raise TypeError('Timing should be of type string')
-        if new_timing_behaviour not in timing_types:
-            raise ValueError('Timing should either be constant or random')
-        self.request_timing_behaviour = new_timing_behaviour
+        # Handle the cases based on input type
+        if isinstance(waiting_time, int):
+            # Ensure the integer is non-negative
+            if waiting_time < 0:
+                raise ValueError('Time interval as integer should be non-negative')
+            self.request_waiting_time = waiting_time
+        elif isinstance(waiting_time, tuple):
+            # Ensure the tuple contains exactly two integers
+            if len(waiting_time) != 2:
+                raise ValueError('Time tuple should contain exactly two integers')
+            lower, upper = waiting_time
+
+            # Ensure both elements are integers
+            if not isinstance(lower, int) or not isinstance(upper, int):
+                raise TypeError('Both elements of the tuple must be integers')
+
+            # Ensure the upper bound is greater than the lower bound
+            if upper <= lower:
+                raise ValueError('Upper bound should be greater than lower bound')
+
+            self.request_waiting_time = (lower, upper)
 
     def set_user_agent_behaviour(self, new_ua_behaviour: int):
         """
@@ -209,7 +218,6 @@ class Crawler:
         # if _check_for_queue(web_page):
         #     logging.info('Crawler in queue, waiting 30 seconds')
         #     cookie = web_page.headers.get('Set-Cookie')
-        #     # TODO - Try if it works with only dcap cookie
         #     time.sleep(30)
         #     new_header = {'Cookie': cookie, 'User-Agent': self.user_agent}
         #     web_page = requests.get(url, headers=new_header, proxies=self.proxies)
@@ -315,9 +323,9 @@ class Crawler:
                     blob = bucket.blob(relative_path)
                     blob.upload_from_filename(local_file)
                     print(f"Uploaded {local_file} to {relative_path}")
-                elif os.path.getmtime(local_file) > datetime.timestamp(blob.updated.replace(tzinfo=timezone.utc)):
+                elif datetime.fromtimestamp(os.path.getmtime(local_file), tz=pytz.UTC) > blob.updated:
                     blob.upload_from_filename(local_file)
-                    print(f"Replaced local file: {local_file} with {relative_path}")
+                    print(f"Replaced bucket file: {relative_path} with {local_file}")
                 # else:
                 #     logging.info(f'Local file: {local_file} up-to-date in bucket')
 
@@ -510,10 +518,11 @@ class Crawler:
                             logging.debug('URL: {} has already been scraped!'.format(url))
 
                     # insert some waiting time in between each request
-                    if self.request_timing_behaviour == 'constant':
-                        time.sleep(self.request_interval)  # time between each request
-                    elif self.request_timing_behaviour == 'random':
-                        time.sleep(random.randint(0, self.request_interval))
+                    if isinstance(self.request_waiting_time, int):
+                        time.sleep(self.request_waiting_time)  # time between each request
+                    elif isinstance(self.request_waiting_time, tuple):
+                        lower, upper = self.request_waiting_time
+                        time.sleep(random.randint(lower, upper))
 
             else:
                 _write_network_data(file_location=network_data_file_loc,
