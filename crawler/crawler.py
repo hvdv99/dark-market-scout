@@ -465,7 +465,7 @@ class Crawler:
                     new_captcha_page = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + ' ' + \
                                        self.marketplace_name + '.html'
                     captcha_page_location = os.path.join('crawler', 'captcha', 'training-data',
-                                                         'captcha', new_captcha_page)
+                                                         'detected', new_captcha_page)
 
                     with open(captcha_page_location, 'w') as cp:
                         cp.write(web_page.text)
@@ -480,9 +480,6 @@ class Crawler:
                     # # raise error message when no more cookies left
                     # if not self.cookies:
                     #     raise CaptchaDetectedError('The Crawler detected a page with captcha and stopped crawling')
-
-                    # put url back in queue
-                    self.queue.appendleft(url)
 
                 else:
                     # Update the visited pages
