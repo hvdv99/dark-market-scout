@@ -12,6 +12,7 @@ import logging
 import sys
 import pickle
 import subprocess
+import itertools
 from collections import deque
 from urllib.parse import urlparse, urljoin
 import json
@@ -37,7 +38,7 @@ class Crawler:
     logging.basicConfig(level=logging.INFO, stream=sys.stdout, )
 
     def __init__(self):
-        self.cookies = list()
+        self.cookies = None
         self.seed = str()
         self.proxies = {'http': 'socks5h://localhost:9050',
                         'https': 'socks5h://localhost:9050'}
@@ -62,7 +63,7 @@ class Crawler:
         if not isinstance(cookies, list):
             raise TypeError('Cookies should be inserted as list')
         else:
-            self.cookies = cookies
+            self.cookies = itertools.cycle(cookies)
 
     def set_seed(self, url: str):
         """Method that sets the union address of the first request. If a queue already exists for marketplace, then
@@ -196,19 +197,11 @@ class Crawler:
         :return: response
         """
 
-        def _check_for_queue(web_page: requests.Response) -> bool:
-            waiting_cue_words = ['waiting', 'checking your browser before accessing nexus market']
-            web_page_soup = bs4.BeautifulSoup(web_page.text, features="html.parser").text.lower()
-            for word in waiting_cue_words:
-                if word in web_page_soup:
-                    return True
-            return False
-
         self._replace_user_agent()
         if not self.cookies:
             header = {'User-Agent': self.user_agent}
         else:
-            header = {'Cookie': random.choice(self.cookies), 'User-Agent': self.user_agent}
+            header = {'Cookie': next(self.cookies), 'User-Agent': self.user_agent}
         web_page = requests.get(url, headers=header, proxies=self.proxies)
 
         # if queue detected: change cookies
