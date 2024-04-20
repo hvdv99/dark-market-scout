@@ -1,11 +1,8 @@
 import bs4
 from fake_useragent import UserAgent
-import pytz
 import requests
 from requests.exceptions import Timeout
 from bs4 import BeautifulSoup
-from google.cloud import storage
-from google.oauth2 import service_account
 
 import os
 import time
@@ -14,6 +11,7 @@ import random
 import logging
 import sys
 import pickle
+import subprocess
 from collections import deque
 from urllib.parse import urlparse, urljoin
 import json
@@ -288,113 +286,21 @@ class Crawler:
             logging.info(f"URL {url} saved under the name {filename}")
             return True
 
-    @staticmethod
-    def _get_bucket() -> storage.Bucket:
-        """
-        helper that configures a bucket
-        :return: configured bucket
-        """
-        credentials = service_account.Credentials.from_service_account_file(
-            c.GOOGLE_APPLICATION_CREDENTIALS
-        )
-        storage_client = storage.Client(credentials=credentials)
-        return storage_client.bucket(bucket_name=c.BUCKET_NAME)  # returns bucket object
-
-    def _upload_resources(self):
-        """
-        method that uploads resources that are kept in the local resources
-        directory to the cloud bucket. Also uploads files that have been changed more recently locally. Only uploads
-        and does not download from bucket.
-        :return: None
-        """
-        bucket = self._get_bucket()
-        # looping over local resource directory
-        resources_directory = os.path.dirname(self.resource_path)
-        for root, dirs, files in os.walk(resources_directory):
-            for filename in files:
-                if filename in {'.DS_Store'}:
-                    continue
-                local_file = os.path.join(root, filename)
-
-                relative_path = os.path.relpath(local_file, resources_directory)
-                blob = bucket.get_blob(relative_path)
-
-                if not blob:  # blob does not exist in bucket
-                    blob = bucket.blob(relative_path)
-                    blob.upload_from_filename(local_file)
-                    print(f"Uploaded {local_file} to {relative_path}")
-                elif (datetime.fromtimestamp(os.path.getmtime(local_file)).replace(second=0, microsecond=0) <
-                      blob.updated.replace(second=0, microsecond=0, tzinfo=None)):
-                    blob.upload_from_filename(local_file)
-                    print(f"Replaced bucket file: {relative_path} with {local_file}")
-                # else:
-                #     logging.info(f'Local file: {local_file} up-to-date in bucket')
-
-    def _download_resources(self):
-        """
-        Method that downloads resources from the cloud bucket that are not in the local directory.
-        """
-        bucket = self._get_bucket()
-        local_resources_path = os.path.dirname(self.resource_path)  # resolves to /resources
-        blobs = bucket.list_blobs()
-
-        for blob in blobs:
-            local_file_path = os.path.join(local_resources_path, blob.name)
-
-            # Check if the file exists locally and if the cloud version is newer
-            # Some Python-pro knowledge: In the case that the file not exists, the second condition will not be
-            # evaluated this is beneficial, because if this was not the case, os.marketplace_dir.getmtime
-            # would throw an error!
-            if not os.path.exists(local_file_path) or (blob.updated.replace(second=0, microsecond=0, tzinfo=None) <
-                                                       datetime.fromtimestamp(os.path.getmtime(local_file_path))
-                                                               .replace(second=0, microsecond=0)):
-                # Ensure the local directory structure exists
-                os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
-
-                # Download the file
-                blob.download_to_filename(local_file_path)
-                logging.info(f"Downloaded {blob.name} to {local_file_path}")
-
-    def delete_resource(self, resource_name: str):
-        """
-        method deletes resource locally and in bucket
-        :param resource_name: the name resource to be deleted
-        :return: None
-        """
-        # Delete from bucket
-        bucket = self._get_bucket()
-        blobs = bucket.list_blobs()
-        for blob in blobs:
-            blob_name = blob.name
-            if blob_name.endswith(resource_name):
-                blob.delete()
-                logging.info(f"Blob: {blob_name} deleted")
-
-        # Delete locally
-        for root, _, files in os.walk(os.path.dirname(self.resource_path)):
-            for file in files:
-                if file == resource_name:
-                    os.remove(os.path.join(root, file))
-                    logging.info(f"File {file} removed locally")
-                    return
-
     def synchronize_resources(self) -> None:
         """
         Method used to synchronize all files in '../resources' with a cloud bucket. If a file must be deleted for
         some reason use self.delete_resource.
         """
         if self.synchronize:
-            # error handling
-            if not self.resource_path:
-                raise ValueError("Resource directory must be set before synchronizing resources")
+            logging.info('Started synchronizing resources')
+            command = 'gsutil -m rsync -r resources gs://{}'.format(c.BUCKET_NAME)
+            result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
-            # First download
-            self._download_resources()
-
-            # Then upload
-            self._upload_resources()
-
-            logging.info('Synchronized resources')
+            # Check the result
+            if result.returncode == 0:
+                logging.info('Synchronized resources')
+            else:
+                logging.info('Error synchronizing resources:\t{}'.format(result.stderr))
 
     def crawl(self):
         """
