@@ -5,7 +5,7 @@ from config import constants as c
 crawl_scout = Crawler()
 
 # Name of resource directory is required
-crawl_scout.set_resource_dir('')  # set to name of the marketplace that's being scraped
+crawl_scout.set_resource_dir('nexus')  # set to name of the marketplace that's being scraped
 
 # Synchronizing resources setting
 crawl_scout.synchronize = True

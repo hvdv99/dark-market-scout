@@ -319,11 +319,15 @@ class Crawler:
 
                 relative_path = os.path.relpath(local_file, resources_directory)
                 blob = bucket.get_blob(relative_path)
+
+                blob_mod_time = blob.updated.replace(second=0, microsecond=0, tzinfo=None)
+                local_mod_time = datetime.fromtimestamp(os.path.getmtime(local_file)).replace(second=0, microsecond=0)
+
                 if not blob:  # blob does not exist in bucket
                     blob = bucket.blob(relative_path)
                     blob.upload_from_filename(local_file)
                     print(f"Uploaded {local_file} to {relative_path}")
-                elif datetime.fromtimestamp(os.path.getmtime(local_file), tz=pytz.UTC) > blob.updated:
+                elif local_mod_time > blob_mod_time and not filename.endswith('.html'):
                     blob.upload_from_filename(local_file)
                     print(f"Replaced bucket file: {relative_path} with {local_file}")
                 # else:
@@ -344,9 +348,9 @@ class Crawler:
             # Some Python-pro knowledge: In the case that the file not exists, the second condition will not be
             # evaluated this is beneficial, because if this was not the case, os.marketplace_dir.getmtime
             # would throw an error!
-            if not os.path.exists(local_file_path) or (blob.updated >
-                                                       datetime.fromtimestamp(os.path.getmtime(local_file_path),
-                                                                              tz=pytz.UTC)):
+            if not os.path.exists(local_file_path) or (blob.updated.replace(second=0, microsecond=0, tzinfo=None) >
+                                                       datetime.fromtimestamp(os.path.getmtime(local_file_path))
+                                                               .replace(second=0, microsecond=0)):
                 # Ensure the local directory structure exists
                 os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
 
