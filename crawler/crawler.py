@@ -1,8 +1,9 @@
-import bs4
 from fake_useragent import UserAgent
 import requests
 from requests.exceptions import Timeout
 from bs4 import BeautifulSoup
+from stem import Signal
+from stem.control import Controller
 
 import os
 import time
@@ -35,10 +36,11 @@ class Crawler:
 
     """
 
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout, )
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 
     def __init__(self):
         self.cookies = None
+        self.num_cookies = 0
         self.seed = str()
         self.proxies = {'http': 'socks5h://localhost:9050',
                         'https': 'socks5h://localhost:9050'}
@@ -63,6 +65,7 @@ class Crawler:
         if not isinstance(cookies, list):
             raise TypeError('Cookies should be inserted as list')
         else:
+            self.num_cookies = len(cookies)
             self.cookies = itertools.cycle(cookies)
 
     def set_seed(self, url: str):
@@ -197,22 +200,25 @@ class Crawler:
         :return: response
         """
 
+        def _renew_tor_circuit():
+            with Controller.from_port(port=9051) as controller:
+                controller.authenticate(password=c.ADMIN_PASS)
+                controller.signal(Signal.NEWNYM)
+
         self._replace_user_agent()
-        if not self.cookies:
-            header = {'User-Agent': self.user_agent}
-        else:
+
+        if self.cookies:
             header = {'Cookie': next(self.cookies), 'User-Agent': self.user_agent}
+        else:
+            header = {'User-Agent': self.user_agent}
+
+        # Get new tor circuit when each cookie has been used once
+        if self.requests_send_counter % self.num_cookies == 0:
+            _renew_tor_circuit()
+
         web_page = requests.get(url, headers=header, proxies=self.proxies)
-
-        # if queue detected: change cookies
-        # if _check_for_queue(web_page):
-        #     logging.info('Crawler in queue, waiting 30 seconds')
-        #     cookie = web_page.headers.get('Set-Cookie')
-        #     time.sleep(30)
-        #     new_header = {'Cookie': cookie, 'User-Agent': self.user_agent}
-        #     web_page = requests.get(url, headers=new_header, proxies=self.proxies)
-
         self.requests_send_counter += 1
+
         return web_page, header.get('Cookie', None)
 
     @staticmethod
@@ -344,8 +350,9 @@ class Crawler:
             self.queue.append(self.seed)
 
         try:
-            # start crawling until exit condition was reached
             while self.queue and self._check_max_pages():
+
+                # Retrieve web page
                 url = self.queue.popleft()
                 hashed_url = self._hash_url(url)  # later needed for logging network information
 
@@ -361,77 +368,60 @@ class Crawler:
                 if self.captcha_detector.detect_captcha(web_page.text):
                     logging.info('Captcha Detected ')
                     # save file to captcha training data
-                    new_captcha_page = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + ' ' + \
-                                       self.marketplace_name + '.html'
+                    new_captcha_page = (datetime.now().strftime('%H:%M:%S %d-%m-%Y') + ' ' +
+                                        self.marketplace_name + '.html')
                     captcha_page_location = os.path.join('crawler', 'captcha', 'training-data',
                                                          'detected', new_captcha_page)
 
                     with open(captcha_page_location, 'w') as cp:
                         cp.write(web_page.text)
 
-                    time.sleep(32)
+                    time.sleep(20)
+                    continue
 
-                    # # Delete the cookie if the crawler has cookies
-                    # if self.cookies:
-                    #     self.cookies.remove(used_cookie)
-                    #     logging.info('Removed cookie from list')
-                    #
-                    # # raise error message when no more cookies left
-                    # if not self.cookies:
-                    #     raise CaptchaDetectedError('The Crawler detected a page with captcha and stopped crawling')
+                # Update the visited pages in the current session
+                self.visited.add(url)
 
-                else:
-                    # Update the visited pages
-                    self.visited.add(url)
+                # Extract all the internal links from the retrieved web page
+                new_urls = self._extract_internal_links(web_page)
 
-                    # Extract all the internal links
-                    new_urls = self._extract_internal_links(web_page)
+                # hash the urls for logging
+                url_object = {hashed_url: {"original": url}}  # storing the original url as its value
+                url_children = {self._hash_url(n_url): n_url for n_url in
+                                new_urls}  # the same for internal links
+                url_object[hashed_url].update({"children": url_children})  # adding its children to the object
+                # now the original and the children can easily be referenced with:
+                # url_object[hashed_url].get("original") OR url_object[hashed_url].get("children")
 
-                    # hash the urls for logging
-                    url_object = {hashed_url: {"original": url}}  # storing the original url as its value
-                    url_children = {self._hash_url(n_url): n_url for n_url in new_urls}  # the same for internal links
-                    url_object[hashed_url].update({"children": url_children})  # adding its children to the object
-                    # now the original and the children can easily be referenced with:
-                    # url_object[hashed_url].get("original") OR url_object[hashed_url].get("children")
+                # checking if the url is not already in the data
+                if self._hash_url(url) not in network_data.keys():
+                    network_data.update(url_object)  # updating the current json file in memory
 
-                    # checking if the url is not already in the data
-                    if self._hash_url(url) not in network_data.keys():
-                        network_data.update(url_object)  # updating the current json file in memory
-                        # writing network data to file if > 10 MB
-                        if sys.getsizeof(network_data) > (10 * 1024 * 1024):
-                            _write_network_data(file_location=network_data_file_loc, file_data=network_data)
+                # Save the page into the resource folder
+                self._save_resource(url, web_page)
 
-                    # Save the page into the resource folder
-                    self._save_resource(url, web_page)
+                # adding only the urls that are not in queue already and not in visited
+                # Note: we are collecting data about all urls in the step above, which will allow us to
+                #       visualize the whole structure of the marketplace
+                for new_url in new_urls:
+                    if new_url not in self.queue and new_url not in self.visited:
+                        self.queue.append(new_url)
+                    else:
+                        logging.debug('URL: {} has already been scraped!'.format(url))
 
-                    # adding only the urls that are not in queue already and not in visited
-                    # Note: we are collecting data about all urls in the step above, which will allow us to
-                    #       visualize the whole structure of the marketplace
-                    for new_url in new_urls:
-                        if new_url not in self.queue and new_url not in self.visited:
-                            self.queue.append(new_url)
-                        else:
-                            logging.debug('URL: {} has already been scraped!'.format(url))
+                # insert some waiting time in between each request
+                if isinstance(self.request_waiting_time, int):
+                    time.sleep(self.request_waiting_time)  # time between each request
+                elif isinstance(self.request_waiting_time, tuple):
+                    lower, upper = self.request_waiting_time
+                    time.sleep(random.randint(lower, upper))
 
-                    # insert some waiting time in between each request
-                    if isinstance(self.request_waiting_time, int):
-                        time.sleep(self.request_waiting_time)  # time between each request
-                    elif isinstance(self.request_waiting_time, tuple):
-                        lower, upper = self.request_waiting_time
-                        time.sleep(random.randint(lower, upper))
-
-            else:
+            else:  # end of while loop
                 _write_network_data(file_location=network_data_file_loc,
                                     file_data=network_data)  # writing when everything went fine
                 self._write_queue_to_file()
-                logging.info('Process finished and queue written to file')
+                logging.info('Process finished, queue and network written to file')
                 self.synchronize_resources()
-
-        except CaptchaDetectedError:
-            _write_network_data(file_location=network_data_file_loc, file_data=network_data)
-            self._write_queue_to_file()
-            self.synchronize_resources()
-            logging.info('Captcha detected')
 
         except Timeout:
             _write_network_data(file_location=network_data_file_loc, file_data=network_data)
@@ -450,9 +440,4 @@ class Crawler:
             _write_network_data(file_location=network_data_file_loc, file_data=network_data)
             self._write_queue_to_file()
             self.synchronize_resources()
-            logging.info('Interrupted and queue written to file')
-
-
-class CaptchaDetectedError(Exception):
-    def __init__(self, message):
-        super().__init__(message)
+            logging.info('Unknown error occurred, queue and network written to file')

@@ -6,8 +6,6 @@ requests[socks]
 requests[security]
 cryptography
 stem
-google-cloud-storage
-google-auth
 pytest
 scikit-learn
 pytz
