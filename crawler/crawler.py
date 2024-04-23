@@ -16,6 +16,7 @@ import subprocess
 import itertools
 from collections import deque
 from urllib.parse import urlparse, urljoin
+from urllib3.exceptions import NewConnectionError
 import json
 import hashlib
 
@@ -213,13 +214,21 @@ class Crawler:
             header = {'User-Agent': self.user_agent}
 
         # Get new tor circuit when each cookie has been used once
-        if self.requests_send_counter % self.num_cookies == 0:
-            _renew_tor_circuit()
+        # if self.requests_send_counter % self.num_cookies == 0:
+        #     _renew_tor_circuit()
 
-        web_page = requests.get(url, headers=header, proxies=self.proxies)
-        self.requests_send_counter += 1
+        current_second = time.localtime().tm_sec
+        if current_second in {29, 30, 59, 0}:
+            logging.info('Crawler waiting for new tor circuit')
+            time.sleep(1)
 
-        return web_page, header.get('Cookie', None)
+        try:
+            web_page = requests.get(url, headers=header, proxies=self.proxies)
+            self.requests_send_counter += 1
+            return web_page, header.get('Cookie', None)
+        except NewConnectionError:
+            self.queue.appendleft(url)
+            time.sleep(1)
 
     @staticmethod
     def _extract_internal_links(web_page: requests.Response) -> list:
@@ -358,6 +367,7 @@ class Crawler:
 
                 # url can not be in current crawling session and not in previous crawls
                 if (url not in self.visited) and (hashed_url not in network_data.keys()):
+
                     # Send tor request to download the page
                     web_page, used_cookie = self._send_request(url)
                 else:
@@ -376,7 +386,7 @@ class Crawler:
                     with open(captcha_page_location, 'w') as cp:
                         cp.write(web_page.text)
 
-                    time.sleep(20)
+                    time.sleep(10)
                     continue
 
                 # Update the visited pages in the current session
