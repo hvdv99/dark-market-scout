@@ -1,3 +1,5 @@
+import http.client
+
 from fake_useragent import UserAgent
 import requests
 from requests.exceptions import Timeout
@@ -225,10 +227,11 @@ class Crawler:
         try:
             web_page = requests.get(url, headers=header, proxies=self.proxies)
             self.requests_send_counter += 1
-            return web_page, header.get('Cookie', None)
-        except NewConnectionError:
+            return web_page
+        except (NewConnectionError, http.client.RemoteDisconnected):
             self.queue.appendleft(url)
             time.sleep(1)
+            return None
 
     @staticmethod
     def _extract_internal_links(web_page: requests.Response) -> list:
@@ -369,7 +372,10 @@ class Crawler:
                 if (url not in self.visited) and (hashed_url not in network_data.keys()):
 
                     # Send tor request to download the page
-                    web_page, used_cookie = self._send_request(url)
+                    web_page = self._send_request(url)
+                    if not web_page:
+                        continue
+
                 else:
                     logging.info("Url: {} already visited".format(url))
                     continue
