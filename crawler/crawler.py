@@ -229,7 +229,13 @@ class Crawler:
             self.requests_send_counter += 1
             return web_page
         except (NewConnectionError, http.client.RemoteDisconnected):
-            self.queue.appendleft(url)
+            logging.error("New Connection or RemoteDisconnected")
+            self.queue.append(url)
+            time.sleep(1)
+            return None
+        except Exception:
+            logging.error("Unknown Error")
+            self.queue.append(url)
             time.sleep(1)
             return None
 
