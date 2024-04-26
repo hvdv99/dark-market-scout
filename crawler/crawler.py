@@ -229,12 +229,12 @@ class Crawler:
             self.requests_send_counter += 1
             return web_page
         except (NewConnectionError, http.client.RemoteDisconnected):
-            logging.error("New Connection or RemoteDisconnected")
+            logging.error("Error caught: New Connection or RemoteDisconnected")
             self.queue.append(url)
             time.sleep(1)
             return None
         except Exception:
-            logging.error("Unknown Error")
+            logging.error("Error caught: Unknown Error")
             self.queue.append(url)
             time.sleep(1)
             return None
@@ -292,14 +292,27 @@ class Crawler:
         function retrieved from lab session to save the crawled page to the resources repo
         :param url:
         :param web_page:
-        :return: True if resource saved, else error
+        :return: True if resource saved
         """
         hashed_url = self._hash_url(url)
-        filename = hashed_url + ".html"
+
+        content_type = web_page.headers.get('Content-Type')
+        # Determine the file extension based on the content type
+        if 'text/html' in content_type:
+            file_extension = '.html'
+        elif 'image/jpeg' in content_type or 'image/jpg' in content_type:
+            file_extension = '.jpeg'
+        elif 'image/png' in content_type:
+            file_extension = '.png'
+        else:
+            print(f"Content type '{content_type}' is not supported.")
+            return False
+
+        filename = hashed_url + file_extension
 
         path = os.path.join(self.resource_path, filename)
-        with open(path, 'w') as file:
-            file.write(web_page.text)
+        with open(path, 'wb') as file:
+            file.write(web_page.content)
             logging.info(f"URL {url} saved under the name {filename}")
             return True
 
@@ -404,13 +417,17 @@ class Crawler:
                 # Update the visited pages in the current session
                 self.visited.add(url)
 
-                # Extract all the internal links from the retrieved web page
-                new_urls = self._extract_internal_links(web_page)
+                # Extract all the internal links from the retrieved web page if a html file was scraped
+                content_type = web_page.headers.get('Content-Type')
+                if 'text/html' in content_type:
+                    new_urls = self._extract_internal_links(web_page)
+                else:
+                    new_urls = list()
 
-                # hash the urls for logging
-                url_object = {hashed_url: {"original": url}}  # storing the original url as its value
-                url_children = {self._hash_url(n_url): n_url for n_url in
-                                new_urls}  # the same for internal links
+                # hash the original url for logging
+                url_object = {hashed_url: {"original": url}}
+                # hashing the internal links
+                url_children = {self._hash_url(n_url): n_url for n_url in new_urls}
                 url_object[hashed_url].update({"children": url_children})  # adding its children to the object
                 # now the original and the children can easily be referenced with:
                 # url_object[hashed_url].get("original") OR url_object[hashed_url].get("children")
