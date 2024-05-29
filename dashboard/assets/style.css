@@ -1,0 +1,61 @@
+/* Overall body styling */
+body {
+    background-color: #121212;  /* Very dark grey, almost black */
+    color: #E0E0E0;  /* Soft white */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Data Card styling for dark theme */
+.data-card {
+    background-color: #252525;  /* Dark grey for cards */
+    color: #FFFFFF;  /* White text for readability */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);  /* Darker shadow for depth */
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    width: 30%;
+    transition: transform 0.3s;
+}
+
+.data-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.75);
+}
+
+/* Styling list items */
+li {
+    color: #BBBBBB;  /* Lighter grey for less emphasis */
+}
+
+/* Links and header elements */
+a, h1, h2, h3, h4 {
+    color: #FFFFFF;  /* Bright white for headers and links */
+}
+
+/* Styling for all Dash tabs */
+.dash-tabs-container .dash-tab {
+    background-color: #333; /* Darker background for tabs */
+    color: #fff; /* White text for readability */
+    border: none;
+}
+
+/* Styling for the active tab */
+.dash-tabs-container .dash-tab--selected {
+    background-color: #555; /* Slightly lighter gray for the active tab */
+    color: #fff;
+    border-bottom: 2px solid #007BFF; /* Blue bottom border for active tab */
+}
+
+/* Plotly plot background colors */
+.js-plotly-plot .plot-container .svg-container {
+    background: #121212 !important; /* Important to ensure background matches dark theme */
+}
+
+/* Input fields and dropdowns styling */
+.Select-control, .Select-menu-outer, .input, .dropdown {
+    background-color: #333333;  /* Dark background for inputs and dropdowns */
+    color: black;  /* White text for visibility */
+    border: 1px solid #444444;  /* Subtle border for inputs */
+}
+

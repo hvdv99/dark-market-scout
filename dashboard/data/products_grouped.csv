@@ -1,0 +1,19 @@
+main_business,category,price_range,product_count
+Data,Digital Commerce,Budget (<= $50),1164
+Data,Digital Commerce,Mid-range ($50-$200),376
+Data,Digital Commerce,High-end (>$200),172
+Data,Digital Knowledge Products,Budget (<= $50),1007
+Data,Digital Knowledge Products,Mid-range ($50-$200),52
+Data,Digital Knowledge Products,High-end (>$200),18
+Data,Digital Security,Budget (<= $50),589
+Data,Digital Security,Mid-range ($50-$200),126
+Data,Digital Security,High-end (>$200),58
+Data,Other Digital Products,Budget (<= $50),372
+Data,Other Digital Products,Mid-range ($50-$200),43
+Data,Other Digital Products,High-end (>$200),12
+Drugs,Pharmaceutical Drugs,Budget (<= $50),292
+Drugs,Pharmaceutical Drugs,Mid-range ($50-$200),442
+Drugs,Pharmaceutical Drugs,High-end (>$200),515
+Drugs,Recreational Drugs,Budget (<= $50),814
+Drugs,Recreational Drugs,Mid-range ($50-$200),972
+Drugs,Recreational Drugs,High-end (>$200),964

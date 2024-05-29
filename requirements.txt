@@ -1,0 +1,17 @@
+beautifulsoup4
+fake-useragent
+pysocks
+requests
+requests[socks]
+requests[security]
+cryptography
+stem
+pytest
+scikit-learn
+urllib3
+matplotlib
+wordcloud
+seaborn
+dash
+plotly
+CurrencyConverter
