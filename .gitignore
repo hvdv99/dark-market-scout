@@ -240,3 +240,4 @@ config/personal_constants.py
 /resources/*
 /.idea
 /config/*.json
+crawler/captcha/training-data/detected/*

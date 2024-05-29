@@ -4,8 +4,6 @@ from fake_useragent import UserAgent
 import requests
 from requests.exceptions import Timeout
 from bs4 import BeautifulSoup
-from stem import Signal
-from stem.control import Controller
 
 import os
 import time
@@ -14,7 +12,6 @@ import random
 import logging
 import sys
 import pickle
-import subprocess
 import itertools
 from collections import deque
 from urllib.parse import urlparse, urljoin
@@ -22,7 +19,6 @@ from urllib3.exceptions import NewConnectionError
 import json
 import hashlib
 
-import config.constants as c
 from crawler.captcha.detector import CaptchaDetector
 
 
@@ -41,7 +37,7 @@ class Crawler:
 
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 
-    def __init__(self):
+    def __init__(self, train_captcha_detector=True):
         self.cookies = None
         self.num_cookies = 0
         self.seed = str()
@@ -58,8 +54,9 @@ class Crawler:
         self.resource_path = str()  # the marketplace directory from the repo root
         self.seed = str()
         self.exit_condition = bool()
-        self.captcha_detector = CaptchaDetector()
         self.synchronize = True
+        if train_captcha_detector:
+            self.captcha_detector = CaptchaDetector()
 
     def set_cookies(self, cookies: list):
         """Method that sets the cookies that will be used for sending requests. A cookie can be obtained by creating a
@@ -203,11 +200,6 @@ class Crawler:
         :return: response
         """
 
-        def _renew_tor_circuit():
-            with Controller.from_port(port=9051) as controller:
-                controller.authenticate(password=c.ADMIN_PASS)
-                controller.signal(Signal.NEWNYM)
-
         self._replace_user_agent()
 
         if self.cookies:
@@ -271,7 +263,7 @@ class Crawler:
         return list(urls)
 
     @staticmethod
-    def _hash_url(url: str) -> str:
+    def hash_url(url: str) -> str:
         """
         Method that will be used to hash the urls, so that they can later be used to store the urls.
         Algorithm used is MD5
@@ -294,7 +286,7 @@ class Crawler:
         :param web_page:
         :return: True if resource saved
         """
-        hashed_url = self._hash_url(url)
+        hashed_url = self.hash_url(url)
 
         content_type = web_page.headers.get('Content-Type')
         # Determine the file extension based on the content type
@@ -315,22 +307,6 @@ class Crawler:
             file.write(web_page.content)
             logging.info(f"URL {url} saved under the name {filename}")
             return True
-
-    def synchronize_resources(self) -> None:
-        """
-        Method used to synchronize all files in '../resources' with a cloud bucket. If a file must be deleted for
-        some reason use self.delete_resource.
-        """
-        if self.synchronize:
-            logging.info('Started synchronizing resources')
-            command = 'gsutil -m rsync -r resources gs://{}'.format(c.BUCKET_NAME)
-            result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-
-            # Check the result
-            if result.returncode == 0:
-                logging.info('Synchronized resources')
-            else:
-                logging.info('Error synchronizing resources:\t{}'.format(result.stderr))
 
     def crawl(self):
         """
@@ -385,7 +361,7 @@ class Crawler:
 
                 # Retrieve web page
                 url = self.queue.popleft()
-                hashed_url = self._hash_url(url)  # later needed for logging network information
+                hashed_url = self.hash_url(url)  # later needed for logging network information
 
                 # url can not be in current crawling session and not in previous crawls
                 if (url not in self.visited) and (hashed_url not in network_data.keys()):
@@ -427,13 +403,13 @@ class Crawler:
                 # hash the original url for logging
                 url_object = {hashed_url: {"original": url}}
                 # hashing the internal links
-                url_children = {self._hash_url(n_url): n_url for n_url in new_urls}
+                url_children = {self.hash_url(n_url): n_url for n_url in new_urls}
                 url_object[hashed_url].update({"children": url_children})  # adding its children to the object
                 # now the original and the children can easily be referenced with:
                 # url_object[hashed_url].get("original") OR url_object[hashed_url].get("children")
 
                 # checking if the url is not already in the data
-                if self._hash_url(url) not in network_data.keys():
+                if self.hash_url(url) not in network_data.keys():
                     network_data.update(url_object)  # updating the current json file in memory
 
                 # Save the page into the resource folder
@@ -460,23 +436,19 @@ class Crawler:
                                     file_data=network_data)  # writing when everything went fine
                 self._write_queue_to_file()
                 logging.info('Process finished, queue and network written to file')
-                self.synchronize_resources()
 
         except Timeout:
             _write_network_data(file_location=network_data_file_loc, file_data=network_data)
             self._write_queue_to_file()
-            self.synchronize_resources()
             logging.info('Request timed out')
 
         except KeyboardInterrupt:
             _write_network_data(file_location=network_data_file_loc, file_data=network_data)
             self._write_queue_to_file()
-            self.synchronize_resources()
             logging.info('Crawler manually interrupted')
 
         except Exception as e:  # just any error
             print(f'An error occurred with {e}')
             _write_network_data(file_location=network_data_file_loc, file_data=network_data)
             self._write_queue_to_file()
-            self.synchronize_resources()
             logging.info('Unknown error occurred, queue and network written to file')
